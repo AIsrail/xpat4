@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Работа и учёба — xpat4.org</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --warm-white: #faf8f4; --ink: #1a1814; --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3); --accent: #2d5a3d; --line: rgba(26,24,20,0.12); }
+    body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:22px 48px; background:rgba(250,248,244,0.9); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--ink); text-decoration:none; }
+    .logo span { color:var(--accent); }
+    .back { font-size:13px; color:var(--ink-60); text-decoration:none; }
+    .back::before { content:'← '; }
+    .back:hover { color:var(--ink); }
+    .page-hero { padding:160px 48px 80px; max-width:760px; margin:0 auto; border-bottom:1px solid var(--line); }
+    .eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+    .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+    h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(40px,6vw,68px); font-weight:300; line-height:1.1; margin-bottom:22px; }
+    .page-sub { font-size:16px; color:var(--ink-60); font-weight:300; line-height:1.7; }
+    .content { max-width:760px; margin:0 auto; padding:72px 48px; }
+    .topic-block { padding:40px 0; border-bottom:1px solid var(--line); }
+    .topic-block:last-child { border-bottom:none; }
+    .topic-num { font-size:11px; color:var(--ink-30); letter-spacing:0.12em; margin-bottom:12px; }
+    h2 { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; margin-bottom:14px; }
+    p { font-size:15px; color:var(--ink-60); font-weight:300; line-height:1.7; }
+    footer { padding:36px 48px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+    .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
+    .footer-logo span { color:var(--accent); }
+    .footer-copy { font-size:12px; color:var(--ink-30); }
+    @media(max-width:700px){ nav,footer{ padding:18px 24px; } .page-hero,.content{ padding-left:24px; padding-right:24px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="logo" href="/">xpat<span>4</span>.org</a>
+    <a class="back" href="/">Главная</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="eyebrow">03 · Работа и учёба</div>
+    <h1>Трудоустройство и образование</h1>
+    <p class="page-sub">Разрешения на работу для иностранцев, трудоустройство в КР, поступление в кыргызские вузы и студенческие визы.</p>
+  </div>
+
+  <div class="content">
+    <div class="topic-block">
+      <div class="topic-num">03.1</div>
+      <h2>Разрешение на работу</h2>
+      <p>Иностранцы, трудоустраивающиеся в кыргызские компании, обязаны получить разрешение на работу. Оформляется работодателем через Министерство труда. Граждане стран ЕАЭС (Россия, Казахстан, Беларусь, Армения) работают без разрешения наравне с гражданами КР.</p>
+    </div>
+
+    <div class="topic-block">
+      <div class="topic-num">03.2</div>
+      <h2>Фриланс и удалённая работа</h2>
+      <p>Для цифровых номадов, работающих на иностранных работодателей, специального разрешения не требуется. Рекомендуется корректно оформить налоговый статус — ИП или ОсОО — для прозрачности и открытия счёта.</p>
+    </div>
+
+    <div class="topic-block">
+      <div class="topic-num">03.3</div>
+      <h2>Учёба в Кыргызстане</h2>
+      <p>Иностранные студенты могут поступить в государственные и частные вузы КР. Для очного обучения оформляется студенческая виза или ВНЖ по основанию «учёба». Обучение в большинстве вузов ведётся на русском языке.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="/">xpat<span>4</span>.org</a>
+    <span class="footer-copy">© 2025 xpat4.org</span>
+  </footer>
+</body>
+</html>

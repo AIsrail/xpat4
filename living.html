@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бизнес, жильё и др. — xpat4.org</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --warm-white: #faf8f4; --ink: #1a1814; --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3); --accent: #2d5a3d; --line: rgba(26,24,20,0.12); }
+    body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:22px 48px; background:rgba(250,248,244,0.9); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--ink); text-decoration:none; }
+    .logo span { color:var(--accent); }
+    .back { font-size:13px; color:var(--ink-60); text-decoration:none; }
+    .back::before { content:'← '; }
+    .back:hover { color:var(--ink); }
+    .page-hero { padding:160px 48px 80px; max-width:760px; margin:0 auto; border-bottom:1px solid var(--line); }
+    .eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+    .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+    h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(40px,6vw,68px); font-weight:300; line-height:1.1; margin-bottom:22px; }
+    .page-sub { font-size:16px; color:var(--ink-60); font-weight:300; line-height:1.7; }
+    .content { max-width:760px; margin:0 auto; padding:72px 48px; }
+    .topic-block { padding:40px 0; border-bottom:1px solid var(--line); }
+    .topic-block:last-child { border-bottom:none; }
+    .topic-num { font-size:11px; color:var(--ink-30); letter-spacing:0.12em; margin-bottom:12px; }
+    h2 { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; margin-bottom:14px; }
+    p { font-size:15px; color:var(--ink-60); font-weight:300; line-height:1.7; }
+    footer { padding:36px 48px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+    .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
+    .footer-logo span { color:var(--accent); }
+    .footer-copy { font-size:12px; color:var(--ink-30); }
+    @media(max-width:700px){ nav,footer{ padding:18px 24px; } .page-hero,.content{ padding-left:24px; padding-right:24px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="logo" href="/">xpat<span>4</span>.org</a>
+    <a class="back" href="/">Главная</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="eyebrow">04 · Бизнес, жильё и др.</div>
+    <h1>Практическая сторона жизни в КР</h1>
+    <p class="page-sub">Открытие бизнеса, аренда жилья, банки, налоги и всё остальное, что нужно знать для комфортной жизни в Кыргызстане.</p>
+  </div>
+
+  <div class="content">
+    <div class="topic-block">
+      <div class="topic-num">04.1</div>
+      <h2>Открытие бизнеса</h2>
+      <p>Иностранцы могут регистрировать ОсОО (аналог ООО) и ИП в КР. Регистрация занимает от 1 дня, пошлина минимальна. Налоговая система достаточно простая: НДС 12%, налог на прибыль 10%, упрощённая система для малого бизнеса.</p>
+    </div>
+
+    <div class="topic-block">
+      <div class="topic-num">04.2</div>
+      <h2>Аренда жилья</h2>
+      <p>Рынок аренды в Бишкеке активен. Цены от $200/мес за однокомнатную квартиру в спальном районе до $1500+ за современные апартаменты в центре. Иностранцам рекомендуется заключать официальный договор аренды — он потребуется для регистрации.</p>
+    </div>
+
+    <div class="topic-block">
+      <div class="topic-num">04.3</div>
+      <h2>Банки и счета</h2>
+      <p>Открытие счёта возможно для нерезидентов в большинстве банков КР при наличии паспорта и регистрации. Популярны: KICB, Optima Bank, RSK, Bakai Bank. Карты Visa и Mastercard работают, широко развит интернет-банкинг.</p>
+    </div>
+
+    <div class="topic-block">
+      <div class="topic-num">04.4</div>
+      <h2>Повседневная жизнь</h2>
+      <p>Бишкек — относительно недорогой и комфортный город. Развита инфраструктура, много кафе и коворкингов. Мобильный интернет доступен, SIM-карта оформляется по паспорту. Официальные языки — кыргызский и русский.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="/">xpat<span>4</span>.org</a>
+    <span class="footer-copy">© 2025 xpat4.org</span>
+  </footer>
+</body>
+</html>
