@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Политика конфиденциальности — xpat4.org</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --warm-white: #faf8f4; --ink: #1a1814; --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3); --ink-10: rgba(26,24,20,0.08); --accent: #2d5a3d; --line: rgba(26,24,20,0.12); }
+    body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(250,248,244,0.9); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--ink); text-decoration:none; }
+    .logo span { color:var(--accent); }
+    .nav-right { display:flex; align-items:center; gap:16px; }
+    .lang-switch { display:flex; gap:2px; background:var(--ink-10); border-radius:3px; padding:3px; }
+    .lang-btn { font-size:11px; font-weight:500; letter-spacing:0.06em; padding:5px 10px; border:none; background:transparent; cursor:pointer; color:var(--ink-60); border-radius:2px; transition:background 0.15s, color 0.15s; }
+    .lang-btn.active { background:var(--warm-white); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+    .back-link { font-size:13px; color:var(--ink-60); text-decoration:none; }
+    .back-link::before { content:'← '; }
+    .back-link:hover { color:var(--ink); }
+
+    .page-wrap { max-width:680px; margin:0 auto; padding:140px 48px 100px; }
+    .eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:22px; display:flex; align-items:center; gap:10px; }
+    .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+    h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,5vw,52px); font-weight:300; margin-bottom:10px; }
+    .date { font-size:12px; color:var(--ink-30); margin-bottom:52px; }
+
+    .prose { font-size:15px; font-weight:300; color:var(--ink-60); line-height:1.75; }
+    .prose h2 { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; color:var(--ink); margin-top:44px; margin-bottom:14px; }
+    .prose p { margin-bottom:16px; }
+    .prose ul { padding-left:20px; margin-bottom:16px; }
+    .prose li { margin-bottom:6px; }
+    .prose a { color:var(--accent); text-decoration:none; }
+    .prose a:hover { text-decoration:underline; }
+
+    .lang-block { display:none; }
+    .lang-block.visible { display:block; }
+
+    footer { padding:36px 48px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+    .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
+    .footer-logo span { color:var(--accent); }
+    .footer-copy { font-size:12px; color:var(--ink-30); }
+    @media(max-width:700px){ nav,footer{padding:16px 20px;} .page-wrap{padding:120px 24px 80px;} }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="back-link" href="index.html" data-ru="Главная" data-en="Home">Главная</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="eyebrow" data-ru="Документ" data-en="Document">Документ</div>
+
+  <div class="lang-block visible" id="block-ru">
+    <h1>Политика конфиденциальности</h1>
+    <p class="date">Дата вступления в силу: 1 января 2025 г.</p>
+    <div class="prose">
+      <p>Настоящая политика конфиденциальности описывает, как сайт <strong>xpat4.org</strong> («мы», «наш сайт») обрабатывает персональные данные пользователей.</p>
+
+      <h2>1. Какие данные мы собираем</h2>
+      <p>Мы можем собирать следующие данные, которые вы добровольно предоставляете через форму обратной связи:</p>
+      <ul>
+        <li>Имя и фамилия</li>
+        <li>Адрес электронной почты</li>
+        <li>Гражданство</li>
+        <li>Содержание вашего сообщения</li>
+      </ul>
+
+      <h2>2. Как мы используем данные</h2>
+      <p>Собранные данные используются исключительно для ответа на ваш запрос и предоставления информационной поддержки. Мы не продаём и не передаём ваши данные третьим лицам в коммерческих целях.</p>
+
+      <h2>3. Хранение данных</h2>
+      <p>Данные, переданные через форму, направляются на электронный адрес <a href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a> и хранятся в рамках почтового сервиса Google (Gmail). Мы не храним данные на серверах сайта.</p>
+
+      <h2>4. Файлы cookie</h2>
+      <p>Сайт использует только технические cookie — для сохранения выбранного языка интерфейса (localStorage). Маркетинговые и аналитические cookie не используются.</p>
+
+      <h2>5. Права пользователей</h2>
+      <p>Вы вправе запросить удаление или исправление своих данных, направив письмо на <a href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a>.</p>
+
+      <h2>6. Изменения политики</h2>
+      <p>Мы оставляем за собой право обновлять настоящую политику. Актуальная версия всегда доступна на этой странице.</p>
+
+      <h2>7. Контакты</h2>
+      <p>По вопросам обработки персональных данных: <a href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a></p>
+    </div>
+  </div>
+
+  <div class="lang-block" id="block-en">
+    <h1>Privacy Policy</h1>
+    <p class="date">Effective date: January 1, 2025</p>
+    <div class="prose">
+      <p>This privacy policy describes how <strong>xpat4.org</strong> ("we", "our site") processes the personal data of users.</p>
+
+      <h2>1. What data we collect</h2>
+      <p>We may collect the following data that you voluntarily provide via the contact form:</p>
+      <ul>
+        <li>First and last name</li>
+        <li>Email address</li>
+        <li>Nationality</li>
+        <li>Content of your message</li>
+      </ul>
+
+      <h2>2. How we use your data</h2>
+      <p>Data collected is used solely to respond to your inquiry and provide informational support. We do not sell or share your data with third parties for commercial purposes.</p>
+
+      <h2>3. Data storage</h2>
+      <p>Data submitted via the form is sent to <a href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a> and stored within Google's Gmail service. We do not store any data on our website servers.</p>
+
+      <h2>4. Cookies</h2>
+      <p>The site uses only technical storage (localStorage) to remember your language preference. No marketing or analytics cookies are used.</p>
+
+      <h2>5. Your rights</h2>
+      <p>You may request deletion or correction of your data by emailing <a href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a>.</p>
+
+      <h2>6. Policy updates</h2>
+      <p>We reserve the right to update this policy. The current version is always available on this page.</p>
+
+      <h2>7. Contact</h2>
+      <p>For data privacy questions: <a href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
+  <span class="footer-copy">© 2025 xpat4.org</span>
+</footer>
+
+<script>
+  let currentLang = localStorage.getItem('lang') || 'ru';
+  function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.getElementById('block-ru').classList.toggle('visible', lang === 'ru');
+    document.getElementById('block-en').classList.toggle('visible', lang === 'en');
+    document.querySelectorAll('[data-ru]').forEach(el => {
+      const t = el.getAttribute('data-' + lang);
+      if (t) el.innerHTML = t;
+    });
+  }
+  setLang(currentLang);
+</script>
+</body>
+</html>
