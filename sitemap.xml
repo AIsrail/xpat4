@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://xpat4.org/</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>1.00</priority>
-  </url>
 
-  <url>
-    <loc>https://xpat4.org/catalog</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.90</priority>
-  </url>
+  <!-- Core pages -->
+  <url><loc>https://xpat4.org/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://xpat4.org/visa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://xpat4.org/residence.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://xpat4.org/work.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://xpat4.org/living.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://xpat4.org/catalog.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/contact.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/calculator.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/checklist.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/join.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://xpat4.org/terms.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://xpat4.org/privacy.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
 
-  <url>
-    <loc>https://xpat4.org/contact</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.80</priority>
-  </url>
+  <!-- AEO pages -->
+  <url><loc>https://xpat4.org/kyrgyzstan-visa-free-countries.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/evisa-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/ovpg-registration-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/residence-permit-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/open-company-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/digital-nomad-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/cost-of-living-bishkek-2025.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/banking-kyrgyzstan-foreigners.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/work-permit-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/rent-apartment-bishkek.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/kyrgyzstan-citizenship-foreigners.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/tax-foreigners-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/international-schools-bishkek.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/healthcare-bishkek-expats.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/visa-run-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/eaeu-citizens-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/property-purchase-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/bishkek-expat-guide.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/kyrgyzstan-chinese-investors.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
-  <url>
-    <loc>https://xpat4.org/visa</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.90</priority>
-  </url>
+  <!-- AEO batch 2 (to be added) -->
+  <url><loc>https://xpat4.org/insurance-kyrgyzstan-expats.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/bishkek-vs-osh-expats.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/kyrgyz-russian-language-expats.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://xpat4.org/relocate-kyrgyzstan-from-russia.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://xpat4.org/relocate-kyrgyzstan-from-europe.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/relocate-kyrgyzstan-from-china.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/issyk-kul-expat-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://xpat4.org/kyrgyzstan-permanent-residence.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/open-bank-account-kyrgyzstan-step-by-step.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://xpat4.org/kyrgyzstan-investment-visa.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/marriage-kyrgyzstan-foreigner.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/kyrgyzstan-crypto-fintech.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://xpat4.org/bishkek-coworking-spaces.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/kyrgyzstan-freelancer-tax.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://xpat4.org/move-bishkek-checklist.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
 
-  <url>
-    <loc>https://xpat4.org/residence</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://xpat4.org/work</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://xpat4.org/living</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://xpat4.org/privacy</loc>
-    <lastmod>2026-04-09</lastmod>
-    <priority>0.30</priority>
-  </url>
 </urlset>
