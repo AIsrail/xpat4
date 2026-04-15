@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Контакты — xpat4.org</title>
+  <title>Contacts — xpat4.org | Контакты | 联系我们</title>
+  <meta name="description" content="Contact Gulnara Mambetaliyeva — visa and migration expert in Kyrgyzstan. 联系吉尔吉斯斯坦签证与移民专家古尔纳拉。">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -19,13 +20,10 @@
     .back-link { font-size:13px; color:var(--ink-60); text-decoration:none; }
     .back-link::before { content:'← '; }
     .back-link:hover { color:var(--ink); }
-
     .page-wrap { max-width:760px; margin:0 auto; padding:140px 48px 100px; }
     .eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:22px; display:flex; align-items:center; gap:10px; }
     .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
     h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(38px,6vw,62px); font-weight:300; line-height:1.1; margin-bottom:48px; }
-
-    /* Expert card */
     .expert-card { border:1px solid var(--line); padding:44px 40px; margin-bottom:60px; display:flex; gap:32px; align-items:flex-start; }
     .expert-avatar { width:72px; height:72px; border-radius:50%; background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:28px; color:var(--accent); font-weight:400; flex-shrink:0; }
     .expert-info { flex:1; }
@@ -37,41 +35,26 @@
     .contact-label { font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-30); min-width:64px; }
     .contact-value { font-size:14px; color:var(--ink); text-decoration:none; font-weight:400; }
     a.contact-value:hover { color:var(--accent); }
-
-    /* Form */
+    .wa-direct { display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:#25d366; color:#fff; padding:11px 22px; border-radius:2px; font-size:14px; font-weight:500; text-decoration:none; transition:opacity 0.2s; }
+    .wa-direct:hover { opacity:0.88; }
     .form-section h2 { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; margin-bottom:8px; }
     .form-section p { font-size:14px; color:var(--ink-60); font-weight:300; margin-bottom:32px; line-height:1.65; }
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
     .form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
     label { font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-60); }
-    input, textarea, select {
-      font-family:'DM Sans',sans-serif; font-size:14px; font-weight:300;
-      color:var(--ink); background:var(--warm-white);
-      border:1px solid var(--line); border-radius:2px;
-      padding:12px 16px; outline:none;
-      transition:border-color 0.2s;
-      width:100%;
-    }
+    input, textarea, select { font-family:'DM Sans',sans-serif; font-size:14px; font-weight:300; color:var(--ink); background:var(--warm-white); border:1px solid var(--line); border-radius:2px; padding:12px 16px; outline:none; transition:border-color 0.2s; width:100%; }
     input:focus, textarea:focus, select:focus { border-color:rgba(26,24,20,0.4); }
     textarea { min-height:120px; resize:vertical; }
     .btn-submit { background:var(--accent); color:#fff; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; padding:14px 36px; border:none; border-radius:2px; cursor:pointer; letter-spacing:0.03em; transition:opacity 0.2s; }
     .btn-submit:hover { opacity:0.85; }
     .form-note { font-size:12px; color:var(--ink-30); margin-top:14px; line-height:1.6; }
     .form-note a { color:var(--ink-60); }
-
     .success-msg { display:none; padding:20px 24px; background:var(--accent-light); border:1px solid rgba(45,90,61,0.2); border-radius:2px; font-size:14px; color:var(--accent); margin-top:20px; }
-
     footer { padding:36px 48px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
     .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
     .footer-logo span { color:var(--accent); }
     .footer-copy { font-size:12px; color:var(--ink-30); }
-
-    @media(max-width:700px) {
-      nav, footer { padding:16px 20px; }
-      .page-wrap { padding:120px 24px 80px; }
-      .expert-card { flex-direction:column; gap:20px; padding:28px 24px; }
-      .form-row { grid-template-columns:1fr; }
-    }
+    @media(max-width:700px) { nav, footer { padding:16px 20px; } .page-wrap { padding:120px 24px 80px; } .expert-card { flex-direction:column; gap:20px; padding:28px 24px; } .form-row { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -79,26 +62,37 @@
   <a class="logo" href="index.html">xpat<span>4</span>.org</a>
   <div class="nav-right">
     <div class="lang-switch">
-      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
     </div>
-    <a class="back-link" href="index.html" data-ru="Главная" data-en="Home">Главная</a>
+    <a class="back-link" href="index.html" data-ru="Главная" data-en="Home" data-zh="首页">Главная</a>
   </div>
 </nav>
 
 <div class="page-wrap">
-  <div class="eyebrow" data-ru="Контакты" data-en="Contacts">Контакты</div>
-  <h1 data-ru="Свяжитесь<br/>с нами" data-en="Get in<br/>touch">Свяжитесь<br/>с нами</h1>
+  <div class="eyebrow" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</div>
+  <h1 data-ru="Свяжитесь<br/>с нами" data-en="Get in<br/>touch" data-zh="与我们<br/>取得联系">Свяжитесь<br/>с нами</h1>
 
   <div class="expert-card">
     <div class="expert-avatar">ГМ</div>
     <div class="expert-info">
-      <div class="expert-role" data-ru="Эксперт по визовым вопросам" data-en="Visa Expert">Эксперт по визовым вопросам</div>
+      <div class="expert-role"
+        data-ru="Эксперт по визовым вопросам"
+        data-en="Visa & Migration Expert"
+        data-zh="签证与移民专家">
+        Эксперт по визовым вопросам
+      </div>
       <div class="expert-name">Гульнара Мамбеталиева</div>
-      <p class="expert-desc" data-ru="Специалист по визовым и миграционным вопросам в Кыргызстане. Помогает иностранцам разобраться в процедурах въезда, регистрации и легализации." data-en="Specialist in visa and migration matters in Kyrgyzstan. Helps foreigners navigate entry, registration and legalization procedures.">Специалист по визовым и миграционным вопросам в Кыргызстане. Помогает иностранцам разобраться в процедурах въезда, регистрации и легализации.</p>
+      <p class="expert-desc"
+        data-ru="Специалист по визовым и миграционным вопросам в Кыргызстане. Помогает иностранцам разобраться в процедурах въезда, регистрации и легализации."
+        data-en="Specialist in visa and migration matters in Kyrgyzstan. Helps foreigners navigate entry procedures, registration and legalization."
+        data-zh="吉尔吉斯斯坦签证与移民事务专家。帮助外国人了解入境、登记和合法化程序。">
+        Специалист по визовым и миграционным вопросам в Кыргызстане. Помогает иностранцам разобраться в процедурах въезда, регистрации и легализации.
+      </p>
       <div class="contact-list">
         <div class="contact-item">
-          <span class="contact-label" data-ru="Телефон" data-en="Phone">Телефон</span>
+          <span class="contact-label" data-ru="Телефон" data-en="Phone" data-zh="电话">Телефон</span>
           <a class="contact-value" href="tel:+996700522667">+996 700 522 667</a>
         </div>
         <div class="contact-item">
@@ -106,26 +100,38 @@
           <a class="contact-value" href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a>
         </div>
         <div class="contact-item">
-          <span class="contact-label" data-ru="Город" data-en="City">Город</span>
-          <span class="contact-value" data-ru="Бишкек, Кыргызстан" data-en="Bishkek, Kyrgyzstan">Бишкек, Кыргызстан</span>
+          <span class="contact-label" data-ru="Город" data-en="City" data-zh="城市">Город</span>
+          <span class="contact-value"
+            data-ru="Бишкек, Кыргызстан"
+            data-en="Bishkek, Kyrgyzstan"
+            data-zh="比什凯克，吉尔吉斯斯坦">
+            Бишкек, Кыргызстан
+          </span>
         </div>
       </div>
+      <a class="wa-direct" href="https://wa.me/996700522667" target="_blank" rel="noopener">
+        💬 <span data-ru="Написать в WhatsApp" data-en="Message on WhatsApp" data-zh="通过WhatsApp联系">Написать в WhatsApp</span>
+      </a>
     </div>
   </div>
 
   <div class="form-section">
-    <h2 data-ru="Задать вопрос" data-en="Ask a Question">Задать вопрос</h2>
-    <p data-ru="Опишите вашу ситуацию, и мы ответим в течение 1–2 рабочих дней." data-en="Describe your situation and we'll respond within 1–2 business days.">Опишите вашу ситуацию, и мы ответим в течение 1–2 рабочих дней.</p>
+    <h2 data-ru="Задать вопрос" data-en="Ask a Question" data-zh="提问">Задать вопрос</h2>
+    <p data-ru="Опишите вашу ситуацию, и мы ответим в течение 1–2 рабочих дней."
+       data-en="Describe your situation and we'll respond within 1–2 business days."
+       data-zh="描述您的情况，我们将在1-2个工作日内回复。">
+      Опишите вашу ситуацию, и мы ответим в течение 1–2 рабочих дней.
+    </p>
 
     <form id="contact-form" onsubmit="handleSubmit(event)">
       <div class="form-row">
         <div class="form-group">
-          <label data-ru="Имя" data-en="Name">Имя</label>
-          <input type="text" name="name" required placeholder="" />
+          <label data-ru="Имя" data-en="Name" data-zh="姓名">Имя</label>
+          <input type="text" name="name" required />
         </div>
         <div class="form-group">
-          <label data-ru="Гражданство" data-en="Nationality">Гражданство</label>
-          <input type="text" name="nationality" placeholder="" />
+          <label data-ru="Гражданство" data-en="Nationality" data-zh="国籍">Гражданство</label>
+          <input type="text" name="nationality" />
         </div>
       </div>
       <div class="form-group">
@@ -133,24 +139,35 @@
         <input type="email" name="email" required />
       </div>
       <div class="form-group">
-        <label data-ru="Тема" data-en="Topic">Тема</label>
+        <label data-ru="Тема" data-en="Topic" data-zh="主题">Тема</label>
         <select name="topic">
-          <option value="" data-ru="Выберите тему" data-en="Select topic">Выберите тему</option>
-          <option value="visa" data-ru="Виза и въезд" data-en="Visa & Entry">Виза и въезд</option>
-          <option value="residence" data-ru="Регистрация и ВНЖ" data-en="Registration & Residence">Регистрация и ВНЖ</option>
-          <option value="work" data-ru="Работа и учёба" data-en="Work & Study">Работа и учёба</option>
-          <option value="business" data-ru="Бизнес и жильё" data-en="Business & Housing">Бизнес и жильё</option>
-          <option value="other" data-ru="Другое" data-en="Other">Другое</option>
+          <option value="" data-ru="Выберите тему" data-en="Select topic" data-zh="选择主题">Выберите тему</option>
+          <option value="visa" data-ru="Виза и въезд" data-en="Visa & Entry" data-zh="签证与入境">Виза и въезд</option>
+          <option value="residence" data-ru="Регистрация и ВНЖ" data-en="Registration & Residence" data-zh="注册与居留">Регистрация и ВНЖ</option>
+          <option value="work" data-ru="Работа и учёба" data-en="Work & Study" data-zh="工作与学习">Работа и учёба</option>
+          <option value="business" data-ru="Бизнес и жильё" data-en="Business & Housing" data-zh="商业与住房">Бизнес и жильё</option>
+          <option value="other" data-ru="Другое" data-en="Other" data-zh="其他">Другое</option>
         </select>
       </div>
       <div class="form-group">
-        <label data-ru="Сообщение" data-en="Message">Сообщение</label>
+        <label data-ru="Сообщение" data-en="Message" data-zh="留言">Сообщение</label>
         <textarea name="message" required></textarea>
       </div>
-      <button class="btn-submit" type="submit" data-ru="Отправить" data-en="Send">Отправить</button>
-      <p class="form-note" data-ru="Нажимая «Отправить», вы соглашаетесь с нашей <a href='privacy.html'>политикой конфиденциальности</a>." data-en="By clicking Submit, you agree to our <a href='privacy.html'>privacy policy</a>.">Нажимая «Отправить», вы соглашаетесь с нашей <a href="privacy.html">политикой конфиденциальности</a>.</p>
+      <button class="btn-submit" type="submit"
+        data-ru="Отправить" data-en="Send" data-zh="发送">Отправить</button>
+      <p class="form-note"
+        data-ru="Нажимая «Отправить», вы соглашаетесь с нашей <a href='privacy.html'>политикой конфиденциальности</a>."
+        data-en="By clicking Send, you agree to our <a href='privacy.html'>privacy policy</a>."
+        data-zh="点击"发送"即表示您同意我们的<a href='privacy.html'>隐私政策</a>。">
+        Нажимая «Отправить», вы соглашаетесь с нашей <a href="privacy.html">политикой конфиденциальности</a>.
+      </p>
     </form>
-    <div class="success-msg" id="success-msg" data-ru="Сообщение отправлено. Мы свяжемся с вами в ближайшее время." data-en="Message sent. We'll be in touch soon.">Сообщение отправлено. Мы свяжемся с вами в ближайшее время.</div>
+    <div class="success-msg" id="success-msg"
+      data-ru="Сообщение отправлено. Мы свяжемся с вами в ближайшее время."
+      data-en="Message sent. We'll be in touch soon."
+      data-zh="消息已发送。我们将尽快与您联系。">
+      Сообщение отправлено. Мы свяжемся с вами в ближайшее время.
+    </div>
   </div>
 </div>
 
@@ -159,38 +176,20 @@
   <span class="footer-copy">© 2025 xpat4.org</span>
 </footer>
 
+<script src="xpat4.js"></script>
 <script>
-  let currentLang = localStorage.getItem('lang') || 'ru';
-
-  function setLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
-    document.querySelectorAll('[data-ru]').forEach(el => {
-      const t = el.getAttribute('data-' + lang);
-      if (t) el.innerHTML = t;
-    });
-    // Update select options
-    document.querySelectorAll('select option[data-ru]').forEach(opt => {
-      const t = opt.getAttribute('data-' + lang);
-      if (t) opt.textContent = t;
-    });
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    // Send via mailto as fallback (replace with proper backend/formspree later)
-    const body = `Имя: ${data.get('name')}\nГражданство: ${data.get('nationality')}\nТема: ${data.get('topic')}\n\n${data.get('message')}`;
-    window.location.href = `mailto:xpat4kg@gmail.com?subject=Вопрос с сайта xpat4.org&body=${encodeURIComponent(body)}`;
-    form.style.display = 'none';
+    const lang = XPAT4.currentLang || 'ru';
+    const data = new FormData(e.target);
+    const subj = { ru: 'Вопрос с сайта xpat4.org', en: 'Question from xpat4.org', zh: '来自xpat4.org的问题' }[lang];
+    const body = `Name: ${data.get('name')}\nNationality: ${data.get('nationality')}\nTopic: ${data.get('topic')}\n\n${data.get('message')}`;
+    window.location.href = `mailto:xpat4kg@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+    e.target.style.display = 'none';
     const msg = document.getElementById('success-msg');
     msg.style.display = 'block';
-    msg.textContent = msg.getAttribute('data-' + currentLang);
+    msg.textContent = msg.getAttribute('data-' + lang);
   }
-
-  setLang(currentLang);
 </script>
 </body>
 </html>

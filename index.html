@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xpat4 — Виза и релокация в Кыргызстан</title>
+  <title>xpat4 — Виза и релокация в Кыргызстан | Visa & Relocation to Kyrgyzstan</title>
+  <meta name="description" content="Всё для иностранцев в Кыргызстане: визы, регистрация, ВНЖ, работа, бизнес. Everything for expats in Kyrgyzstan.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -37,6 +38,14 @@
     .lang-btn.active { background: var(--warm-white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 8px 20px; border-radius: 2px; transition: background 0.2s, color 0.2s; }
     .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.25s; }
+    .mobile-menu { display: none; position: fixed; top: 62px; left: 0; right: 0; background: var(--warm-white); border-bottom: 1px solid var(--line); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--ink-60); text-decoration: none; padding: 6px 0; border-bottom: 1px solid var(--line); }
+    .mobile-menu a:last-child { border-bottom: none; }
 
     /* HERO */
     .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 48px 80px; max-width: 860px; margin: 0 auto; }
@@ -111,6 +120,7 @@
     @media (max-width: 900px) {
       nav { padding: 16px 20px; }
       .nav-center { display: none; }
+      .nav-burger { display: flex; }
       .hero, .section, .cards-section { padding-left: 24px; padding-right: 24px; }
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
       .consultants-grid { grid-template-columns: repeat(2, 1fr); }
@@ -130,28 +140,69 @@
 <nav>
   <a class="logo" href="/">xpat<span>4</span>.org</a>
   <ul class="nav-center">
-    <li><a href="#services" data-ru="Услуги" data-en="Services">Услуги</a></li>
-    <li><a href="catalog.html" data-ru="Каталог" data-en="Catalog">Каталог</a></li>
-    <li><a href="contact.html" data-ru="Контакты" data-en="Contacts">Контакты</a></li>
+    <li><a href="#services"
+      data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a></li>
+    <li><a href="catalog.html"
+      data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
+    <li><a href="contact.html"
+      data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
   </ul>
   <div class="nav-right">
     <div class="lang-switch">
-      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
     </div>
-    <a class="nav-cta" href="contact.html" data-ru="Получить помощь" data-en="Get Help">Получить помощь</a>
+    <a class="nav-cta" href="contact.html"
+      data-ru="Получить помощь" data-en="Get Help" data-zh="获取帮助">Получить помощь</a>
   </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a>
+  <a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a>
+  <a href="contact.html" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a>
+  <a href="visa.html" data-ru="Виза и въезд" data-en="Visa & Entry" data-zh="签证与入境">Виза и въезд</a>
+</div>
+
 <section class="hero">
-  <div class="hero-eyebrow" data-ru="Кыргызстан · Для экспатов" data-en="Kyrgyzstan · For Expats">Кыргызстан · Для экспатов</div>
-  <h1 data-ru="Виза, регистрация<br/>и <em>жизнь</em> в Кыргызстане" data-en="Visa, registration<br/>and <em>life</em> in Kyrgyzstan">Виза, регистрация<br/>и <em>жизнь</em> в Кыргызстане</h1>
-  <p class="hero-sub" data-ru="Всё, что нужно иностранцу — от въезда до вида на жительство. Простые ответы на сложные вопросы, проверенные специалисты рядом." data-en="Everything a foreigner needs — from entry to residence permit. Clear answers to complex questions, trusted specialists nearby.">Всё, что нужно иностранцу — от въезда до вида на жительство. Простые ответы на сложные вопросы, проверенные специалисты рядом.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="#services" data-ru="Начать здесь" data-en="Start Here">Начать здесь</a>
-    <a class="btn-ghost" href="catalog.html" data-ru="Найти специалиста" data-en="Find a Specialist">Найти специалиста</a>
+  <div class="hero-eyebrow"
+    data-ru="Кыргызстан · Для экспатов"
+    data-en="Kyrgyzstan · For Expats"
+    data-zh="吉尔吉斯斯坦 · 为外籍人士">
+    Кыргызстан · Для экспатов
   </div>
-  <div class="hero-trust" data-ru="Независимый ресурс для экспатов в КР · Без рекламы" data-en="Independent resource for expats in KR · Ad-free">Независимый ресурс для экспатов в КР · Без рекламы</div>
+  <h1
+    data-ru="Виза, регистрация<br/>и <em>жизнь</em> в Кыргызстане"
+    data-en="Visa, registration<br/>and <em>life</em> in Kyrgyzstan"
+    data-zh="签证、注册<br/>和<em>生活</em>在吉尔吉斯斯坦">
+    Виза, регистрация<br/>и <em>жизнь</em> в Кыргызстане
+  </h1>
+  <p class="hero-sub"
+    data-ru="Всё, что нужно иностранцу — от въезда до вида на жительство. Простые ответы на сложные вопросы, проверенные специалисты рядом."
+    data-en="Everything a foreigner needs — from entry to residence permit. Clear answers to complex questions, trusted specialists nearby."
+    data-zh="外籍人士所需的一切——从入境到居留许可。复杂问题的简单答案，可信赖的专家就在身边。">
+    Всё, что нужно иностранцу — от въезда до вида на жительство. Простые ответы на сложные вопросы, проверенные специалисты рядом.
+  </p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#services"
+      data-ru="Начать здесь" data-en="Start Here" data-zh="从这里开始">
+      Начать здесь
+    </a>
+    <a class="btn-ghost" href="catalog.html"
+      data-ru="Найти специалиста" data-en="Find a Specialist" data-zh="寻找专家">
+      Найти специалиста
+    </a>
+  </div>
+  <div class="hero-trust"
+    data-ru="Независимый ресурс для экспатов в КР · Без рекламы"
+    data-en="Independent resource for expats in KR · Ad-free"
+    data-zh="吉尔吉斯斯坦外籍人士独立资源 · 无广告">
+    Независимый ресурс для экспатов в КР · Без рекламы
+  </div>
 </section>
 
 <div class="cards-section" id="services">
@@ -159,30 +210,74 @@
     <a class="card" href="visa.html">
       <span class="card-num">01</span>
       <div class="card-icon">🛂</div>
-      <div class="card-title" data-ru="Виза и въезд" data-en="Visa & Entry">Виза и въезд</div>
-      <p class="card-desc" data-ru="Типы виз, безвизовые режимы, ОВПГ, пересечение границы." data-en="Visa types, visa-free entry, OVPG, border crossing.">Типы виз, безвизовые режимы, ОВПГ, пересечение границы.</p>
-      <span class="card-link" data-ru="Подробнее" data-en="Learn more">Подробнее</span>
+      <div class="card-title"
+        data-ru="Виза и въезд" data-en="Visa & Entry" data-zh="签证与入境">
+        Виза и въезд
+      </div>
+      <p class="card-desc"
+        data-ru="Типы виз, безвизовые режимы, ОВПГ, пересечение границы."
+        data-en="Visa types, visa-free entry, OVPG, border crossing."
+        data-zh="签证类型、免签制度、OVPG、边境过境。">
+        Типы виз, безвизовые режимы, ОВПГ, пересечение границы.
+      </p>
+      <span class="card-link"
+        data-ru="Подробнее" data-en="Learn more" data-zh="了解更多">
+        Подробнее
+      </span>
     </a>
     <a class="card" href="residence.html">
       <span class="card-num">02</span>
       <div class="card-icon">📋</div>
-      <div class="card-title" data-ru="Регистрация и ВНЖ" data-en="Registration & Residence">Регистрация и ВНЖ</div>
-      <p class="card-desc" data-ru="Временная регистрация, вид на жительство, гражданство." data-en="Temporary registration, residence permit, citizenship.">Временная регистрация, вид на жительство, гражданство.</p>
-      <span class="card-link" data-ru="Подробнее" data-en="Learn more">Подробнее</span>
+      <div class="card-title"
+        data-ru="Регистрация и ВНЖ" data-en="Registration & Residence" data-zh="注册与居留">
+        Регистрация и ВНЖ
+      </div>
+      <p class="card-desc"
+        data-ru="Временная регистрация, вид на жительство, гражданство."
+        data-en="Temporary registration, residence permit, citizenship."
+        data-zh="临时登记、居留许可、公民身份。">
+        Временная регистрация, вид на жительство, гражданство.
+      </p>
+      <span class="card-link"
+        data-ru="Подробнее" data-en="Learn more" data-zh="了解更多">
+        Подробнее
+      </span>
     </a>
     <a class="card" href="work.html">
       <span class="card-num">03</span>
       <div class="card-icon">💼</div>
-      <div class="card-title" data-ru="Работа и учёба" data-en="Work & Study">Работа и учёба</div>
-      <p class="card-desc" data-ru="Разрешение на работу, трудоустройство, учёба в КР." data-en="Work permits, employment, studying in KR.">Разрешение на работу, трудоустройство, учёба в КР.</p>
-      <span class="card-link" data-ru="Подробнее" data-en="Learn more">Подробнее</span>
+      <div class="card-title"
+        data-ru="Работа и учёба" data-en="Work & Study" data-zh="工作与学习">
+        Работа и учёба
+      </div>
+      <p class="card-desc"
+        data-ru="Разрешение на работу, трудоустройство, учёба в КР."
+        data-en="Work permits, employment, studying in KR."
+        data-zh="工作许可、就业、在吉学习。">
+        Разрешение на работу, трудоустройство, учёба в КР.
+      </p>
+      <span class="card-link"
+        data-ru="Подробнее" data-en="Learn more" data-zh="了解更多">
+        Подробнее
+      </span>
     </a>
     <a class="card" href="living.html">
       <span class="card-num">04</span>
       <div class="card-icon">🏡</div>
-      <div class="card-title" data-ru="Бизнес, жильё и др." data-en="Business, Housing & More">Бизнес, жильё и др.</div>
-      <p class="card-desc" data-ru="Открытие компании, аренда, банки, налоги, повседневная жизнь." data-en="Company setup, housing, banking, taxes, daily life.">Открытие компании, аренда, банки, налоги, повседневная жизнь.</p>
-      <span class="card-link" data-ru="Подробнее" data-en="Learn more">Подробнее</span>
+      <div class="card-title"
+        data-ru="Бизнес, жильё и др." data-en="Business, Housing & More" data-zh="商业、住房等">
+        Бизнес, жильё и др.
+      </div>
+      <p class="card-desc"
+        data-ru="Открытие компании, аренда, банки, налоги, повседневная жизнь."
+        data-en="Company setup, housing, banking, taxes, daily life."
+        data-zh="公司注册、住房、银行、税务、日常生活。">
+        Открытие компании, аренда, банки, налоги, повседневная жизнь.
+      </p>
+      <span class="card-link"
+        data-ru="Подробнее" data-en="Learn more" data-zh="了解更多">
+        Подробнее
+      </span>
     </a>
   </div>
 </div>
@@ -190,11 +285,24 @@
 <section class="section" id="catalog">
   <div class="catalog-intro fade-up">
     <div class="catalog-intro-text">
-      <h2 data-ru="Специалисты<br/>и организации" data-en="Specialists<br/>& Organizations">Специалисты<br/>и организации</h2>
-      <p data-ru="Консультанты, юристы и агентства, которые помогают иностранцам решать вопросы проживания и легализации в Кыргызстане." data-en="Consultants, lawyers and agencies who help foreigners with residency and legalization in Kyrgyzstan.">Консультанты, юристы и агентства, которые помогают иностранцам решать вопросы проживания и легализации в Кыргызстане.</p>
+      <h2
+        data-ru="Специалисты<br/>и организации"
+        data-en="Specialists<br/>& Organizations"
+        data-zh="专家<br/>与机构">
+        Специалисты<br/>и организации
+      </h2>
+      <p
+        data-ru="Консультанты, юристы и агентства, которые помогают иностранцам решать вопросы проживания и легализации в Кыргызстане."
+        data-en="Consultants, lawyers and agencies who help foreigners with residency and legalization in Kyrgyzstan."
+        data-zh="帮助外国人解决在吉尔吉斯斯坦居住和合法化问题的顾问、律师和机构。">
+        Консультанты, юристы и агентства, которые помогают иностранцам решать вопросы проживания и легализации в Кыргызстане.
+      </p>
     </div>
     <div>
-      <a class="btn-outline" href="catalog.html" data-ru="Весь каталог" data-en="Full Catalog">Весь каталог</a>
+      <a class="btn-outline" href="catalog.html"
+        data-ru="Весь каталог" data-en="Full Catalog" data-zh="完整目录">
+        Весь каталог
+      </a>
     </div>
   </div>
   <div class="consultants-grid" id="specialists-grid">
@@ -204,74 +312,85 @@
 
 <section class="final-cta" id="consult">
   <div class="final-cta-inner">
-    <h2 data-ru="Не знаете,<br/><em>с чего начать?</em>" data-en="Not sure<br/><em>where to start?</em>">Не знаете,<br/><em>с чего начать?</em></h2>
-    <p data-ru="Опишите вашу ситуацию — мы поможем разобраться, какие документы нужны и к кому обратиться." data-en="Describe your situation — we'll help figure out what documents you need and who to contact.">Опишите вашу ситуацию — мы поможем разобраться, какие документы нужны и к кому обратиться.</p>
-    <a class="btn-light" href="contact.html" data-ru="Задать вопрос" data-en="Ask a Question">Задать вопрос</a>
+    <h2
+      data-ru="Не знаете,<br/><em>с чего начать?</em>"
+      data-en="Not sure<br/><em>where to start?</em>"
+      data-zh="不知道<br/><em>从哪里开始？</em>">
+      Не знаете,<br/><em>с чего начать?</em>
+    </h2>
+    <p
+      data-ru="Опишите вашу ситуацию — мы поможем разобраться, какие документы нужны и к кому обратиться."
+      data-en="Describe your situation — we'll help figure out what documents you need and who to contact."
+      data-zh="描述您的情况——我们将帮助您了解需要哪些文件以及联系谁。">
+      Опишите вашу ситуацию — мы поможем разобраться, какие документы нужны и к кому обратиться.
+    </p>
+    <a class="btn-light" href="contact.html"
+      data-ru="Задать вопрос" data-en="Ask a Question" data-zh="提问">
+      Задать вопрос
+    </a>
   </div>
 </section>
 
 <footer>
   <a class="footer-logo" href="/">xpat<span>4</span>.org</a>
   <ul class="footer-links">
-    <li><a href="visa.html" data-ru="Виза" data-en="Visa">Виза</a></li>
-    <li><a href="catalog.html" data-ru="Каталог" data-en="Catalog">Каталог</a></li>
-    <li><a href="contact.html" data-ru="Контакты" data-en="Contacts">Контакты</a></li>
-    <li><a href="privacy.html" data-ru="Конфиденциальность" data-en="Privacy">Конфиденциальность</a></li>
+    <li><a href="visa.html" data-ru="Виза" data-en="Visa" data-zh="签证">Виза</a></li>
+    <li><a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
+    <li><a href="contact.html" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
+    <li><a href="privacy.html" data-ru="Конфиденциальность" data-en="Privacy" data-zh="隐私政策">Конфиденциальность</a></li>
   </ul>
   <span class="footer-copy">© 2025 xpat4.org</span>
 </footer>
 
+<!-- AI Widget + Language system -->
+<script src="xpat4.js"></script>
+
 <script>
-  // ── Language system ──
-  let currentLang = localStorage.getItem('lang') || 'ru';
+  /* ── Mobile burger menu ── */
+  const burger = document.getElementById('nav-burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-  function setLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
-    document.querySelectorAll('[data-ru]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (text) el.innerHTML = text;
-    });
-    renderSpecialists();
-  }
-
-  // ── Load specialists from JSON ──
+  /* ── Load specialists from JSON ── */
   async function loadSpecialists() {
     try {
       const res = await fetch('specialists.json');
       return await res.json();
-    } catch {
-      return [];
-    }
+    } catch { return []; }
   }
 
   function renderSpecialists() {
     const grid = document.getElementById('specialists-grid');
     if (!grid || !window._specialists) return;
-    const open = currentLang === 'ru' ? 'Профиль' : 'Profile';
+    const lang = XPAT4.currentLang || 'ru';
+    const openLabel = { ru: 'Профиль', en: 'Profile', zh: '查看资料' }[lang] || 'Profile';
+    const onlineLabel = { ru: 'Онлайн', en: 'Online', zh: '在线' }[lang] || 'Online';
+
     grid.innerHTML = window._specialists.slice(0, 6).map(s => `
       <a class="consultant-card fade-up" href="catalog.html#specialist-${s.id}">
         <div class="consultant-avatar">${s.initials}</div>
-        <div class="consultant-role">${currentLang === 'ru' ? s.role_ru : s.role_en}</div>
-        <div class="consultant-name">${currentLang === 'ru' ? s.name_ru : s.name_en}</div>
-        <p class="consultant-desc">${currentLang === 'ru' ? s.desc_ru : s.desc_en}</p>
+        <div class="consultant-role">${s['role_' + lang] || s.role_en}</div>
+        <div class="consultant-name">${s['name_' + lang] || s.name_en}</div>
+        <p class="consultant-desc">${s['desc_' + lang] || s.desc_en}</p>
         <div class="consultant-footer">
-          <span class="consultant-city">${currentLang === 'ru' ? s.city_ru : s.city_en}${s.online ? (currentLang === 'ru' ? ' · Онлайн' : ' · Online') : ''}</span>
-          <span class="consultant-open">${open}</span>
+          <span class="consultant-city">${s['city_' + lang] || s.city_en}${s.online ? ' · ' + onlineLabel : ''}</span>
+          <span class="consultant-open">${openLabel}</span>
         </div>
       </a>
     `).join('');
-    // Re-observe fade-up
     document.querySelectorAll('.consultant-card.fade-up').forEach(el => io.observe(el));
   }
 
   loadSpecialists().then(data => {
     window._specialists = data;
-    setLang(currentLang);
+    renderSpecialists();
   });
 
-  // ── Scroll fade-in ──
+  /* Re-render specialists on language change */
+  document.addEventListener('xpat4-lang-change', renderSpecialists);
+
+  /* ── Scroll fade-in ── */
   const io = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {

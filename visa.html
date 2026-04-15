@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Виза и въезд — xpat4.org</title>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visa & Entry — xpat4.org | Виза и въезд | 签证与入境</title>
+  <meta name="description" content="Visa types, visa-free entry, e-Visa, OVPG registration in Kyrgyzstan. Tipos de visa en Kirguistán. 吉尔吉斯斯坦签证信息。">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -11,7 +11,7 @@
     :root {
       --sand: #f5f0e8; --warm-white: #faf8f4; --ink: #1a1814;
       --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3);
-      --accent: #2d5a3d; --line: rgba(26,24,20,0.12);
+      --ink-10: rgba(26,24,20,0.08); --accent: #2d5a3d; --line: rgba(26,24,20,0.12);
     }
     body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
     nav {
@@ -22,21 +22,16 @@
     }
     .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); text-decoration: none; }
     .logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switch { display: flex; gap: 2px; background: var(--ink-10); border-radius: 3px; padding: 3px; }
+    .lang-btn { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; padding: 5px 10px; border: none; background: transparent; cursor: pointer; color: var(--ink-60); border-radius: 2px; transition: background 0.15s, color 0.15s; }
+    .lang-btn.active { background: var(--warm-white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .back { font-size: 13px; color: var(--ink-60); text-decoration: none; display: flex; align-items: center; gap: 6px; }
     .back::before { content: '←'; }
     .back:hover { color: var(--ink); }
 
-    .page-hero {
-      padding: 160px 48px 80px;
-      max-width: 760px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--line);
-    }
-    .eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 24px;
-      display: flex; align-items: center; gap: 10px;
-    }
+    .page-hero { padding: 160px 48px 80px; max-width: 760px; margin: 0 auto; border-bottom: 1px solid var(--line); }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
     h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,6vw,68px); font-weight: 300; line-height: 1.1; margin-bottom: 22px; }
     .page-sub { font-size: 16px; color: var(--ink-60); font-weight: 300; line-height: 1.7; }
@@ -54,56 +49,137 @@
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--ink-60); text-decoration: none; }
     .footer-logo span { color: var(--accent); }
     .footer-copy { font-size: 12px; color: var(--ink-30); }
-    @media(max-width:700px){ nav,footer{ padding:18px 24px; } .page-hero,.content{ padding-left:24px; padding-right:24px; } }
+    @media(max-width:700px) { nav, footer { padding: 18px 24px; } .page-hero, .content { padding-left: 24px; padding-right: 24px; } }
   </style>
 </head>
 <body>
   <nav>
-    <a class="logo" href="/">xpat<span>4</span>.org</a>
-    <a class="back" href="/">Главная</a>
+    <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+        <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+      </div>
+      <a class="back" href="index.html"
+        data-ru="Главная" data-en="Home" data-zh="首页">Главная</a>
+    </div>
   </nav>
 
   <div class="page-hero">
-    <div class="eyebrow">01 · Виза и въезд</div>
-    <h1>Въезд в Кыргызстан</h1>
-    <p class="page-sub">Типы виз, безвизовые режимы, правила пересечения границы и разрешение на временное пребывание (ОВПГ).</p>
+    <div class="eyebrow"
+      data-ru="01 · Виза и въезд"
+      data-en="01 · Visa & Entry"
+      data-zh="01 · 签证与入境">
+      01 · Виза и въезд
+    </div>
+    <h1
+      data-ru="Въезд в Кыргызстан"
+      data-en="Entering Kyrgyzstan"
+      data-zh="进入吉尔吉斯斯坦">
+      Въезд в Кыргызстан
+    </h1>
+    <p class="page-sub"
+      data-ru="Типы виз, безвизовые режимы, правила пересечения границы и разрешение на временное пребывание (ОВПГ)."
+      data-en="Visa types, visa-free entry, border crossing rules and temporary stay permit (OVPG)."
+      data-zh="签证类型、免签制度、边境过境规则及临时居留许可（OVPG）。">
+      Типы виз, безвизовые режимы, правила пересечения границы и разрешение на временное пребывание (ОВПГ).
+    </p>
   </div>
 
   <div class="content">
     <div class="topic-block">
       <div class="topic-num">01.1</div>
-      <h2>Безвизовый въезд</h2>
-      <p>Кыргызстан открыт для граждан более 60 стран без визы. Срок безвизового пребывания зависит от гражданства — обычно от 30 до 60 дней. Граждане России, Казахстана, Беларуси, Армении могут находиться неограниченно.</p>
+      <h2
+        data-ru="Безвизовый въезд"
+        data-en="Visa-Free Entry"
+        data-zh="免签入境">
+        Безвизовый въезд
+      </h2>
+      <p
+        data-ru="Кыргызстан открыт для граждан более 60 стран без визы. Срок безвизового пребывания зависит от гражданства — обычно от 30 до 60 дней. Граждане России, Казахстана, Беларуси, Армении могут находиться неограниченно."
+        data-en="Kyrgyzstan is open to citizens of over 60 countries without a visa. The visa-free stay period depends on nationality — usually 30 to 60 days. Citizens of Russia, Kazakhstan, Belarus, and Armenia may stay indefinitely."
+        data-zh="吉尔吉斯斯坦对60多个国家的公民开放免签。免签停留期限因国籍而异，通常为30至60天。俄罗斯、哈萨克斯坦、白俄罗斯和亚美尼亚公民可无限期居留。">
+        Кыргызстан открыт для граждан более 60 стран без визы. Срок безвизового пребывания зависит от гражданства — обычно от 30 до 60 дней. Граждане России, Казахстана, Беларуси, Армении могут находиться неограниченно.
+      </p>
       <div class="tag-row">
-        <span class="tag">Россия — без ограничений</span>
-        <span class="tag">ЕС — 30 дней</span>
-        <span class="tag">США — 60 дней</span>
-        <span class="tag">Китай — по соглашению</span>
+        <span class="tag" data-ru="Россия — без ограничений" data-en="Russia — unlimited" data-zh="俄罗斯 — 无限制">Россия — без ограничений</span>
+        <span class="tag" data-ru="ЕС — 30 дней" data-en="EU — 30 days" data-zh="欧盟 — 30天">ЕС — 30 дней</span>
+        <span class="tag" data-ru="США — 60 дней" data-en="USA — 60 days" data-zh="美国 — 60天">США — 60 дней</span>
+        <span class="tag" data-ru="Китай — по соглашению" data-en="China — by agreement" data-zh="中国 — 按协议">Китай — по соглашению</span>
       </div>
     </div>
 
     <div class="topic-block">
       <div class="topic-num">01.2</div>
-      <h2>Виза по прибытии (VOA)</h2>
-      <p>Для ряда стран доступна виза по прилёту в аэропорту Манас (Бишкек). Оформляется на месте, стоимость зависит от типа и срока. Рекомендуется уточнить актуальный список стран заранее.</p>
+      <h2
+        data-ru="Виза по прибытии (VOA)"
+        data-en="Visa on Arrival (VOA)"
+        data-zh="落地签证（VOA）">
+        Виза по прибытии (VOA)
+      </h2>
+      <p
+        data-ru="Для ряда стран доступна виза по прилёту в аэропорту Манас (Бишкек). Оформляется на месте, стоимость зависит от типа и срока. Рекомендуется уточнить актуальный список стран заранее на сайте evisa.e-gov.kg."
+        data-en="Some nationalities can obtain a visa on arrival at Manas Airport (Bishkek). It is issued on-site; cost depends on type and duration. Check the current list of eligible countries in advance at evisa.e-gov.kg."
+        data-zh="某些国籍的旅客可在玛纳斯机场（比什凯克）办理落地签证。现场办理，费用视类型和期限而定。请提前在evisa.e-gov.kg查看最新合格国家列表。">
+        Для ряда стран доступна виза по прилёту в аэропорту Манас (Бишкек). Оформляется на месте, стоимость зависит от типа и срока. Рекомендуется уточнить актуальный список стран заранее на сайте evisa.e-gov.kg.
+      </p>
     </div>
 
     <div class="topic-block">
       <div class="topic-num">01.3</div>
-      <h2>ОВПГ — разрешение на временное пребывание</h2>
-      <p>Иностранец, планирующий находиться в КР более 30 дней, обязан встать на учёт — получить ОВПГ. Это делается через местные органы МВД или миграционную службу. Срок — до 90 дней с возможностью продления.</p>
+      <h2
+        data-ru="Электронная виза (e-Visa)"
+        data-en="Electronic Visa (e-Visa)"
+        data-zh="电子签证（e-Visa）">
+        Электронная виза (e-Visa)
+      </h2>
+      <p
+        data-ru="С 2017 года граждане любой страны могут подать заявку на туристическую или деловую визу онлайн через evisa.e-gov.kg. Виза оформляется на 30 или 60 дней. Въезд — только через аэропорты Манас или Ош и ряд пограничных переходов."
+        data-en="Since 2017, citizens of any country can apply for a tourist or business e-Visa online at evisa.e-gov.kg. Valid for 30 or 60 days. Entry is only through Manas or Osh airports and select land border crossings."
+        data-zh="自2017年起，任何国家公民均可通过evisa.e-gov.kg在线申请旅游或商务电子签证。有效期30或60天。入境须经玛纳斯或奥什机场及部分陆路口岸。">
+        С 2017 года граждане любой страны могут подать заявку на туристическую или деловую визу онлайн через evisa.e-gov.kg. Виза оформляется на 30 или 60 дней. Въезд — только через аэропорты Манас или Ош и ряд пограничных переходов.
+      </p>
     </div>
 
     <div class="topic-block">
       <div class="topic-num">01.4</div>
-      <h2>Продление и «визаран»</h2>
-      <p>Выезд и повторный въезд («визаран») позволяет сбросить счётчик пребывания, однако миграционные органы обращают внимание на частые пересечения границы. При длительном проживании рекомендуется оформить ВНЖ.</p>
+      <h2
+        data-ru="ОВПГ — разрешение на временное пребывание"
+        data-en="OVPG — Temporary Stay Permit"
+        data-zh="OVPG — 临时居留许可">
+        ОВПГ — разрешение на временное пребывание
+      </h2>
+      <p
+        data-ru="Иностранец, планирующий находиться в КР более 30 дней, обязан встать на учёт — получить ОВПГ. Это делается через местные органы МВД или миграционную службу. Срок — до 90 дней с возможностью продления."
+        data-en="Foreigners planning to stay in Kyrgyzstan for more than 30 days must register and obtain an OVPG (temporary stay permit) through local MIA offices or migration services. Valid for up to 90 days, extendable."
+        data-zh="计划在吉尔吉斯斯坦停留超过30天的外国人，须通过当地内务部或移民服务机构办理OVPG（临时居留许可）。有效期最长90天，可延期。">
+        Иностранец, планирующий находиться в КР более 30 дней, обязан встать на учёт — получить ОВПГ. Это делается через местные органы МВД или миграционную службу. Срок — до 90 дней с возможностью продления.
+      </p>
+    </div>
+
+    <div class="topic-block">
+      <div class="topic-num">01.5</div>
+      <h2
+        data-ru="Продление и «визаран»"
+        data-en="Extension & Visa Run"
+        data-zh="延期与签证续签">
+        Продление и «визаран»
+      </h2>
+      <p
+        data-ru="Выезд и повторный въезд («визаран») позволяет сбросить счётчик пребывания, однако миграционные органы обращают внимание на частые пересечения границы. При длительном проживании рекомендуется оформить ВНЖ."
+        data-en="Leaving and re-entering (a 'visa run') resets the stay counter, but immigration authorities monitor frequent border crossings. For long-term residence, obtaining a residence permit (VNJ) is recommended."
+        data-zh="出境后再入境（"签证跑"）可重置停留计时，但移民机构会关注频繁过境行为。长期居住者建议申请居留许可（VNJ）。">
+        Выезд и повторный въезд («визаран») позволяет сбросить счётчик пребывания, однако миграционные органы обращают внимание на частые пересечения границы. При длительном проживании рекомендуется оформить ВНЖ.
+      </p>
     </div>
   </div>
 
   <footer>
-    <a class="footer-logo" href="/">xpat<span>4</span>.org</a>
+    <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
     <span class="footer-copy">© 2025 xpat4.org</span>
   </footer>
+
+  <script src="xpat4.js"></script>
 </body>
 </html>

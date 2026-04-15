@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Каталог — xpat4.org</title>
+  <title>Specialists Catalog — xpat4.org | Каталог специалистов | 专家目录</title>
+  <meta name="description" content="Find immigration lawyers, visa consultants and relocation agents in Kyrgyzstan. 在吉尔吉斯斯坦寻找移民律师和签证顾问。">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -26,15 +27,12 @@
     h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(38px,6vw,62px); font-weight:300; line-height:1.1; margin-bottom:18px; }
     .page-sub { font-size:16px; color:var(--ink-60); font-weight:300; line-height:1.7; max-width:520px; }
 
-    /* FILTERS */
     .filters-bar { padding:0 48px 48px; max-width:900px; margin:0 auto; display:flex; gap:8px; flex-wrap:wrap; }
     .filter-btn { font-size:12px; font-weight:400; color:var(--ink-60); border:1px solid var(--line); background:transparent; padding:8px 18px; border-radius:100px; cursor:pointer; transition:all 0.2s; letter-spacing:0.02em; }
     .filter-btn:hover { border-color:rgba(26,24,20,0.3); color:var(--ink); }
     .filter-btn.active { background:var(--ink); color:#fff; border-color:var(--ink); }
 
-    /* GRID */
     .catalog-grid { padding:0 48px 80px; max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; }
-
     .specialist-card { border:1px solid var(--line); padding:32px 28px; background:var(--warm-white); display:flex; flex-direction:column; gap:10px; transition:border-color 0.2s; }
     .specialist-card:hover { border-color:rgba(26,24,20,0.3); }
     .card-top { display:flex; align-items:flex-start; gap:16px; }
@@ -49,19 +47,13 @@
     .contact-link { font-size:12px; font-weight:500; color:var(--accent); text-decoration:none; border:1px solid var(--accent-light); padding:5px 12px; border-radius:2px; transition:background 0.2s; }
     .contact-link:hover { background:var(--accent-light); }
     .online-badge { font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); background:var(--accent-light); padding:3px 8px; border-radius:100px; }
-
     .empty-state { padding:60px 48px; text-align:center; color:var(--ink-30); font-size:15px; font-weight:300; grid-column:1/-1; }
 
     footer { padding:36px 48px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
     .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
     .footer-logo span { color:var(--accent); }
     .footer-copy { font-size:12px; color:var(--ink-30); }
-
-    @media(max-width:700px) {
-      nav, footer { padding:16px 20px; }
-      .page-hero, .filters-bar, .catalog-grid { padding-left:20px; padding-right:20px; }
-      .catalog-grid { grid-template-columns:1fr; }
-    }
+    @media(max-width:700px) { nav, footer { padding:16px 20px; } .page-hero, .filters-bar, .catalog-grid { padding-left:20px; padding-right:20px; } .catalog-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -69,131 +61,107 @@
   <a class="logo" href="index.html">xpat<span>4</span>.org</a>
   <div class="nav-right">
     <div class="lang-switch">
-      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
     </div>
-    <a class="back-link" href="index.html" data-ru="Главная" data-en="Home">Главная</a>
+    <a class="back-link" href="index.html" data-ru="Главная" data-en="Home" data-zh="首页">Главная</a>
   </div>
 </nav>
 
 <div class="page-hero">
-  <div class="eyebrow" data-ru="Каталог специалистов" data-en="Specialist Catalog">Каталог специалистов</div>
-  <h1 data-ru="Найдите нужного<br/>специалиста" data-en="Find the right<br/>specialist">Найдите нужного<br/>специалиста</h1>
-  <p class="page-sub" data-ru="Юристы, консультанты и агентства, работающие с иностранцами в Кыргызстане." data-en="Lawyers, consultants and agencies working with foreigners in Kyrgyzstan.">Юристы, консультанты и агентства, работающие с иностранцами в Кыргызстане.</p>
+  <div class="eyebrow" data-ru="Каталог специалистов" data-en="Specialist Catalog" data-zh="专家目录">Каталог специалистов</div>
+  <h1 data-ru="Найдите нужного<br/>специалиста" data-en="Find the right<br/>specialist" data-zh="寻找合适的<br/>专家">Найдите нужного<br/>специалиста</h1>
+  <p class="page-sub" data-ru="Юристы, консультанты и агентства, работающие с иностранцами в Кыргызстане." data-en="Lawyers, consultants and agencies working with foreigners in Kyrgyzstan." data-zh="在吉尔吉斯斯坦为外国人提供服务的律师、顾问和机构。">Юристы, консультанты и агентства, работающие с иностранцами в Кыргызстане.</p>
 </div>
 
-<div class="filters-bar" id="filters-bar">
-  <!-- injected by JS -->
-</div>
-
-<div class="catalog-grid" id="catalog-grid">
-  <!-- injected by JS -->
-</div>
+<div class="filters-bar" id="filters-bar"></div>
+<div class="catalog-grid" id="catalog-grid"></div>
 
 <footer>
   <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
   <span class="footer-copy">© 2025 xpat4.org</span>
 </footer>
 
+<script src="xpat4.js"></script>
 <script>
-  let currentLang = localStorage.getItem('lang') || 'ru';
   let currentFilter = 'all';
   let specialists = [];
 
-  const filters = {
-    all:       { ru: 'Все', en: 'All' },
-    visa:      { ru: 'Виза', en: 'Visa' },
-    residence: { ru: 'ВНЖ', en: 'Residence' },
-    work:      { ru: 'Работа', en: 'Work' },
-    business:  { ru: 'Бизнес', en: 'Business' },
-    living:    { ru: 'Жильё', en: 'Housing' }
+  const FILTERS = {
+    all:       { ru: 'Все', en: 'All', zh: '全部' },
+    visa:      { ru: 'Виза', en: 'Visa', zh: '签证' },
+    residence: { ru: 'ВНЖ', en: 'Residence', zh: '居留' },
+    work:      { ru: 'Работа', en: 'Work', zh: '工作' },
+    business:  { ru: 'Бизнес', en: 'Business', zh: '商业' },
+    living:    { ru: 'Жильё', en: 'Housing', zh: '住房' }
   };
 
-  function setLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
-    document.querySelectorAll('[data-ru]').forEach(el => {
-      const t = el.getAttribute('data-' + lang);
-      if (t) el.innerHTML = t;
-    });
-    renderFilters();
-    renderCards();
-  }
+  const CONTACT_LABELS = {
+    ru: { wa: 'WhatsApp', email: 'Email', tg: 'Telegram', online: 'Онлайн', nocontact: 'Уточнить контакты' },
+    en: { wa: 'WhatsApp', email: 'Email', tg: 'Telegram', online: 'Online', nocontact: 'Request contacts' },
+    zh: { wa: 'WhatsApp', email: '邮件', tg: 'Telegram', online: '在线', nocontact: '询问联系方式' }
+  };
 
   function renderFilters() {
+    const lang = XPAT4.currentLang || 'ru';
     const bar = document.getElementById('filters-bar');
-    bar.innerHTML = Object.entries(filters).map(([key, label]) => `
-      <button class="filter-btn${currentFilter === key ? ' active' : ''}" onclick="setFilter('${key}')">
-        ${label[currentLang]}
-      </button>
-    `).join('');
+    bar.innerHTML = Object.entries(FILTERS).map(([key, labels]) =>
+      `<button class="filter-btn${currentFilter === key ? ' active' : ''}" onclick="setFilter('${key}')">${labels[lang] || labels.en}</button>`
+    ).join('');
   }
 
-  function setFilter(key) {
-    currentFilter = key;
-    renderFilters();
-    renderCards();
-  }
+  function setFilter(key) { currentFilter = key; renderFilters(); renderCards(); }
 
   function renderCards() {
+    const lang = XPAT4.currentLang || 'ru';
+    const cl = CONTACT_LABELS[lang] || CONTACT_LABELS.en;
     const grid = document.getElementById('catalog-grid');
-    const filtered = currentFilter === 'all'
-      ? specialists
-      : specialists.filter(s => s.categories.includes(currentFilter));
+    const filtered = currentFilter === 'all' ? specialists : specialists.filter(s => s.categories.includes(currentFilter));
 
     if (!filtered.length) {
-      const msg = currentLang === 'ru' ? 'Специалисты не найдены' : 'No specialists found';
+      const msg = lang === 'zh' ? '未找到专家' : lang === 'en' ? 'No specialists found' : 'Специалисты не найдены';
       grid.innerHTML = `<div class="empty-state">${msg}</div>`;
       return;
     }
 
     grid.innerHTML = filtered.map(s => {
-      const name = currentLang === 'ru' ? s.name_ru : s.name_en;
-      const role = currentLang === 'ru' ? s.role_ru : s.role_en;
-      const desc = currentLang === 'ru' ? s.desc_ru : s.desc_en;
-      const city = currentLang === 'ru' ? s.city_ru : s.city_en;
-      const onlineBadge = s.online ? `<span class="online-badge">${currentLang === 'ru' ? 'Онлайн' : 'Online'}</span>` : '';
-      const contactLabel = currentLang === 'ru' ? 'Написать' : 'Contact';
-      const telLabel = currentLang === 'ru' ? 'Позвонить' : 'Call';
-      const contacts = [
-        s.email ? `<a class="contact-link" href="mailto:${s.email}">Email</a>` : '',
-        s.phone ? `<a class="contact-link" href="tel:${s.phone}">${telLabel}</a>` : '',
-        s.telegram ? `<a class="contact-link" href="https://t.me/${s.telegram}">Telegram</a>` : '',
-      ].filter(Boolean).join('') || `<span style="font-size:12px;color:var(--ink-30)">${currentLang === 'ru' ? 'Контакты скоро' : 'Contacts soon'}</span>`;
+      const contacts = [];
+      if (s.phone) contacts.push(`<a class="contact-link" href="https://wa.me/${s.phone.replace(/\D/g,'')}" target="_blank">${cl.wa}</a>`);
+      if (s.telegram) contacts.push(`<a class="contact-link" href="https://t.me/${s.telegram}" target="_blank">${cl.tg}</a>`);
+      if (s.email) contacts.push(`<a class="contact-link" href="mailto:${s.email}">${cl.email}</a>`);
+      if (!contacts.length) contacts.push(`<a class="contact-link" href="contact.html">${cl.nocontact}</a>`);
 
       return `
         <div class="specialist-card" id="specialist-${s.id}">
           <div class="card-top">
             <div class="avatar">${s.initials}</div>
             <div class="card-meta">
-              <div class="s-role">${role}</div>
-              <div class="s-name">${name}</div>
+              <div class="s-role">${s['role_' + lang] || s.role_en}</div>
+              <div class="s-name">${s['name_' + lang] || s.name_en}</div>
             </div>
           </div>
-          <p class="s-desc">${desc}</p>
+          <p class="s-desc">${s['desc_' + lang] || s.desc_en}</p>
           <div class="card-bottom">
-            <span class="s-city">${city} ${onlineBadge}</span>
-            <div class="s-contacts">${contacts}</div>
+            <span class="s-city">${s['city_' + lang] || s.city_en}${s.online ? ' · <span class="online-badge">' + cl.online + '</span>' : ''}</span>
+            <div class="s-contacts">${contacts.join('')}</div>
           </div>
         </div>
       `;
     }).join('');
+
+    // Scroll to anchor if hash
+    const hash = window.location.hash;
+    if (hash) { setTimeout(() => { const el = document.querySelector(hash); if (el) el.scrollIntoView({ behavior:'smooth', block:'center' }); }, 100); }
   }
 
-  fetch('specialists.json')
-    .then(r => r.json())
-    .then(data => {
-      specialists = data;
-      setLang(currentLang);
-      // Handle anchor scroll
-      if (location.hash) {
-        setTimeout(() => {
-          const el = document.querySelector(location.hash);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-      }
-    });
+  fetch('specialists.json').then(r => r.json()).then(data => {
+    specialists = data;
+    renderFilters();
+    renderCards();
+  });
+
+  document.addEventListener('xpat4-lang-change', () => { renderFilters(); renderCards(); });
 </script>
 </body>
 </html>
