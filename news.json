@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "date": "2025-04-10",
+    "category": "visa",
+    "title_ru": "Кыргызстан продлил безвизовый режим для граждан ЕС до 30 дней",
+    "title_en": "Kyrgyzstan extends visa-free regime for EU citizens to 30 days",
+    "title_zh": "吉尔吉斯斯坦将欧盟公民免签期限延长至30天",
+    "body_ru": "Правительство КР подтвердило действие безвизового режима для граждан государств ЕС сроком до 30 дней. Для более длительного пребывания по-прежнему требуется е-Виза или ВНЖ.",
+    "body_en": "The Kyrgyz government confirmed the visa-free regime for EU citizens for up to 30 days. For longer stays, an e-Visa or VNJ residence permit is still required.",
+    "body_zh": "吉尔吉斯斯坦政府确认对欧盟国家公民的30天免签制度继续有效。更长时间居留仍需电子签证或VNJ居留许可。",
+    "source_name": "МИД КР",
+    "source_url": "https://mfa.gov.kg"
+  },
+  {
+    "id": 2,
+    "date": "2025-03-20",
+    "category": "life",
+    "title_ru": "Бишкек вошёл в топ-30 городов для цифровых номадов в Азии",
+    "title_en": "Bishkek ranked in top 30 cities for digital nomads in Asia",
+    "title_zh": "比什凯克跻身亚洲数字游民城市前30名",
+    "body_ru": "По данным Nomad List, Бишкек занял высокое место в рейтинге благодаря низкой стоимости жизни, доступным коворкингам и улучшившейся интернет-инфраструктуре.",
+    "body_en": "According to Nomad List, Bishkek ranked highly due to low cost of living, affordable coworking spaces and improved internet infrastructure.",
+    "body_zh": "据Nomad List数据，比什凯克因低生活成本、实惠的联合办公空间和改善的网络基础设施而获得高排名。",
+    "source_name": "Nomad List",
+    "source_url": "https://nomadlist.com"
+  }
+]

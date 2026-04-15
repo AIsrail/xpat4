@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "title_ru": "Встреча экспатов в Бишкеке",
+    "title_en": "Bishkek Expat Meetup",
+    "title_zh": "比什凯克外籍人士聚会",
+    "date": "2025-05-10",
+    "time": "18:00",
+    "location_ru": "Hub Bishkek, ул. Токтогула 78",
+    "location_en": "Hub Bishkek, 78 Toktogul St",
+    "location_zh": "Hub Bishkek, 托克托古尔街78号",
+    "desc_ru": "Ежемесячная встреча иностранцев, живущих в Бишкеке. Нетворкинг, обмен опытом, актуальная информация о жизни в КР.",
+    "desc_en": "Monthly gathering of foreigners living in Bishkek. Networking, experience sharing and current info about life in KR.",
+    "desc_zh": "比什凯克外籍人士月度聚会。交流经验，分享在吉尔吉斯斯坦生活的最新信息。",
+    "link": "",
+    "category": "meetup",
+    "free": true
+  },
+  {
+    "id": 2,
+    "title_ru": "Семинар: Как открыть бизнес в КР",
+    "title_en": "Workshop: How to Open a Business in Kyrgyzstan",
+    "title_zh": "研讨会：如何在吉尔吉斯斯坦开办企业",
+    "date": "2025-05-18",
+    "time": "10:00",
+    "location_ru": "Бишкек, Impact Hub",
+    "location_en": "Bishkek, Impact Hub",
+    "location_zh": "比什凯克，Impact Hub",
+    "desc_ru": "Практический семинар для иностранцев о регистрации ОсОО и ИП, налогах и открытии счёта.",
+    "desc_en": "Practical workshop for foreigners on registering OsOO and IP, taxes and opening a bank account.",
+    "desc_zh": "面向外国人的实用研讨会，介绍OsOO和IP注册、税务及开立银行账户。",
+    "link": "",
+    "category": "workshop",
+    "free": false
+  }
+]

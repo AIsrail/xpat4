@@ -191,6 +191,8 @@
     <div class="topbar-right">
       <button class="topbar-tab active" id="tab-catalog" onclick="showTab('catalog')">📋 Специалисты</button>
       <button class="topbar-tab" id="tab-pending" onclick="showTab('pending')">⏳ Заявки <span class="pending-badge" id="pending-badge">0</span></button>
+      <button class="topbar-tab" id="tab-news" onclick="showTab('news')">📰 Новости</button>
+      <button class="topbar-tab" id="tab-events" onclick="showTab('events')">📅 События</button>
       <span class="topbar-badge" id="topbar-count"></span>
       <button class="logout-btn" onclick="logout()">Выйти</button>
     </div>
@@ -202,6 +204,28 @@
     <p style="font-size:13px;color:var(--ink-60);margin-bottom:28px;font-weight:300;">Поступают через форму join.html. Одобри — специалист добавится в каталог.</p>
     <div id="pending-list"></div>
     <div id="pending-empty" style="text-align:center;color:var(--ink-30);padding:60px 0;font-size:15px;display:none;">Заявок пока нет</div>
+  </div>
+
+  <!-- NEWS PANEL -->
+  <div id="news-panel" style="display:none;padding:32px 40px;max-width:860px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line);">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Новости (news.json)</h2>
+      <button class="btn-save" onclick="addNewsItem()">+ Добавить заметку</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Эти заметки появляются на странице <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a>. После сохранения нажми «Опубликовать» в боковой панели.</p>
+    <div id="news-list"></div>
+    <div id="news-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
+  </div>
+
+  <!-- EVENTS PANEL -->
+  <div id="events-panel" style="display:none;padding:32px 40px;max-width:860px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line);">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Мероприятия (events.json)</h2>
+      <button class="btn-save" onclick="addEvent()">+ Добавить событие</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Мероприятия отображаются на <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a> во вкладке «Мероприятия». После изменений — «Опубликовать».</p>
+    <div id="events-list"></div>
+    <div id="event-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
   </div>
 
   <!-- CATALOG PANEL -->
@@ -311,22 +335,28 @@ function init() {
 
 // ── TABS ──
 function showTab(tab) {
-  const catPanel  = document.getElementById('catalog-panel');
-  const pendPanel = document.getElementById('pending-panel');
-  const tabCat    = document.getElementById('tab-catalog');
-  const tabPend   = document.getElementById('tab-pending');
+  const panels = ['catalog','pending','news','events'];
+  panels.forEach(p => {
+    const el = document.getElementById(p+'-panel');
+    if (el) el.style.display = 'none';
+    const btn = document.getElementById('tab-'+p);
+    if (btn) btn.classList.remove('active');
+  });
+  const catPanel = document.getElementById('catalog-panel');
+  if (catPanel) catPanel.style.display = 'none';
+
   if (tab === 'catalog') {
-    catPanel.style.display  = 'grid';
-    pendPanel.style.display = 'none';
-    tabCat.classList.add('active');
-    tabPend.classList.remove('active');
+    if (catPanel) catPanel.style.display = 'grid';
   } else {
-    catPanel.style.display  = 'none';
-    pendPanel.style.display = 'block';
-    tabPend.classList.add('active');
-    tabCat.classList.remove('active');
-    renderPending();
+    const panel = document.getElementById(tab+'-panel');
+    if (panel) panel.style.display = 'block';
   }
+  const btn = document.getElementById('tab-'+tab);
+  if (btn) btn.classList.add('active');
+
+  if (tab === 'pending') renderPending();
+  if (tab === 'news')    renderNewsList();
+  if (tab === 'events')  renderEventsList();
 }
 
 // ── LIST ──
@@ -611,9 +641,7 @@ async function publishToGitHub() {
   btn.classList.add('loading');
   btn.textContent = '⏳ Публикую...';
   status.className = 'gh-status';
-  status.textContent = 'Получаю текущий файл...';
 
-  const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -621,39 +649,28 @@ async function publishToGitHub() {
     'X-GitHub-Api-Version': '2022-11-28'
   };
 
+  const filesToPush = [
+    { file: GITHUB_FILE,   content: generateJSON() },
+    { file: 'news.json',   content: JSON.stringify(newsItems, null, 2) },
+    { file: 'events.json', content: JSON.stringify(eventsData, null, 2) },
+  ];
+
   try {
-    // 1. Get current SHA
-    const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, { headers });
-    if (!getRes.ok) {
-      const err = await getRes.json();
-      throw new Error(err.message || `HTTP ${getRes.status}`);
-    }
-    const fileData = await getRes.json();
-
-    status.textContent = 'Загружаю изменения...';
-
-    // 2. Push updated file
-    const content = btoa(unescape(encodeURIComponent(generateJSON())));
-    const now = new Date().toLocaleString('ru-RU', { timeZone:'Asia/Bishkek' });
-
-    const putRes = await fetch(apiUrl, {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify({
-        message: `[admin] Update specialists — ${now}`,
-        content,
-        sha: fileData.sha,
-        branch: GITHUB_BRANCH
-      })
-    });
-
-    if (!putRes.ok) {
-      const err = await putRes.json();
-      throw new Error(err.message || `HTTP ${putRes.status}`);
+    for (const f of filesToPush) {
+      status.textContent = `Обновляю ${f.file}...`;
+      const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${f.file}`;
+      const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, { headers });
+      let sha = null;
+      if (getRes.ok) { const d = await getRes.json(); sha = d.sha; }
+      const now = new Date().toLocaleString('ru-RU', { timeZone:'Asia/Bishkek' });
+      const body = { message:`[admin] Update ${f.file} — ${now}`, content: btoa(unescape(encodeURIComponent(f.content))), branch: GITHUB_BRANCH };
+      if (sha) body.sha = sha;
+      const putRes = await fetch(apiUrl, { method:'PUT', headers, body: JSON.stringify(body) });
+      if (!putRes.ok) { const err = await putRes.json(); throw new Error(`${f.file}: ${err.message}`); }
     }
 
     status.className = 'gh-status ok';
-    status.innerHTML = '✅ Готово! Сайт обновится через ~1 мин. <a href="https://xpat4.org/catalog.html" target="_blank" style="color:var(--accent)">Проверить →</a>';
+    status.innerHTML = '✅ Все файлы опубликованы! Сайт обновится ~1 мин. <a href="https://xpat4.org/news.html" target="_blank" style="color:var(--accent)">Проверить →</a>';
     btn.textContent = '🌐 Опубликовать на xpat4.org';
     btn.classList.remove('loading');
     showToast('🚀 Опубликовано!');
@@ -664,11 +681,13 @@ async function publishToGitHub() {
     btn.textContent = '🌐 Опубликовать на xpat4.org';
     btn.classList.remove('loading');
     if (err.message.includes('401') || err.message.toLowerCase().includes('bad credentials')) {
-      status.textContent += ' — токен недействителен. Обнови токен.';
+      status.textContent += ' — токен недействителен.';
       setTimeout(resetGithubToken, 2000);
     }
   }
 }
+
+
 
 // ── PENDING APPLICATIONS ──
 function renderPending() {
@@ -758,7 +777,288 @@ function showToast(msg) {
   toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
+// ── NEWS MANAGEMENT ──
+let newsItems = [];
+let editingNewsId = null;
+
+function loadNewsData() {
+  const saved = localStorage.getItem('xpat4-news');
+  if (saved) { try { newsItems = JSON.parse(saved); return; } catch{} }
+  fetch('news.json').then(r=>r.json()).then(d=>{
+    newsItems = d; localStorage.setItem('xpat4-news', JSON.stringify(d));
+    renderNewsList();
+  }).catch(()=>{ newsItems=[]; });
+}
+
+function saveNewsData() { localStorage.setItem('xpat4-news', JSON.stringify(newsItems)); }
+
+function nextNewsId() { return newsItems.length ? Math.max(...newsItems.map(n=>n.id))+1 : 1; }
+
+function renderNewsList() {
+  const list = document.getElementById('news-list');
+  if (!list) return;
+  if (!newsItems.length) { list.innerHTML = '<div style="color:var(--ink-30);padding:32px 0;text-align:center;">Заметок пока нет. Нажмите «Добавить заметку».</div>'; return; }
+  list.innerHTML = newsItems.map(n => `
+    <div style="border:1px solid var(--line);padding:20px 24px;margin-bottom:12px;display:flex;align-items:flex-start;gap:20px;background:var(--warm-white);">
+      <div style="flex:1;">
+        <div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">${n.category||'life'} · ${n.date}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;">${n.title_ru||n.title_en}</div>
+        <div style="font-size:12px;color:var(--ink-60);margin-top:6px;font-weight:300;">${(n.body_ru||'').slice(0,100)}${(n.body_ru||'').length>100?'...':''}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="editNewsItem(${n.id})" style="background:none;border:1px solid var(--line);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">✏️ Изменить</button>
+        <button onclick="deleteNewsItem(${n.id})" style="background:none;border:1px solid rgba(192,76,42,.25);color:var(--red);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addNewsItem() { editingNewsId=null; showNewsForm({}); }
+function editNewsItem(id) { editingNewsId=id; showNewsForm(newsItems.find(n=>n.id===id)||{}); }
+
+function showNewsForm(n) {
+  const f = document.getElementById('news-form');
+  f.style.display='block';
+  f.innerHTML = `
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:20px;">${editingNewsId?'Редактировать заметку':'Новая заметка'}</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Дата</label>
+        <input type="date" id="nf-date" value="${n.date||new Date().toISOString().slice(0,10)}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Категория</label>
+        <select id="nf-cat" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+          <option value="visa" ${n.category==='visa'?'selected':''}>Виза</option>
+          <option value="life" ${n.category==='life'?'selected':''}>Жизнь</option>
+          <option value="business" ${n.category==='business'?'selected':''}>Бизнес</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Источник (URL)</label>
+        <input type="text" id="nf-src-url" value="${n.source_url||''}" placeholder="https://..." style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Заголовок 🇷🇺</label>
+      <input type="text" id="nf-title-ru" value="${n.title_ru||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Заголовок 🇬🇧</label>
+      <input type="text" id="nf-title-en" value="${n.title_en||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Текст 🇷🇺</label>
+      <textarea id="nf-body-ru" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;min-height:80px;resize:vertical;">${n.body_ru||''}</textarea>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Текст 🇬🇧</label>
+      <textarea id="nf-body-en" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;min-height:80px;resize:vertical;">${n.body_en||''}</textarea>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-save" onclick="saveNewsItem()">💾 Сохранить</button>
+      <button class="btn-delete" onclick="document.getElementById('news-form').style.display='none'">Отмена</button>
+    </div>
+  `;
+  f.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function saveNewsItem() {
+  const item = {
+    id: editingNewsId || nextNewsId(),
+    date: document.getElementById('nf-date').value,
+    category: document.getElementById('nf-cat').value,
+    source_url: document.getElementById('nf-src-url').value,
+    title_ru: document.getElementById('nf-title-ru').value,
+    title_en: document.getElementById('nf-title-en').value,
+    body_ru:  document.getElementById('nf-body-ru').value,
+    body_en:  document.getElementById('nf-body-en').value,
+  };
+  if (!item.title_ru && !item.title_en) { showToast('⚠️ Введите заголовок'); return; }
+  if (editingNewsId) {
+    const idx = newsItems.findIndex(n=>n.id===editingNewsId);
+    if (idx>=0) newsItems[idx]=item;
+  } else {
+    newsItems.unshift(item);
+  }
+  saveNewsData();
+  renderNewsList();
+  document.getElementById('news-form').style.display='none';
+  showToast('✅ Сохранено — не забудьте опубликовать!');
+}
+
+function deleteNewsItem(id) {
+  if (!confirm('Удалить заметку?')) return;
+  newsItems = newsItems.filter(n=>n.id!==id);
+  saveNewsData(); renderNewsList(); showToast('🗑 Удалено');
+}
+
+// ── EVENTS MANAGEMENT ──
+let eventsData = [];
+let editingEventId = null;
+
+function loadEventsData() {
+  const saved = localStorage.getItem('xpat4-events');
+  if (saved) { try { eventsData = JSON.parse(saved); return; } catch{} }
+  fetch('events.json').then(r=>r.json()).then(d=>{
+    eventsData=d; localStorage.setItem('xpat4-events', JSON.stringify(d));
+    renderEventsList();
+  }).catch(()=>{ eventsData=[]; });
+}
+
+function saveEventsData() { localStorage.setItem('xpat4-events', JSON.stringify(eventsData)); }
+function nextEventId() { return eventsData.length ? Math.max(...eventsData.map(e=>e.id))+1 : 1; }
+
+function renderEventsList() {
+  const list = document.getElementById('events-list');
+  if (!list) return;
+  if (!eventsData.length) { list.innerHTML='<div style="color:var(--ink-30);padding:32px 0;text-align:center;">Мероприятий пока нет.</div>'; return; }
+  const today = new Date(); today.setHours(0,0,0,0);
+  list.innerHTML = eventsData
+    .sort((a,b)=>new Date(a.date)-new Date(b.date))
+    .map(e=>{
+      const past = new Date(e.date) < today;
+      return `
+      <div style="border:1px solid var(--line);padding:20px 24px;margin-bottom:12px;display:flex;align-items:flex-start;gap:20px;background:var(--warm-white);${past?'opacity:0.5':''}">
+        <div style="flex-shrink:0;text-align:center;padding:8px 12px;background:var(--sand);border:1px solid var(--line);min-width:60px;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--accent);line-height:1;">${new Date(e.date).getDate()}</div>
+          <div style="font-size:10px;color:var(--ink-30);text-transform:uppercase;letter-spacing:.08em;">${e.date.slice(0,7)}</div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;">${e.title_ru||e.title_en}</div>
+          <div style="font-size:12px;color:var(--ink-60);margin-top:4px;">📍 ${e.location_ru||''} · 🕐 ${e.time||''} · ${e.free?'Бесплатно':'Платно'}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button onclick="editEvent(${e.id})" style="background:none;border:1px solid var(--line);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">✏️</button>
+          <button onclick="deleteEvent(${e.id})" style="background:none;border:1px solid rgba(192,76,42,.25);color:var(--red);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">🗑</button>
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function addEvent() { editingEventId=null; showEventForm({}); }
+function editEvent(id) { editingEventId=id; showEventForm(eventsData.find(e=>e.id===id)||{}); }
+
+function showEventForm(e) {
+  const f = document.getElementById('event-form');
+  f.style.display='block';
+  f.innerHTML = `
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:20px;">${editingEventId?'Редактировать событие':'Новое событие'}</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Дата</label>
+        <input type="date" id="ef-date" value="${e.date||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Время</label>
+        <input type="text" id="ef-time" value="${e.time||''}" placeholder="18:00" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Тип</label>
+        <select id="ef-cat" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+          <option value="meetup" ${e.category==='meetup'?'selected':''}>Встреча</option>
+          <option value="workshop" ${e.category==='workshop'?'selected':''}>Семинар</option>
+          <option value="tour" ${e.category==='tour'?'selected':''}>Тур</option>
+          <option value="other" ${e.category==='other'?'selected':''}>Другое</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Название 🇷🇺</label>
+        <input type="text" id="ef-title-ru" value="${e.title_ru||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Title 🇬🇧</label>
+        <input type="text" id="ef-title-en" value="${e.title_en||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Место 🇷🇺</label>
+        <input type="text" id="ef-loc-ru" value="${e.location_ru||''}" placeholder="Hub Bishkek, ул. Токтогула 78" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Location 🇬🇧</label>
+        <input type="text" id="ef-loc-en" value="${e.location_en||''}" placeholder="Hub Bishkek, 78 Toktogul St" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Описание 🇷🇺</label>
+        <textarea id="ef-desc-ru" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;min-height:70px;resize:vertical;">${e.desc_ru||''}</textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Description 🇬🇧</label>
+        <textarea id="ef-desc-en" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;min-height:70px;resize:vertical;">${e.desc_en||''}</textarea>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Ссылка (FB, Telegram...)</label>
+        <input type="text" id="ef-link" value="${e.link||''}" placeholder="https://..." style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;justify-content:flex-end;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--ink-60);">
+          <input type="checkbox" id="ef-free" ${e.free?'checked':''} style="accent-color:var(--accent);width:16px;height:16px;" />
+          Бесплатное мероприятие
+        </label>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-save" onclick="saveEvent()">💾 Сохранить</button>
+      <button class="btn-delete" onclick="document.getElementById('event-form').style.display='none'">Отмена</button>
+    </div>
+  `;
+  f.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function saveEvent() {
+  const item = {
+    id: editingEventId || nextEventId(),
+    date: document.getElementById('ef-date').value,
+    time: document.getElementById('ef-time').value,
+    category: document.getElementById('ef-cat').value,
+    title_ru: document.getElementById('ef-title-ru').value,
+    title_en: document.getElementById('ef-title-en').value,
+    location_ru: document.getElementById('ef-loc-ru').value,
+    location_en: document.getElementById('ef-loc-en').value,
+    desc_ru: document.getElementById('ef-desc-ru').value,
+    desc_en: document.getElementById('ef-desc-en').value,
+    link: document.getElementById('ef-link').value,
+    free: document.getElementById('ef-free').checked,
+  };
+  if (!item.date) { showToast('⚠️ Укажите дату'); return; }
+  if (!item.title_ru && !item.title_en) { showToast('⚠️ Введите название'); return; }
+  if (editingEventId) {
+    const idx = eventsData.findIndex(e=>e.id===editingEventId);
+    if (idx>=0) eventsData[idx]=item;
+  } else {
+    eventsData.push(item);
+  }
+  saveEventsData();
+  renderEventsList();
+  document.getElementById('event-form').style.display='none';
+  showToast('✅ Сохранено — не забудьте опубликовать!');
+}
+
+function deleteEvent(id) {
+  if (!confirm('Удалить мероприятие?')) return;
+  eventsData = eventsData.filter(e=>e.id!==id);
+  saveEventsData(); renderEventsList(); showToast('🗑 Удалено');
+}
+
 // ── BOOT ──
+function init() {
+  loadData();
+  setTimeout(() => {
+    renderList();
+    renderExport();
+    updatePendingBadge();
+    loadNewsData();
+    loadEventsData();
+  }, 150);
+}
 if (sessionStorage.getItem('xpat4-auth')==='1') { init(); }
 </script>
 </body>
