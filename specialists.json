@@ -18,7 +18,11 @@
     "phone": "+996 700 522 667",
     "email": "xpat4kg@gmail.com",
     "W/A|telegram": "+996 700 522 667",
-    "categories": ["residence", "visa", "business"]
+    "categories": [
+      "residence",
+      "visa",
+      "business"
+    ]
   },
   {
     "id": 2,
@@ -39,14 +43,16 @@
     "phone": "+996 702 271 827",
     "email": "prof4dev@gmail.com",
     "telegram": "@azat_19",
-    "categories": ["business"]
+    "categories": [
+      "business"
+    ]
   },
   {
     "id": 3,
     "initials": "MA",
-    "name_ru": "Частный нотариус",
-    "name_en": "Private Notary Services",
-    "name_zh": "私人公证服务",
+    "name_ru": "Махабат Арыкова",
+    "name_en": "Mahabat Arykova",
+    "name_zh": "马哈巴特·阿里科娃",
     "role_ru": "Нотариальные услуги для иностранных граждан",
     "role_en": "Notary services for foreign citizens",
     "role_zh": "为外国公民提供的公证服务",
@@ -56,11 +62,13 @@
     "city_ru": "Бишкек",
     "city_en": "Bishkek",
     "city_zh": "比什凯克",
-    "online": false,
     "phone": "+996 312 622 322",
     "email": "mahabat.78@mail.ru",
     "telegram": "",
-    "categories": ["legal", "business"]
+    "online": false,
+    "categories": [
+      "business"
+    ]
   },
   {
     "id": 4,
@@ -81,7 +89,9 @@
     "phone": "",
     "email": "",
     "telegram": "",
-    "categories": ["living"]
+    "categories": [
+      "living"
+    ]
   },
   {
     "id": 5,
@@ -102,7 +112,9 @@
     "phone": "",
     "email": "",
     "telegram": "",
-    "categories": ["work"]
+    "categories": [
+      "work"
+    ]
   },
   {
     "id": 6,
@@ -123,6 +135,8 @@
     "phone": "",
     "email": "",
     "telegram": "",
-    "categories": ["work"]
+    "categories": [
+      "work"
+    ]
   }
 ]
