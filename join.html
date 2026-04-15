@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Стать специалистом — xpat4.org | Join as Specialist</title>
+  <meta name="description" content="Подайте заявку на включение в каталог специалистов xpat4.org.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sand:#f5f0e8;--warm-white:#faf8f4;--ink:#1a1814;--ink-60:rgba(26,24,20,0.6);--ink-30:rgba(26,24,20,0.3);--ink-10:rgba(26,24,20,0.08);--accent:#2d5a3d;--accent-light:#e8f0ea;--line:rgba(26,24,20,0.12)}
+    body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);-webkit-font-smoothing:antialiased}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);text-decoration:none}.logo span{color:var(--accent)}
+    .nav-right{display:flex;align-items:center;gap:16px}
+    .lang-switch{display:flex;gap:2px;background:var(--ink-10);border-radius:3px;padding:3px}
+    .lang-btn{font-size:11px;font-weight:500;padding:5px 10px;border:none;background:transparent;cursor:pointer;color:var(--ink-60);border-radius:2px;transition:background .15s,color .15s}
+    .lang-btn.active{background:var(--warm-white);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+    .back{font-size:13px;color:var(--ink-60);text-decoration:none}.back::before{content:'← '}.back:hover{color:var(--ink)}
+    .page-wrap{max-width:720px;margin:0 auto;padding:140px 48px 100px}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+    .eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+    h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:300;line-height:1.1;margin-bottom:18px}
+    .page-sub{font-size:15px;color:var(--ink-60);font-weight:300;line-height:1.7;margin-bottom:40px}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px}
+    .why-card{border:1px solid var(--line);padding:22px 20px}
+    .why-icon{font-size:22px;margin-bottom:10px}
+    .why-title{font-size:14px;font-weight:500;margin-bottom:6px}
+    .why-desc{font-size:12px;color:var(--ink-60);line-height:1.6;font-weight:300}
+    .form-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:14px}
+    .form-note-top{font-size:13px;color:var(--ink-60);font-weight:300;margin-bottom:28px;line-height:1.6;padding:14px 16px;background:var(--accent-light);border-left:3px solid var(--accent)}
+    .form-section-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-30);margin:24px 0 14px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{display:flex;flex-direction:column;gap:6px}
+    .form-group.full{grid-column:1/-1}
+    label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60)}
+    label .opt{color:var(--ink-30);font-weight:300;text-transform:none;letter-spacing:0;font-size:11px}
+    input,textarea,select{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--ink);background:var(--warm-white);border:1px solid var(--line);border-radius:2px;padding:10px 14px;outline:none;transition:border-color .2s;width:100%}
+    input:focus,textarea:focus{border-color:rgba(45,90,61,.5)}
+    textarea{min-height:80px;resize:vertical}
+    .cat-toggles{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+    .cat-toggle{display:flex;align-items:center;cursor:pointer}
+    .cat-toggle input{display:none}
+    .cat-chip{font-size:12px;padding:6px 14px;border-radius:100px;border:1px solid var(--line);color:var(--ink-60);background:transparent;transition:all .15s;cursor:pointer}
+    .cat-toggle input:checked + .cat-chip{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .toggle-row{display:flex;align-items:center;gap:12px;margin-top:4px}
+    .toggle-switch{position:relative;width:44px;height:24px;cursor:pointer}
+    .toggle-switch input{opacity:0;width:0;height:0}
+    .toggle-track{position:absolute;inset:0;background:var(--line);border-radius:100px;transition:background .2s}
+    .toggle-switch input:checked + .toggle-track{background:var(--accent)}
+    .toggle-track::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+    .toggle-switch input:checked + .toggle-track::after{transform:translateX(20px)}
+    .toggle-label{font-size:13px;color:var(--ink-60)}
+    .consent-row{display:flex;align-items:flex-start;gap:12px;margin-top:6px}
+    .consent-row input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:3px;accent-color:var(--accent)}
+    .consent-text{font-size:12px;color:var(--ink-60);line-height:1.6;font-weight:300}
+    .consent-text a{color:var(--accent);text-decoration:none}
+    .btn-submit{background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:14px 36px;border:none;border-radius:2px;cursor:pointer;transition:opacity .2s;margin-top:24px;letter-spacing:.03em}
+    .btn-submit:hover{opacity:.88}
+    .success-screen{display:none;text-align:center;padding:60px 0}
+    .success-icon{font-size:56px;margin-bottom:20px}
+    .success-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:14px}
+    .success-sub{font-size:15px;color:var(--ink-60);font-weight:300;line-height:1.7}
+    footer{padding:36px 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink-60);text-decoration:none}.footer-logo span{color:var(--accent)}
+    .footer-copy{font-size:12px;color:var(--ink-30)}
+    @media(max-width:700px){nav,footer{padding:16px 20px}.page-wrap{padding:120px 24px 80px}.why-grid,.form-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+    </div>
+    <a class="back" href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div id="form-section">
+    <div class="eyebrow" data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</div>
+    <h1 data-ru="Войдите в каталог xpat4.org" data-en="Join the xpat4.org catalog" data-zh="加入xpat4.org专家目录">Войдите в каталог xpat4.org</h1>
+    <p class="page-sub"
+      data-ru="Каталог xpat4.org читают иностранцы, переезжающие в Кыргызстан. Оставьте заявку — мы рассмотрим её и опубликуем профиль после проверки."
+      data-en="The xpat4.org catalog is read by foreigners relocating to Kyrgyzstan. Submit your application — we review it and publish your profile after verification."
+      data-zh="xpat4.org目录面向移居吉尔吉斯斯坦的外籍人士。提交申请后，我们审核并在验证后发布您的档案。">
+      Каталог xpat4.org читают иностранцы, переезжающие в Кыргызстан. Оставьте заявку — мы рассмотрим её и опубликуем профиль после проверки.
+    </p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🌐</div>
+        <div class="why-title" data-ru="Клиенты из 60+ стран" data-en="Clients from 60+ countries" data-zh="60多个国家的客户">Клиенты из 60+ стран</div>
+        <div class="why-desc" data-ru="Профиль виден на русском, английском и китайском языках." data-en="Profile visible in Russian, English and Chinese." data-zh="档案以俄语、英语和中文显示。">Профиль на трёх языках.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <div class="why-title" data-ru="Бесплатно" data-en="Free listing" data-zh="免费入驻">Бесплатно</div>
+        <div class="why-desc" data-ru="Базовое размещение бесплатно. Платный приоритет — опционально." data-en="Basic listing is free. Paid priority is optional." data-zh="基础展示免费，付费优先可选。">Базовое размещение бесплатно.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔍</div>
+        <div class="why-title" data-ru="Только проверенные" data-en="Verified only" data-zh="仅限审核通过">Только проверенные</div>
+        <div class="why-desc" data-ru="Ручная проверка каждой заявки — это повышает доверие клиентов." data-en="Each application is manually reviewed — this builds client trust." data-zh="每份申请均人工审核——这将提升客户信任度。">Ручная проверка = доверие.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💬</div>
+        <div class="why-title" data-ru="Прямой контакт" data-en="Direct contact" data-zh="直接联系">Прямой контакт</div>
+        <div class="why-desc" data-ru="Клиенты пишут вам напрямую — без посредников и комиссий." data-en="Clients contact you directly — no intermediaries or fees." data-zh="客户直接联系您，无中间人，无佣金。">Без посредников, без комиссий.</div>
+      </div>
+    </div>
+
+    <div class="form-title" data-ru="Заявка на размещение" data-en="Application for listing" data-zh="入驻申请">Заявка на размещение</div>
+    <div class="form-note-top" data-ru="📋 Заявки рассматриваются 1–3 рабочих дня. Профиль появится в каталоге только после нашего одобрения." data-en="📋 Applications reviewed in 1–3 business days. Profile goes live only after our approval." data-zh="📋 申请1-3个工作日内审核。档案仅在获得批准后才会上线。">📋 Заявки рассматриваются 1–3 рабочих дня. Публикация — только после нашего одобрения.</div>
+
+    <form id="join-form" onsubmit="submitForm(event)">
+      <div class="form-section-label" data-ru="Основные данные" data-en="Basic Information" data-zh="基本信息">Основные данные</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Имя / Название <span class="opt">*</span></label>
+          <input type="text" name="name" required placeholder="Айгуль Мамытова" />
+        </div>
+        <div class="form-group">
+          <label data-ru="Специализация" data-en="Specialization" data-zh="专业方向">Специализация</label>
+          <input type="text" name="role" placeholder="Миграционный юрист" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Телефон</label>
+          <input type="tel" name="phone" placeholder="+996 700 000 000" />
+        </div>
+        <div class="form-group">
+          <label>Email <span class="opt">*</span></label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label>Telegram</label>
+          <input type="text" name="telegram" placeholder="@username" />
+        </div>
+        <div class="form-group">
+          <label data-ru="Город" data-en="City" data-zh="城市">Город</label>
+          <input type="text" name="city" placeholder="Бишкек" />
+        </div>
+      </div>
+      <div class="toggle-row" style="margin-top:14px">
+        <label class="toggle-switch"><input type="checkbox" name="online" /><div class="toggle-track"></div></label>
+        <span class="toggle-label" data-ru="Принимаю клиентов онлайн" data-en="Accept online clients" data-zh="接受在线客户">Принимаю клиентов онлайн</span>
+      </div>
+
+      <div class="form-section-label" data-ru="Описание (на языках клиентов)" data-en="Description (in client languages)" data-zh="描述（客户语言）">Описание</div>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Описание 🇷🇺 <span class="opt">(1–2 предложения)</span></label>
+          <textarea name="desc_ru" placeholder="Помогаю иностранцам с получением ВНЖ. 7 лет практики в миграционном праве КР."></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Description 🇬🇧 <span class="opt">(1–2 sentences)</span></label>
+          <textarea name="desc_en" placeholder="I help foreigners obtain residence permits. 7 years of immigration law practice in KR."></textarea>
+        </div>
+        <div class="form-group full">
+          <label>简介 🇨🇳 <span class="opt">（选填）</span></label>
+          <textarea name="desc_zh" placeholder="（选填）"></textarea>
+        </div>
+      </div>
+
+      <div class="form-section-label" data-ru="Категории услуг" data-en="Service categories" data-zh="服务类别">Категории</div>
+      <div class="cat-toggles">
+        <label class="cat-toggle"><input type="checkbox" name="cats" value="visa" /><span class="cat-chip">Виза / Visa</span></label>
+        <label class="cat-toggle"><input type="checkbox" name="cats" value="residence" /><span class="cat-chip">ВНЖ / Residence</span></label>
+        <label class="cat-toggle"><input type="checkbox" name="cats" value="work" /><span class="cat-chip">Работа / Work</span></label>
+        <label class="cat-toggle"><input type="checkbox" name="cats" value="business" /><span class="cat-chip">Бизнес / Business</span></label>
+        <label class="cat-toggle"><input type="checkbox" name="cats" value="living" /><span class="cat-chip">Жильё / Housing</span></label>
+      </div>
+
+      <div class="form-section-label" data-ru="Опыт и документы" data-en="Experience and documents" data-zh="经验与文件">Опыт</div>
+      <div class="form-group">
+        <label>Опыт / Лицензии / Сертификаты <span class="opt">(опционально)</span></label>
+        <textarea name="experience" style="min-height:60px" placeholder="5 лет практики, лицензия юриста, опыт с гражданами 30+ стран..."></textarea>
+      </div>
+
+      <div class="form-section-label" data-ru="Согласие" data-en="Consent" data-zh="同意">Согласие</div>
+      <div class="consent-row">
+        <input type="checkbox" id="consent1" required />
+        <label for="consent1" class="consent-text">Я согласен(на) на обработку персональных данных согласно <a href="privacy.html">Политике конфиденциальности</a> xpat4.org</label>
+      </div>
+      <div class="consent-row" style="margin-top:10px">
+        <input type="checkbox" id="consent2" required />
+        <label for="consent2" class="consent-text">Я ознакомился(лась) с <a href="terms.html">Публичной офертой</a> и принимаю условия размещения в каталоге</label>
+      </div>
+
+      <button class="btn-submit" type="submit" data-ru="Отправить заявку" data-en="Submit Application" data-zh="提交申请">Отправить заявку</button>
+    </form>
+
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">🎉</div>
+      <div class="success-title" data-ru="Заявка отправлена!" data-en="Application submitted!" data-zh="申请已提交！">Заявка отправлена!</div>
+      <p class="success-sub" data-ru="Мы рассмотрим её в течение 1–3 рабочих дней и свяжемся с вами по email." data-en="We will review it within 1–3 business days and contact you by email." data-zh="我们将在1-3个工作日内审核并通过电子邮件联系您。">Мы рассмотрим её в течение 1–3 рабочих дней.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
+  <span class="footer-copy">© 2025 xpat4.org</span>
+</footer>
+
+<script src="xpat4.js"></script>
+<script>
+function submitForm(e) {
+  e.preventDefault();
+  const f = e.target;
+  const cats = [...f.querySelectorAll('[name=cats]:checked')].map(el => el.value);
+
+  // Save to localStorage as pending for admin panel
+  const pending = JSON.parse(localStorage.getItem('xpat4-pending') || '[]');
+  pending.push({
+    id: Date.now(),
+    name: f.name.value,
+    role: f.role.value,
+    phone: f.phone.value,
+    email: f.email.value,
+    telegram: f.telegram.value.replace('@',''),
+    city: f.city.value,
+    online: f.querySelector('[name=online]').checked,
+    categories: cats,
+    desc_ru: f.desc_ru.value,
+    desc_en: f.desc_en.value,
+    desc_zh: f.desc_zh.value,
+    experience: f.experience.value,
+    submitted_at: new Date().toISOString(),
+    status: 'pending'
+  });
+  localStorage.setItem('xpat4-pending', JSON.stringify(pending));
+
+  // Email notification
+  const body = [
+    '=== НОВАЯ ЗАЯВКА СПЕЦИАЛИСТА — xpat4.org ===',
+    'Имя: ' + f.name.value, 'Роль: ' + f.role.value,
+    'Телефон: ' + f.phone.value, 'Email: ' + f.email.value,
+    'Telegram: ' + f.telegram.value, 'Город: ' + f.city.value,
+    'Онлайн: ' + (f.querySelector('[name=online]').checked ? 'Да' : 'Нет'),
+    'Категории: ' + cats.join(', '),
+    '', 'RU: ' + f.desc_ru.value,
+    'EN: ' + f.desc_en.value,
+    'ZH: ' + f.desc_zh.value,
+    'Опыт: ' + f.experience.value,
+    '', '→ Откройте admin.html для одобрения'
+  ].join('\n');
+
+  window.open('mailto:xpat4kg@gmail.com?subject=' + encodeURIComponent('Заявка специалиста: ' + f.name.value) + '&body=' + encodeURIComponent(body));
+
+  document.getElementById('join-form').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  // Refresh lang
+  document.querySelectorAll('[data-ru]').forEach(el => {
+    const t = el.getAttribute('data-' + (XPAT4.currentLang || 'ru')) || el.getAttribute('data-en');
+    if (t) el.innerHTML = t;
+  });
+}
+</script>
+</body>
+</html>

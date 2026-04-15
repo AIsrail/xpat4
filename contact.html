@@ -30,6 +30,10 @@
     .expert-role { font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
     .expert-name { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; margin-bottom:16px; line-height:1.1; }
     .expert-desc { font-size:14px; color:var(--ink-60); font-weight:300; line-height:1.7; margin-bottom:28px; }
+    .expert-creds { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+    .cred-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--ink-60); font-weight: 300; }
+    .cred-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .cred-text { line-height: 1.5; }
     .contact-list { display:flex; flex-direction:column; gap:12px; }
     .contact-item { display:flex; align-items:center; gap:14px; }
     .contact-label { font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-30); min-width:64px; }
@@ -78,18 +82,51 @@
     <div class="expert-avatar">ГМ</div>
     <div class="expert-info">
       <div class="expert-role"
-        data-ru="Эксперт по визовым вопросам"
-        data-en="Visa & Migration Expert"
-        data-zh="签证与移民专家">
-        Эксперт по визовым вопросам
+        data-ru="Визовый и миграционный консультант · Основатель xpat4.org"
+        data-en="Visa & Migration Consultant · Founder of xpat4.org"
+        data-zh="签证与移民顾问 · xpat4.org创始人">
+        Визовый и миграционный консультант · Основатель xpat4.org
       </div>
       <div class="expert-name">Гульнара Мамбеталиева</div>
+
       <p class="expert-desc"
-        data-ru="Специалист по визовым и миграционным вопросам в Кыргызстане. Помогает иностранцам разобраться в процедурах въезда, регистрации и легализации."
-        data-en="Specialist in visa and migration matters in Kyrgyzstan. Helps foreigners navigate entry procedures, registration and legalization."
-        data-zh="吉尔吉斯斯坦签证与移民事务专家。帮助外国人了解入境、登记和合法化程序。">
-        Специалист по визовым и миграционным вопросам в Кыргызстане. Помогает иностранцам разобраться в процедурах въезда, регистрации и легализации.
+        data-ru="Более 10 лет помогает иностранным гражданам в вопросах визы, легального проживания и регистрации в Кыргызстане. Владеет четырьмя языками: кыргызским, русским, английским и турецким. Степень магистра педагогики (Кыргызско-Турецкий университет Манас), дополнительное образование в Лондоне. Работала в международных и американских фондах, специализировалась на соблюдении нормативных требований, документации и управлении проектами."
+        data-en="Over 10 years helping foreign nationals with visas, legal residency and registration in Kyrgyzstan. Fluent in four languages: Kyrgyz, Russian, English and Turkish. Master's degree in Pedagogy (Kyrgyz-Turkish Manas University), additional education in London. Background in international NGOs and US-based foundations with expertise in compliance, documentation and project management."
+        data-zh="10余年帮助外国公民办理吉尔吉斯斯坦签证、合法居留和登记手续。精通四种语言：柯尔克孜语、俄语、英语和土耳其语。拥有教育学硕士学位（吉尔吉斯-土耳其玛纳斯大学），并在伦敦接受过额外教育。曾在美国基金会和国际机构工作，专注合规、文件管理和项目协调。">
+        Более 10 лет помогает иностранным гражданам в вопросах визы, легального проживания и регистрации в Кыргызстане. Владеет четырьмя языками: кыргызским, русским, английским и турецким.
       </p>
+
+      <!-- Credentials strip -->
+      <div class="expert-creds">
+        <div class="cred-item">
+          <span class="cred-icon">🎓</span>
+          <span class="cred-text"
+            data-ru="Магистр педагогики, ун-т Манас · Образование в Лондоне"
+            data-en="Master's in Pedagogy, Manas University · Studied in London"
+            data-zh="曼纳斯大学教育学硕士 · 伦敦留学经历">
+            Магистр педагогики, ун-т Манас · Образование в Лондоне
+          </span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-icon">🌍</span>
+          <span class="cred-text"
+            data-ru="4 языка: кыргызский, русский, английский, турецкий"
+            data-en="4 languages: Kyrgyz, Russian, English, Turkish"
+            data-zh="4种语言：柯尔克孜语、俄语、英语、土耳其语">
+            4 языка: кыргызский, русский, английский, турецкий
+          </span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-icon">📋</span>
+          <span class="cred-text"
+            data-ru="Индивидуальный предприниматель (ИП) с 2020 г."
+            data-en="Licensed Individual Entrepreneur since 2020"
+            data-zh="持牌个体工商户，2020年至今">
+            ИП — визовый консультант с 2020 г.
+          </span>
+        </div>
+      </div>
+
       <div class="contact-list">
         <div class="contact-item">
           <span class="contact-label" data-ru="Телефон" data-en="Phone" data-zh="电话">Телефон</span>
@@ -97,7 +134,7 @@
         </div>
         <div class="contact-item">
           <span class="contact-label">Email</span>
-          <a class="contact-value" href="mailto:xpat4kg@gmail.com">xpat4kg@gmail.com</a>
+          <a class="contact-value" href="mailto:gulnara.mk84@gmail.com">gulnara.mk84@gmail.com</a>
         </div>
         <div class="contact-item">
           <span class="contact-label" data-ru="Город" data-en="City" data-zh="城市">Город</span>
