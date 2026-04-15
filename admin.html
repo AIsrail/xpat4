@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Админ-панель — xpat4.org</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sand: #f5f0e8; --warm-white: #faf8f4; --ink: #1a1814;
+      --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3);
+      --ink-10: rgba(26,24,20,0.08); --accent: #2d5a3d;
+      --accent-light: #e8f0ea; --line: rgba(26,24,20,0.12);
+      --red: #c04c2a; --red-light: #fef3ef;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: #f0ede8; color: var(--ink); min-height: 100vh; }
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    }
+    .login-box {
+      background: var(--warm-white); border: 1px solid var(--line);
+      padding: 52px 48px; width: 360px; text-align: center;
+    }
+    .login-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--ink); margin-bottom: 6px; }
+    .login-logo span { color: var(--accent); }
+    .login-sub { font-size: 12px; color: var(--ink-30); margin-bottom: 36px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .login-box input {
+      width: 100%; border: 1px solid var(--line); border-radius: 2px;
+      padding: 12px 16px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+      outline: none; background: var(--warm-white); margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .login-box input:focus { border-color: rgba(26,24,20,0.35); }
+    .login-btn {
+      width: 100%; background: var(--accent); color: #fff; border: none;
+      padding: 13px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+      border-radius: 2px; cursor: pointer; transition: opacity 0.2s; letter-spacing: 0.03em;
+    }
+    .login-btn:hover { opacity: 0.88; }
+    .login-error { font-size: 12px; color: var(--red); margin-top: 10px; display: none; }
+
+    /* ── APP ── */
+    #app { display: none; }
+
+    /* TOP BAR */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--ink); padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .topbar-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #fff; }
+    .topbar-logo span { color: #7ab88a; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .topbar-badge { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; text-transform: uppercase; }
+    .logout-btn { font-size: 12px; color: rgba(255,255,255,0.5); background: none; border: 1px solid rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 2px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+    .logout-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+    /* LAYOUT */
+    .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 56px); }
+
+    /* SIDEBAR — list */
+    .sidebar { background: var(--warm-white); border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+    .sidebar-header { padding: 20px 24px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+    .sidebar-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .sidebar-count { font-size: 11px; color: var(--ink-30); background: var(--sand); padding: 3px 10px; border-radius: 100px; }
+    .add-btn {
+      margin: 16px 16px 0; background: var(--accent); color: #fff; border: none;
+      padding: 11px 18px; border-radius: 2px; font-size: 13px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .add-btn:hover { opacity: 0.88; }
+    .specialist-list { flex: 1; overflow-y: auto; padding: 12px 0; }
+    .list-item {
+      padding: 14px 20px; cursor: pointer; border-left: 3px solid transparent;
+      transition: all 0.15s; display: flex; align-items: center; gap: 12px;
+    }
+    .list-item:hover { background: var(--sand); }
+    .list-item.active { background: var(--accent-light); border-left-color: var(--accent); }
+    .list-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent-light); display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--accent);
+      font-weight: 500; flex-shrink: 0;
+    }
+    .list-info { flex: 1; min-width: 0; }
+    .list-name { font-size: 14px; font-weight: 400; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .list-role { font-size: 11px; color: var(--ink-30); margin-top: 2px; }
+    .list-cats { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+    .cat-badge { font-size: 10px; background: var(--sand); color: var(--ink-60); padding: 2px 7px; border-radius: 100px; }
+    .list-empty { padding: 32px 20px; text-align: center; color: var(--ink-30); font-size: 13px; }
+
+    /* MAIN — form */
+    .main { padding: 32px 40px; overflow-y: auto; }
+    .form-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .form-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; }
+    .form-actions { display: flex; gap: 10px; }
+    .btn-save { background: var(--accent); color: #fff; border: none; padding: 11px 24px; border-radius: 2px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; }
+    .btn-save:hover { opacity: 0.88; }
+    .btn-delete { background: none; color: var(--red); border: 1px solid rgba(192,76,42,0.25); padding: 10px 18px; border-radius: 2px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .btn-delete:hover { background: var(--red-light); }
+
+    /* FORM GRID */
+    .form-section-title { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30); margin-bottom: 16px; margin-top: 28px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-60); }
+    label .lang-flag { font-style: normal; opacity: 0.6; margin-left: 4px; }
+    input[type=text], input[type=email], input[type=tel], textarea, select {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      color: var(--ink); background: var(--warm-white);
+      border: 1px solid var(--line); border-radius: 2px;
+      padding: 10px 14px; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: rgba(45,90,61,0.5); }
+    textarea { min-height: 72px; resize: vertical; }
+
+    /* INITIALS PREVIEW */
+    .initials-row { display: flex; align-items: center; gap: 14px; }
+    .initials-preview {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--accent);
+      font-weight: 500; flex-shrink: 0; border: 1px solid rgba(45,90,61,0.15);
+    }
+
+    /* CATEGORIES */
+    .cat-toggles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .cat-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .cat-toggle input { display: none; }
+    .cat-chip {
+      font-size: 12px; padding: 6px 14px; border-radius: 100px;
+      border: 1px solid var(--line); color: var(--ink-60); background: transparent;
+      transition: all 0.15s; user-select: none; cursor: pointer;
+    }
+    .cat-toggle input:checked + .cat-chip { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    /* ONLINE TOGGLE */
+    .toggle-row { display: flex; align-items: center; gap: 12px; }
+    .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-track { position: absolute; inset: 0; background: var(--line); border-radius: 100px; transition: background 0.2s; }
+    .toggle-switch input:checked + .toggle-track { background: var(--accent); }
+    .toggle-track::after { content: ''; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+    .toggle-switch input:checked + .toggle-track::after { transform: translateX(20px); }
+    .toggle-label { font-size: 13px; color: var(--ink-60); }
+
+    /* EXPORT SECTION */
+    .export-section { margin-top: 40px; padding: 28px 32px; background: var(--sand); border: 1px solid var(--line); }
+    .export-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+    .export-desc { font-size: 12px; color: var(--ink-60); margin-bottom: 16px; line-height: 1.6; }
+    .export-steps { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-export { background: var(--ink); color: #fff; border: none; padding: 11px 22px; border-radius: 2px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; display: flex; align-items: center; gap: 8px; }
+    .btn-export:hover { opacity: 0.85; }
+    .btn-copy { background: none; color: var(--ink); border: 1px solid var(--line); padding: 10px 18px; border-radius: 2px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .btn-copy:hover { border-color: var(--ink); }
+    .export-json { margin-top: 16px; background: var(--ink); color: #7ab88a; padding: 16px; border-radius: 2px; font-size: 11px; font-family: monospace; line-height: 1.5; max-height: 200px; overflow-y: auto; display: none; white-space: pre; }
+
+    /* EMPTY STATE */
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; text-align: center; color: var(--ink-30); }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-text { font-size: 15px; font-weight: 300; }
+    .empty-sub { font-size: 13px; margin-top: 8px; }
+
+    /* TOAST */
+    #toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--ink); color: #fff; padding: 13px 22px;
+      border-radius: 3px; font-size: 13px; font-weight: 400;
+      opacity: 0; transform: translateY(10px);
+      transition: all 0.25s; pointer-events: none; z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: none; }
+
+    @media(max-width:900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { max-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">xpat<span>4</span>.org</div>
+    <div class="login-sub">Панель управления</div>
+    <input type="password" id="pwd-input" placeholder="Пароль" onkeydown="if(event.key==='Enter')login()" />
+    <button class="login-btn" onclick="login()">Войти</button>
+    <div class="login-error" id="login-error">Неверный пароль</div>
+    <div style="margin-top:20px;font-size:11px;color:var(--ink-30);line-height:1.6;">
+      Пароль по умолчанию: <code style="background:var(--sand);padding:2px 6px;border-radius:2px;">xpat4admin</code><br/>
+      Измените его в коде файла admin.html
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo">xpat<span>4</span>.org <span style="font-size:13px;color:rgba(255,255,255,0.3);font-family:'DM Sans',sans-serif;font-weight:300;margin-left:8px;">/ Каталог специалистов</span></div>
+    <div class="topbar-right">
+      <span class="topbar-badge" id="topbar-count">0 специалистов</span>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Специалисты</span>
+        <span class="sidebar-count" id="sidebar-count">0</span>
+      </div>
+      <button class="add-btn" onclick="newSpecialist()">
+        <span style="font-size:18px;line-height:1;">+</span> Добавить специалиста
+      </button>
+      <div class="specialist-list" id="specialist-list"></div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main" id="main-area">
+      <div class="empty-state">
+        <div class="empty-icon">👤</div>
+        <div class="empty-text">Выберите специалиста</div>
+        <div class="empty-sub">или нажмите «Добавить специалиста»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ─────────────────────────────────────────
+// КОНФИГУРАЦИЯ — измените пароль здесь:
+const ADMIN_PASSWORD = 'xpat4admin';
+// ─────────────────────────────────────────
+
+const CATEGORIES = [
+  { key:'visa',      label:'Виза' },
+  { key:'residence', label:'ВНЖ' },
+  { key:'work',      label:'Работа' },
+  { key:'business',  label:'Бизнес' },
+  { key:'living',    label:'Жильё' },
+];
+
+// ── AUTH ──
+function login() {
+  const pwd = document.getElementById('pwd-input').value;
+  if (pwd === ADMIN_PASSWORD) {
+    sessionStorage.setItem('xpat4-auth', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+function logout() {
+  sessionStorage.removeItem('xpat4-auth');
+  location.reload();
+}
+if (sessionStorage.getItem('xpat4-auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+// ── DATA ──
+let specialists = [];
+let editingId   = null;
+
+const STORAGE_KEY = 'xpat4-specialists';
+
+function loadData() {
+  // First try localStorage (admin edits)
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try { specialists = JSON.parse(saved); return; } catch{}
+  }
+  // Then try to fetch specialists.json from the site
+  fetch('specialists.json')
+    .then(r => r.json())
+    .then(data => {
+      specialists = data;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(specialists));
+      renderList();
+    })
+    .catch(() => {
+      specialists = [];
+      renderList();
+    });
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(specialists));
+}
+
+function nextId() {
+  return specialists.length ? Math.max(...specialists.map(s => s.id)) + 1 : 1;
+}
+
+// ── INIT ──
+function init() {
+  loadData();
+  setTimeout(renderList, 100);
+}
+
+// ── LIST ──
+function renderList() {
+  const list = document.getElementById('specialist-list');
+  const count = specialists.length;
+  document.getElementById('sidebar-count').textContent = count;
+  document.getElementById('topbar-count').textContent = count + ' специалист' + (count===1?'':count<5?'а':'ов');
+
+  if (!count) {
+    list.innerHTML = '<div class="list-empty">Нет специалистов.<br/>Нажмите «Добавить».</div>';
+    return;
+  }
+  list.innerHTML = specialists.map(s => `
+    <div class="list-item${editingId === s.id ? ' active' : ''}" onclick="editSpecialist(${s.id})">
+      <div class="list-avatar">${s.initials || '?'}</div>
+      <div class="list-info">
+        <div class="list-name">${s.name_ru || '—'}</div>
+        <div class="list-role">${s.role_ru || ''}</div>
+        <div class="list-cats">${(s.categories||[]).map(c => `<span class="cat-badge">${c}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── FORM ──
+function getFormData() {
+  const cats = [...document.querySelectorAll('.cat-toggle input:checked')].map(el => el.value);
+  const nameRu = document.getElementById('f-name-ru').value.trim();
+  // Auto-generate initials from name if field empty
+  let initials = document.getElementById('f-initials').value.trim();
+  if (!initials && nameRu) {
+    initials = nameRu.split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase();
+  }
+  return {
+    id: editingId || nextId(),
+    initials,
+    name_ru:  nameRu,
+    name_en:  document.getElementById('f-name-en').value.trim(),
+    name_zh:  document.getElementById('f-name-zh').value.trim(),
+    role_ru:  document.getElementById('f-role-ru').value.trim(),
+    role_en:  document.getElementById('f-role-en').value.trim(),
+    role_zh:  document.getElementById('f-role-zh').value.trim(),
+    desc_ru:  document.getElementById('f-desc-ru').value.trim(),
+    desc_en:  document.getElementById('f-desc-en').value.trim(),
+    desc_zh:  document.getElementById('f-desc-zh').value.trim(),
+    city_ru:  document.getElementById('f-city-ru').value.trim() || 'Бишкек',
+    city_en:  document.getElementById('f-city-en').value.trim() || 'Bishkek',
+    city_zh:  document.getElementById('f-city-zh').value.trim() || '比什凯克',
+    phone:    document.getElementById('f-phone').value.trim(),
+    email:    document.getElementById('f-email').value.trim(),
+    telegram: document.getElementById('f-telegram').value.trim().replace('@',''),
+    online:   document.getElementById('f-online').checked,
+    categories: cats,
+  };
+}
+
+function updateInitialsPreview() {
+  const nameRu = document.getElementById('f-name-ru').value.trim();
+  const manual = document.getElementById('f-initials').value.trim();
+  const preview = manual || (nameRu ? nameRu.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase() : '?');
+  document.getElementById('initials-preview').textContent = preview;
+}
+
+function renderForm(s) {
+  const isNew = !s;
+  const d = s || { categories: [], online: false };
+  const title = isNew ? 'Новый специалист' : 'Редактировать';
+
+  document.getElementById('main-area').innerHTML = `
+    <div class="form-header">
+      <div class="form-title">${title}</div>
+      <div class="form-actions">
+        ${!isNew ? `<button class="btn-delete" onclick="deleteSpecialist(${d.id})">🗑 Удалить</button>` : ''}
+        <button class="btn-save" onclick="saveSpecialist()">💾 Сохранить</button>
+      </div>
+    </div>
+
+    <!-- AVATAR -->
+    <div class="form-section-title">Аватар</div>
+    <div class="initials-row">
+      <div class="initials-preview" id="initials-preview">${d.initials || '?'}</div>
+      <div class="form-group" style="flex:1">
+        <label>Инициалы <span style="color:var(--ink-30);font-size:10px;">(2–3 символа, будут на аватаре)</span></label>
+        <input type="text" id="f-initials" value="${d.initials||''}" maxlength="3" placeholder="ИИ"
+          oninput="updateInitialsPreview()" style="max-width:120px" />
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--ink-30);margin-top:6px;">Если оставить пустым — берётся автоматически из имени на русском.</div>
+
+    <!-- ИМЕНА -->
+    <div class="form-section-title">Имя / Название</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Имя <span class="lang-flag">🇷🇺 RU</span></label>
+        <input type="text" id="f-name-ru" value="${d.name_ru||''}" placeholder="Айгуль Мамытова"
+          oninput="updateInitialsPreview()" />
+      </div>
+      <div class="form-group">
+        <label>Name <span class="lang-flag">🇬🇧 EN</span></label>
+        <input type="text" id="f-name-en" value="${d.name_en||''}" placeholder="Aigul Mamytova" />
+      </div>
+      <div class="form-group full">
+        <label>姓名 <span class="lang-flag">🇨🇳 ZH</span></label>
+        <input type="text" id="f-name-zh" value="${d.name_zh||''}" placeholder="艾古尔·马米托娃" />
+      </div>
+    </div>
+
+    <!-- РОЛЬ -->
+    <div class="form-section-title">Специализация / Роль</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Роль <span class="lang-flag">🇷🇺 RU</span></label>
+        <input type="text" id="f-role-ru" value="${d.role_ru||''}" placeholder="Миграционный юрист" />
+      </div>
+      <div class="form-group">
+        <label>Role <span class="lang-flag">🇬🇧 EN</span></label>
+        <input type="text" id="f-role-en" value="${d.role_en||''}" placeholder="Immigration Lawyer" />
+      </div>
+      <div class="form-group full">
+        <label>职务 <span class="lang-flag">🇨🇳 ZH</span></label>
+        <input type="text" id="f-role-zh" value="${d.role_zh||''}" placeholder="移民律师" />
+      </div>
+    </div>
+
+    <!-- ОПИСАНИЕ -->
+    <div class="form-section-title">Описание</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Описание <span class="lang-flag">🇷🇺 RU</span></label>
+        <textarea id="f-desc-ru" placeholder="Краткое описание, 1–2 предложения...">${d.desc_ru||''}</textarea>
+      </div>
+      <div class="form-group full">
+        <label>Description <span class="lang-flag">🇬🇧 EN</span></label>
+        <textarea id="f-desc-en" placeholder="Short bio, 1–2 sentences...">${d.desc_en||''}</textarea>
+      </div>
+      <div class="form-group full">
+        <label>简介 <span class="lang-flag">🇨🇳 ZH</span></label>
+        <textarea id="f-desc-zh" placeholder="简短介绍，1-2句话...">${d.desc_zh||''}</textarea>
+      </div>
+    </div>
+
+    <!-- ГОРОД -->
+    <div class="form-section-title">Город / Локация</div>
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Город <span class="lang-flag">🇷🇺</span></label>
+        <input type="text" id="f-city-ru" value="${d.city_ru||'Бишкек'}" placeholder="Бишкек" />
+      </div>
+      <div class="form-group">
+        <label>City <span class="lang-flag">🇬🇧</span></label>
+        <input type="text" id="f-city-en" value="${d.city_en||'Bishkek'}" placeholder="Bishkek" />
+      </div>
+      <div class="form-group">
+        <label>城市 <span class="lang-flag">🇨🇳</span></label>
+        <input type="text" id="f-city-zh" value="${d.city_zh||'比什凯克'}" placeholder="比什凯克" />
+      </div>
+    </div>
+    <div class="toggle-row" style="margin-top:12px;">
+      <label class="toggle-switch">
+        <input type="checkbox" id="f-online" ${d.online ? 'checked' : ''} />
+        <div class="toggle-track"></div>
+      </label>
+      <span class="toggle-label">Работает онлайн (добавляет бейдж «Онлайн»)</span>
+    </div>
+
+    <!-- КОНТАКТЫ -->
+    <div class="form-section-title">Контакты</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📞 Телефон / WhatsApp</label>
+        <input type="tel" id="f-phone" value="${d.phone||''}" placeholder="+996 700 000 000" />
+      </div>
+      <div class="form-group">
+        <label>✉️ Email</label>
+        <input type="email" id="f-email" value="${d.email||''}" placeholder="name@example.com" />
+      </div>
+      <div class="form-group">
+        <label>✈️ Telegram</label>
+        <input type="text" id="f-telegram" value="${d.telegram||''}" placeholder="@username" />
+      </div>
+    </div>
+
+    <!-- КАТЕГОРИИ -->
+    <div class="form-section-title">Категории (фильтры в каталоге)</div>
+    <div class="cat-toggles">
+      ${CATEGORIES.map(c => `
+        <label class="cat-toggle">
+          <input type="checkbox" value="${c.key}" ${(d.categories||[]).includes(c.key) ? 'checked' : ''} />
+          <span class="cat-chip">${c.label}</span>
+        </label>
+      `).join('')}
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--ink-30);">Выберите одну или несколько категорий — они влияют на фильтрацию в каталоге.</div>
+
+    <div style="height:40px;"></div>
+  `;
+}
+
+function newSpecialist() {
+  editingId = null;
+  renderList();
+  renderForm(null);
+}
+
+function editSpecialist(id) {
+  editingId = id;
+  const s = specialists.find(x => x.id === id);
+  renderList();
+  renderForm(s);
+}
+
+function saveSpecialist() {
+  const data = getFormData();
+  if (!data.name_ru) { showToast('⚠️ Введите имя на русском'); return; }
+  if (!data.categories.length) { showToast('⚠️ Выберите хотя бы одну категорию'); return; }
+
+  if (editingId) {
+    const idx = specialists.findIndex(s => s.id === editingId);
+    if (idx >= 0) specialists[idx] = data;
+  } else {
+    specialists.push(data);
+    editingId = data.id;
+  }
+
+  saveData();
+  renderList();
+  renderForm(data);
+  showToast('✅ Сохранено');
+}
+
+function deleteSpecialist(id) {
+  if (!confirm('Удалить этого специалиста?')) return;
+  specialists = specialists.filter(s => s.id !== id);
+  editingId = null;
+  saveData();
+  renderList();
+  document.getElementById('main-area').innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">✅</div>
+      <div class="empty-text">Специалист удалён</div>
+    </div>`;
+  showToast('🗑 Удалено');
+}
+
+// ── EXPORT ──
+function generateJSON() {
+  return JSON.stringify(specialists, null, 2);
+}
+
+function downloadJSON() {
+  const json = generateJSON();
+  const blob = new Blob([json], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'specialists.json';
+  a.click();
+  showToast('⬇️ Файл скачан');
+}
+
+function copyJSON() {
+  const json = generateJSON();
+  const box = document.getElementById('export-box');
+  box.textContent = json;
+  box.style.display = 'block';
+  navigator.clipboard.writeText(json).then(() => showToast('📋 Скопировано в буфер'));
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── EXPORT PANEL (always visible at bottom of sidebar) ──
+function renderExport() {
+  const exportEl = document.getElementById('export-panel');
+  if (!exportEl) return;
+  exportEl.innerHTML = `
+    <div class="export-section">
+      <div class="export-title">📤 Экспорт в сайт</div>
+      <div class="export-desc">
+        После редактирования нужно обновить файл <code>specialists.json</code> на хостинге.<br/>
+        Скачайте файл и загрузите его на сервер (GitHub, хостинг).
+      </div>
+      <div class="export-steps">
+        <button class="btn-export" onclick="downloadJSON()">⬇️ Скачать specialists.json</button>
+        <button class="btn-copy" onclick="copyJSON()">📋 Копировать JSON</button>
+      </div>
+      <pre class="export-json" id="export-box"></pre>
+    </div>
+  `;
+}
+
+// Attach export panel after layout renders
+setTimeout(() => {
+  const sidebar = document.querySelector('.sidebar');
+  if (!sidebar) return;
+  const ep = document.createElement('div');
+  ep.id = 'export-panel';
+  sidebar.appendChild(ep);
+  renderExport();
+}, 200);
+
+// Check auth on load
+if (sessionStorage.getItem('xpat4-auth') === '1') { init(); }
+</script>
+</body>
+</html>
