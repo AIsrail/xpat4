@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>First 30 Days in Kyrgyzstan Checklist — xpat4.org | Первые 30 дней | 入境头30天清单</title>
+  <meta name="description" content="Step-by-step checklist for the first 30 days as an expat in Kyrgyzstan. Printable, available in Russian, English and Chinese.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sand: #f5f0e8; --warm-white: #faf8f4; --ink: #1a1814;
+      --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3);
+      --ink-10: rgba(26,24,20,0.08); --accent: #2d5a3d;
+      --accent-light: #e8f0ea; --line: rgba(26,24,20,0.12);
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(250,248,244,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--ink); text-decoration:none; }
+    .logo span { color:var(--accent); }
+    .nav-right { display:flex; align-items:center; gap:16px; }
+    .lang-switch { display:flex; gap:2px; background:var(--ink-10); border-radius:3px; padding:3px; }
+    .lang-btn { font-size:11px; font-weight:500; padding:5px 10px; border:none; background:transparent; cursor:pointer; color:var(--ink-60); border-radius:2px; transition:background 0.15s,color 0.15s; }
+    .lang-btn.active { background:var(--warm-white); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+    .back { font-size:13px; color:var(--ink-60); text-decoration:none; }
+    .back::before { content:'← '; }
+    .back:hover { color:var(--ink); }
+
+    .page-hero { padding:140px 48px 48px; max-width:820px; margin:0 auto; }
+    .eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:22px; display:flex; align-items:center; gap:10px; }
+    .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+    h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,5vw,60px); font-weight:300; line-height:1.1; margin-bottom:16px; }
+    .page-sub { font-size:15px; color:var(--ink-60); font-weight:300; line-height:1.7; max-width:520px; margin-bottom:28px; }
+
+    .hero-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+    .btn-print { background:var(--accent); color:#fff; font-size:13px; font-weight:500; padding:11px 24px; border:none; border-radius:2px; cursor:pointer; letter-spacing:0.03em; font-family:'DM Sans',sans-serif; transition:opacity 0.2s; }
+    .btn-print:hover { opacity:0.85; }
+    .progress-bar-wrap { margin-top:6px; }
+    .progress-text { font-size:12px; color:var(--ink-30); margin-bottom:8px; }
+    .progress-track { height:3px; background:var(--line); border-radius:2px; width:100%; max-width:300px; }
+    .progress-fill { height:3px; background:var(--accent); border-radius:2px; width:0%; transition:width 0.4s ease; }
+
+    /* CHECKLIST */
+    .checklist-wrap { max-width:820px; margin:0 auto; padding:0 48px 100px; }
+    .phase { margin-bottom:56px; }
+    .phase-header { display:flex; align-items:center; gap:16px; padding:20px 0; border-top:2px solid var(--ink); margin-bottom:4px; }
+    .phase-num { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; color:var(--ink-30); line-height:1; }
+    .phase-info {}
+    .phase-label { font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+    .phase-title { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:400; }
+
+    .check-item { display:flex; align-items:flex-start; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); cursor:pointer; transition:background 0.15s; border-radius:2px; padding-left:6px; padding-right:6px; }
+    .check-item:hover { background:var(--sand); }
+    .check-item.done .check-box { background:var(--accent); border-color:var(--accent); }
+    .check-item.done .check-box::after { content:'✓'; color:#fff; font-size:12px; font-weight:500; }
+    .check-item.done .check-text { opacity:0.45; text-decoration:line-through; text-decoration-color:var(--ink-30); }
+    .check-box { width:22px; height:22px; border:1.5px solid var(--line); border-radius:3px; flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+    .check-text { flex:1; }
+    .check-title { font-size:15px; font-weight:400; color:var(--ink); margin-bottom:3px; line-height:1.4; }
+    .check-desc { font-size:13px; color:var(--ink-60); font-weight:300; line-height:1.55; }
+    .check-tag { display:inline-block; margin-top:6px; font-size:11px; font-weight:500; letter-spacing:0.06em; color:var(--accent); background:var(--accent-light); padding:3px 10px; border-radius:100px; }
+    .check-tag.urgent { background:#fef3ef; color:#c04c2a; }
+
+    /* BOTTOM CTA */
+    .bottom-cta { background:var(--ink); padding:60px 48px; text-align:center; }
+    .bottom-cta h2 { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:300; color:var(--sand); margin-bottom:14px; }
+    .bottom-cta p { font-size:15px; color:rgba(245,240,232,0.55); font-weight:300; margin-bottom:32px; }
+    .btn-light { background:var(--sand); color:var(--ink); font-size:14px; font-weight:500; padding:13px 32px; border-radius:2px; text-decoration:none; display:inline-block; transition:opacity 0.2s; }
+    .btn-light:hover { opacity:0.85; }
+
+    footer { padding:36px 48px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+    .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
+    .footer-logo span { color:var(--accent); }
+    .footer-copy { font-size:12px; color:var(--ink-30); }
+
+    @media(max-width:700px) { nav,footer{ padding:16px 20px; } .page-hero,.checklist-wrap{ padding-left:20px; padding-right:20px; } .bottom-cta{ padding:40px 24px; } }
+
+    /* PRINT */
+    @media print {
+      nav, .hero-actions, .bottom-cta, footer { display:none !important; }
+      body { background:#fff; }
+      .page-hero { padding-top:30px; }
+      .check-item:hover { background:transparent; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+    </div>
+    <a class="back" href="index.html" data-ru="Главная" data-en="Home" data-zh="首页">Главная</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow" data-ru="Чеклист для экспата" data-en="Expat Checklist" data-zh="外籍人士清单">Чеклист для экспата</div>
+  <h1 data-ru="Первые 30 дней<br/>в Кыргызстане" data-en="First 30 Days<br/>in Kyrgyzstan" data-zh="入境吉尔吉斯斯坦<br/>头30天">Первые 30 дней<br/>в Кыргызстане</h1>
+  <p class="page-sub" data-ru="Пошаговый план действий с момента прилёта. Отмечайте выполненные пункты — прогресс сохраняется." data-en="Step-by-step action plan from the moment you land. Check items off — progress is saved." data-zh="从抵达时起的逐步行动计划。勾选已完成项目——进度将自动保存。">Пошаговый план действий с момента прилёта. Отмечайте выполненные пункты — прогресс сохраняется.</p>
+  <div class="hero-actions">
+    <button class="btn-print" onclick="window.print()">🖨️ <span data-ru="Распечатать" data-en="Print" data-zh="打印">Распечатать</span></button>
+    <div>
+      <div class="progress-text" id="progress-text">0 / 0 выполнено</div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="checklist-wrap" id="checklist-wrap">
+  <!-- rendered by JS -->
+</div>
+
+<div class="bottom-cta">
+  <h2 data-ru="Остались вопросы?" data-en="Still have questions?" data-zh="还有疑问？">Остались вопросы?</h2>
+  <p data-ru="Гульнара Мамбеталиева поможет с любым этапом переезда — от документов до поиска жилья." data-en="Gulnara Mambetaliyeva can help at any stage of relocation — from documents to finding housing." data-zh="古尔纳拉·马姆别塔利耶娃可帮助移居的每个阶段——从文件到寻找住房。">Гульнара Мамбеталиева поможет с любым этапом переезда — от документов до поиска жилья.</p>
+  <a class="btn-light" href="contact.html" data-ru="Задать вопрос" data-en="Ask a Question" data-zh="提问">Задать вопрос</a>
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
+  <span class="footer-copy">© 2025 xpat4.org</span>
+</footer>
+
+<script src="xpat4.js"></script>
+<script>
+const CHECKLIST = [
+  {
+    phase: { ru:'День 1–2 · Прилёт', en:'Day 1–2 · Arrival', zh:'第1-2天 · 抵达' },
+    num: '01',
+    items: [
+      {
+        id:'passport-control',
+        title:{ ru:'Пройти паспортный контроль', en:'Pass passport control', zh:'通过护照检查' },
+        desc:{ ru:'На въезде убедитесь, что в паспорте стоит отметка о въезде с датой.', en:'At entry, ensure your passport has an entry stamp with the date.', zh:'入境时确保护照上有带日期的入境章。' },
+        tag:{ ru:'Обязательно', en:'Required', zh:'必须' }, urgent:true
+      },
+      {
+        id:'sim-card',
+        title:{ ru:'Купить SIM-карту', en:'Buy a SIM card', zh:'购买SIM卡' },
+        desc:{ ru:'MegaCom, Beeline или O! — доступны в аэропорту. Нужен паспорт.', en:'MegaCom, Beeline or O! — available at the airport. Passport required.', zh:'MegaCom、Beeline或O!——机场有售。需要护照。' },
+        tag:{ ru:'День 1', en:'Day 1', zh:'第1天' }
+      },
+      {
+        id:'accommodation',
+        title:{ ru:'Заселиться и сообщить адрес', en:'Check in and note your address', zh:'办理入住并记录地址' },
+        desc:{ ru:'Отель зарегистрирует вас автоматически. При аренде квартиры — это сделать самостоятельно.', en:'Hotels register you automatically. If renting an apartment, you need to do it yourself.', zh:'酒店会自动为您登记。如果租公寓，需要自行办理。' },
+        tag:{ ru:'День 1', en:'Day 1', zh:'第1天' }
+      },
+      {
+        id:'cash',
+        title:{ ru:'Снять наличные в банкомате', en:'Withdraw cash from ATM', zh:'从ATM取现' },
+        desc:{ ru:'Валюта — сом (KGS). Многие малые заведения принимают только наличные. Курс $1 ≈ 87 KGS.', en:'Currency is som (KGS). Many small places accept cash only. Rate: $1 ≈ 87 KGS.', zh:'货币为索姆（KGS）。许多小店只收现金。汇率：$1 ≈ 87索姆。' },
+        tag:{ ru:'День 1', en:'Day 1', zh:'第1天' }
+      },
+    ]
+  },
+  {
+    phase: { ru:'День 3–5 · Регистрация', en:'Day 3–5 · Registration', zh:'第3-5天 · 登记注册' },
+    num: '02',
+    items: [
+      {
+        id:'registration',
+        title:{ ru:'Зарегистрироваться по месту проживания (ОВПГ)', en:'Register at your place of residence (OVPG)', zh:'在居住地登记（OVPG）' },
+        desc:{ ru:'Обязательно в течение 5 рабочих дней. Через МВД или хозяина квартиры. При нарушении — штраф.', en:'Required within 5 working days. Through MIA or your landlord. Fines apply for violations.', zh:'须在5个工作日内完成。通过内务部或房东办理。违规将被罚款。' },
+        tag:{ ru:'⚠️ 5 рабочих дней', en:'⚠️ 5 working days', zh:'⚠️ 5个工作日' }, urgent:true
+      },
+      {
+        id:'rental-contract',
+        title:{ ru:'Подписать договор аренды', en:'Sign the rental contract', zh:'签署租房合同' },
+        desc:{ ru:'Официальный договор нужен для регистрации и открытия счёта в банке.', en:'An official contract is needed for registration and opening a bank account.', zh:'正式合同是办理登记和开立银行账户所必需的。' },
+        tag:{ ru:'Если аренда', en:'If renting', zh:'如有租房' }
+      },
+      {
+        id:'police',
+        title:{ ru:'Узнать адрес ближайшего отделения МВД', en:'Find the nearest MIA office', zh:'找到最近的内务部办公室' },
+        desc:{ ru:'Адрес: ул. Московская 215, Бишкек. Часы работы: пн–пт 9:00–18:00.', en:'Address: 215 Moskovskaya St, Bishkek. Hours: Mon–Fri 9:00–18:00.', zh:'地址：比什凯克莫斯科夫斯卡娅街215号。工作时间：周一至周五9:00-18:00。' },
+        tag:{ ru:'Справочно', en:'Info', zh:'参考信息' }
+      },
+    ]
+  },
+  {
+    phase: { ru:'День 6–14 · Базовая инфраструктура', en:'Day 6–14 · Basic Setup', zh:'第6-14天 · 基础设施搭建' },
+    num: '03',
+    items: [
+      {
+        id:'bank-account',
+        title:{ ru:'Открыть банковский счёт', en:'Open a bank account', zh:'开立银行账户' },
+        desc:{ ru:'Нужны: паспорт, регистрация. Рекомендуем: Optima Bank, KICB, Bakai Bank. Карта выдаётся в день обращения.', en:'Required: passport, registration. Recommended: Optima Bank, KICB, Bakai Bank. Card issued same day.', zh:'需要：护照、登记证明。推荐：Optima Bank、KICB、Bakai Bank。当天办理当天领卡。' },
+        tag:{ ru:'Приоритет', en:'Priority', zh:'优先' }, urgent:true
+      },
+      {
+        id:'local-map',
+        title:{ ru:'Изучить районы Бишкека', en:'Explore Bishkek neighborhoods', zh:'了解比什凯克各区' },
+        desc:{ ru:'Центр (Дубовый парк), Джал, Аламедин — ключевые жилые районы для экспатов.', en:'Center (Dubovy Park), Jal, Alamedine — key residential areas for expats.', zh:'市中心（杜博沃伊公园）、扎尔、阿拉梅丁——外籍人士主要居住区。' },
+        tag:{ ru:'Практично', en:'Practical', zh:'实用' }
+      },
+      {
+        id:'internet-home',
+        title:{ ru:'Подключить домашний интернет', en:'Set up home internet', zh:'安装家庭网络' },
+        desc:{ ru:'Aknet, KyivStar, Nurtelecom — 50–200 Мбит/с от $10/мес. Подключение за 1-2 дня.', en:'Aknet, KyivStar, Nurtelecom — 50–200 Mbps from $10/month. Connected in 1–2 days.', zh:'Aknet、KyivStar、Nurtelecom——50-200Mbps，低至$10/月。1-2天接通。' },
+        tag:{ ru:'Для номадов', en:'For nomads', zh:'游民必备' }
+      },
+      {
+        id:'transport',
+        title:{ ru:'Разобраться с транспортом', en:'Figure out transportation', zh:'了解交通方式' },
+        desc:{ ru:'Маршрутки (7–10 KGS), такси через inDriver или Yandex GO, велосипеды — всё доступно.', en:'Marshrutkas (7–10 KGS), taxi via inDriver or Yandex GO, bicycles — all available.', zh:'小巴（7-10索姆）、inDriver或Yandex GO打车、自行车——应有尽有。' },
+        tag:{ ru:'День 7–10', en:'Day 7–10', zh:'第7-10天' }
+      },
+      {
+        id:'healthcare',
+        title:{ ru:'Найти ближайшую клинику / аптеку', en:'Find nearest clinic / pharmacy', zh:'找到最近的诊所/药店' },
+        desc:{ ru:'Медцентр «МедАзия», «Международная клиника Бишкека» — работают с иностранцами на английском.', en:'MedAsia Medical Center, International Clinic of Bishkek — work with foreigners in English.', zh:'MedAsia医疗中心、比什凯克国际诊所——提供英语服务，面向外籍人士。' },
+        tag:{ ru:'Важно', en:'Important', zh:'重要' }
+      },
+    ]
+  },
+  {
+    phase: { ru:'День 15–30 · Легализация и адаптация', en:'Day 15–30 · Legalization & Settling', zh:'第15-30天 · 合法化与适应' },
+    num: '04',
+    items: [
+      {
+        id:'tax-number',
+        title:{ ru:'Получить ИНН (налоговый номер)', en:'Get a Tax ID (INN)', zh:'获取纳税人识别号（INN）' },
+        desc:{ ru:'Нужен для работы и открытия ИП/ОсОО. Налоговая служба: ул. Чуй 219.', en:'Required for work and registering as sole trader or company. Tax Service: 219 Chui Ave.', zh:'工作和注册个体户/有限公司所必需。税务局：楚伊大道219号。' },
+        tag:{ ru:'Для работающих', en:'For workers', zh:'工作者必备' }
+      },
+      {
+        id:'vnj-decision',
+        title:{ ru:'Решить вопрос о ВНЖ', en:'Decide on residence permit (VNJ)', zh:'决定是否申请居留许可（VNJ）' },
+        desc:{ ru:'Если планируете остаться дольше 90 дней — начните сбор документов для ВНЖ заранее.', en:'If planning to stay longer than 90 days — start gathering VNJ documents early.', zh:'如计划停留超过90天，请提前开始准备VNJ申请材料。' },
+        tag:{ ru:'Если >90 дней', en:'If >90 days', zh:'超过90天必须' }, urgent:true
+      },
+      {
+        id:'language',
+        title:{ ru:'Выучить базовые фразы на русском', en:'Learn basic Russian phrases', zh:'学习基本俄语短语' },
+        desc:{ ru:'Большинство бытовых ситуаций — на русском. Хватит 50 фраз для повседневной жизни.', en:'Most daily situations are in Russian. 50 phrases are enough for everyday life.', zh:'大多数日常情况使用俄语。50个短语足够日常生活使用。' },
+        tag:{ ru:'Практично', en:'Practical', zh:'实用建议' }
+      },
+      {
+        id:'expat-community',
+        title:{ ru:'Найти экспат-сообщество', en:'Find the expat community', zh:'加入外籍人士社区' },
+        desc:{ ru:'Telegram: «Expats in Bishkek», «Digital Nomads KG» — там все актуальные советы.', en:'Telegram: "Expats in Bishkek", "Digital Nomads KG" — all current tips are there.', zh:'Telegram：《比什凯克外籍人士》《吉尔吉斯数字游民》——最新建议尽在其中。' },
+        tag:{ ru:'Рекомендуем', en:'Recommended', zh:'推荐' }
+      },
+      {
+        id:'specialist-consult',
+        title:{ ru:'Проконсультироваться со специалистом по вашей ситуации', en:'Consult a specialist about your specific situation', zh:'就您的具体情况咨询专家' },
+        desc:{ ru:'Гульнара Мамбеталиева поможет с индивидуальным планом легализации. Бесплатная первичная консультация.', en:'Gulnara Mambetaliyeva will help with a personalized legalization plan. Free initial consultation.', zh:'古尔纳拉·马姆别塔利耶娃将帮助制定个性化合法化方案。提供免费初次咨询。' },
+        tag:{ ru:'xpat4.org', en:'xpat4.org', zh:'xpat4.org' }, urgent:false
+      },
+    ]
+  },
+];
+
+let done = {};
+try { done = JSON.parse(localStorage.getItem('xpat4-checklist') || '{}'); } catch{}
+
+function saveProgress() {
+  try { localStorage.setItem('xpat4-checklist', JSON.stringify(done)); } catch{}
+}
+
+function toggle(id) {
+  done[id] = !done[id];
+  saveProgress();
+  renderProgress();
+  // Update single item UI
+  const el = document.querySelector(`[data-id="${id}"]`);
+  if (el) el.classList.toggle('done', done[id]);
+}
+
+function renderProgress() {
+  const total = CHECKLIST.reduce((a,p) => a + p.items.length, 0);
+  const completed = Object.values(done).filter(Boolean).length;
+  const lang = XPAT4.currentLang || 'ru';
+  const LABELS = {
+    ru: `${completed} / ${total} выполнено`,
+    en: `${completed} / ${total} completed`,
+    zh: `已完成 ${completed} / ${total}`
+  };
+  document.getElementById('progress-text').textContent = LABELS[lang] || LABELS.en;
+  document.getElementById('progress-fill').style.width = total ? (completed / total * 100) + '%' : '0%';
+}
+
+function renderChecklist() {
+  const lang = XPAT4.currentLang || 'ru';
+  const wrap = document.getElementById('checklist-wrap');
+  wrap.innerHTML = CHECKLIST.map(phase => `
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">${phase.num}</div>
+        <div class="phase-info">
+          <div class="phase-label">${phase.phase[lang] || phase.phase.en}</div>
+        </div>
+      </div>
+      ${phase.items.map(item => `
+        <div class="check-item${done[item.id] ? ' done' : ''}" data-id="${item.id}" onclick="toggle('${item.id}')">
+          <div class="check-box"></div>
+          <div class="check-text">
+            <div class="check-title">${item.title[lang] || item.title.en}</div>
+            <div class="check-desc">${item.desc[lang] || item.desc.en}</div>
+            <span class="check-tag${item.urgent ? ' urgent' : ''}">${item.tag[lang] || item.tag.en}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function renderAll() {
+  renderChecklist();
+  renderProgress();
+  // Update tagged elements
+  document.querySelectorAll('[data-ru]').forEach(el => {
+    const t = el.getAttribute('data-' + (XPAT4.currentLang || 'ru')) || el.getAttribute('data-en');
+    if (t) el.innerHTML = t;
+  });
+}
+
+document.addEventListener('xpat4-lang-change', renderAll);
+renderAll();
+</script>
+</body>
+</html>

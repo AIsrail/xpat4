@@ -114,6 +114,54 @@
     .footer-links a:hover { color: var(--ink-60); }
     .footer-copy { font-size: 12px; color: var(--ink-30); }
 
+    /* STATS STRIP */
+    .stats-strip { padding: 0 48px 80px; max-width: 1100px; margin: 0 auto; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .stat-cell { background: var(--sand); padding: 32px 28px; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 12px; font-weight: 400; color: var(--ink-60); line-height: 1.5; }
+
+    /* DIGITAL NOMAD BLOCK */
+    .nomad-section { margin: 0 48px 100px; max-width: calc(1100px - 96px); margin-left: auto; margin-right: auto; background: var(--ink); padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .nomad-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,240,232,0.5); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .nomad-tag::before { content:''; display:block; width:20px; height:1px; background:rgba(245,240,232,0.4); }
+    .nomad-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px,4vw,44px); font-weight: 300; color: var(--sand); line-height: 1.15; margin-bottom: 20px; }
+    .nomad-section h2 em { font-style: italic; color: rgba(245,240,232,0.55); }
+    .nomad-section p { font-size: 15px; color: rgba(245,240,232,0.55); font-weight: 300; line-height: 1.7; margin-bottom: 32px; }
+    .nomad-benefits { display: flex; flex-direction: column; gap: 16px; }
+    .nomad-benefit { display: flex; align-items: flex-start; gap: 14px; }
+    .nomad-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .nomad-text { font-size: 14px; color: rgba(245,240,232,0.7); line-height: 1.55; font-weight: 300; }
+    .nomad-text strong { color: var(--sand); font-weight: 500; }
+    .btn-sand { background: var(--sand); color: var(--ink); font-size: 14px; font-weight: 500; padding: 13px 30px; border-radius: 2px; text-decoration: none; display: inline-block; transition: opacity 0.2s; margin-top: 28px; }
+    .btn-sand:hover { opacity: 0.85; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { padding: 0 48px 100px; max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; display: flex; align-items: center; gap: 10px; }
+    .section-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card { border: 1px solid var(--line); padding: 36px 32px; background: var(--warm-white); display: flex; flex-direction: column; gap: 16px; transition: border-color 0.2s; }
+    .testimonial-card:hover { border-color: rgba(26,24,20,0.3); }
+    .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; line-height: 1.5; color: var(--ink); font-style: italic; }
+    .testimonial-quote::before { content: '"'; color: var(--accent); }
+    .testimonial-quote::after { content: '"'; color: var(--accent); }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+    .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: var(--accent); font-family: 'Cormorant Garamond', serif; flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .author-meta { font-size: 11px; color: var(--ink-30); margin-top: 2px; letter-spacing: 0.03em; }
+
+    /* QUICK ACTIONS */
+    .quick-actions { padding: 0 48px 80px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .quick-card { border: 1px solid var(--line); padding: 36px 32px; text-decoration: none; color: var(--ink); display: flex; align-items: flex-start; gap: 20px; transition: background 0.25s, border-color 0.25s; }
+    .quick-card:hover { background: var(--sand); border-color: transparent; }
+    .quick-card-icon { font-size: 32px; flex-shrink: 0; }
+    .quick-card-text {}
+    .quick-card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+    .quick-card-desc { font-size: 13px; color: var(--ink-60); font-weight: 300; line-height: 1.55; }
+    .quick-card-arrow { margin-top: 14px; font-size: 12px; font-weight: 500; color: var(--accent); display: flex; align-items: center; gap: 5px; }
+    .quick-card-arrow::after { content: '→'; }
+
     .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: none; }
 
@@ -121,16 +169,20 @@
       nav { padding: 16px 20px; }
       .nav-center { display: none; }
       .nav-burger { display: flex; }
-      .hero, .section, .cards-section { padding-left: 24px; padding-right: 24px; }
+      .hero, .section, .cards-section, .stats-strip, .testimonials-section, .quick-actions { padding-left: 24px; padding-right: 24px; }
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
-      .consultants-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .consultants-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .nomad-section { margin: 0 24px 80px; padding: 40px 32px; grid-template-columns: 1fr; gap: 40px; }
+      .quick-actions { grid-template-columns: 1fr; }
       .catalog-intro { flex-direction: column; align-items: flex-start; }
       footer { flex-direction: column; align-items: flex-start; gap: 16px; }
       .final-cta { padding: 80px 24px; }
     }
     @media (max-width: 560px) {
       .cards-grid { grid-template-columns: 1fr; }
-      .consultants-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .consultants-grid, .testimonials-grid { grid-template-columns: 1fr; }
       h1 { font-size: 42px; }
     }
   </style>
@@ -144,6 +196,8 @@
       data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a></li>
     <li><a href="catalog.html"
       data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
+    <li><a href="calculator.html"
+      data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
     <li><a href="contact.html"
       data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
   </ul>
@@ -204,6 +258,28 @@
     Независимый ресурс для экспатов в КР · Без рекламы
   </div>
 </section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip fade-up">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <div class="stat-num">60+</div>
+      <div class="stat-label" data-ru="стран с безвизовым въездом в КР" data-en="countries with visa-free entry to KR" data-zh="个国家免签入境">стран с безвизовым въездом в КР</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1</div>
+      <div class="stat-label" data-ru="день — минимальный срок регистрации компании" data-en="day minimum for company registration" data-zh="天最快注册公司">день — минимальный срок регистрации компании</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">$300</div>
+      <div class="stat-label" data-ru="средняя аренда квартиры в Бишкеке" data-en="average apartment rent in Bishkek" data-zh="比什凯克平均月租">средняя аренда квартиры в Бишкеке</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">10%</div>
+      <div class="stat-label" data-ru="корпоративный налог — один из самых низких в регионе" data-en="corporate tax — one of the lowest in the region" data-zh="企业税率，区域最低之一">корпоративный налог — один из самых низких в регионе</div>
+    </div>
+  </div>
+</div>
 
 <div class="cards-section" id="services">
   <div class="cards-grid">
@@ -282,6 +358,34 @@
   </div>
 </div>
 
+<!-- DIGITAL NOMAD BLOCK -->
+<section class="nomad-section fade-up">
+  <div>
+    <div class="nomad-tag" data-ru="Цифровые номады" data-en="Digital Nomads" data-zh="数字游民">Цифровые номады</div>
+    <h2 data-ru="Бишкек — лучший<br/>город для <em>удалёнщика</em> в ЦА" data-en="Bishkek — best city<br/>for <em>remote workers</em> in CA" data-zh="比什凯克——<br/>中亚最适合<em>远程工作者</em>的城市">Бишкек — лучший<br/>город для <em>удалёнщика</em> в ЦА</h2>
+    <p data-ru="Стоимость жизни на 60% ниже, чем в Европе. Быстрый интернет, коворкинги, нет налогов для работающих на иностранного работодателя — и горы в двух часах езды." data-en="Cost of living 60% lower than Europe. Fast internet, coworking spaces, no taxes for those working for foreign employers — and mountains two hours away." data-zh="生活成本比欧洲低60%。高速网络、联合办公空间、为境外雇主工作无需缴税——两小时车程即可抵达山区。">Стоимость жизни на 60% ниже, чем в Европе. Быстрый интернет, коворкинги, нет налогов для работающих на иностранного работодателя — и горы в двух часах езды.</p>
+    <a class="btn-sand" href="work.html" data-ru="Подробнее о работе в КР" data-en="Learn about working in KR" data-zh="了解在吉工作详情">Подробнее о работе в КР</a>
+  </div>
+  <div class="nomad-benefits">
+    <div class="nomad-benefit">
+      <span class="nomad-icon">⚡</span>
+      <span class="nomad-text"><strong data-ru="Быстрый интернет" data-en="Fast Internet" data-zh="高速网络">Быстрый интернет</strong><br/><span data-ru="50–200 Мбит/с, доступен повсеместно, операторы: MegaCom, Beeline, O!" data-en="50–200 Mbps, widely available, carriers: MegaCom, Beeline, O!" data-zh="50–200 Mbps，覆盖广泛，运营商：MegaCom、Beeline、O!">50–200 Мбит/с, операторы MegaCom, Beeline, O!</span></span>
+    </div>
+    <div class="nomad-benefit">
+      <span class="nomad-icon">🏢</span>
+      <span class="nomad-text"><strong data-ru="Коворкинги и кафе" data-en="Coworkings & Cafés" data-zh="联合办公与咖啡馆">Коворкинги и кафе</strong><br/><span data-ru="Ноушн, Hub Bishkek, Impact Hub — от $5/день" data-en="Notion, Hub Bishkek, Impact Hub — from $5/day" data-zh="Notion、Hub Bishkek、Impact Hub — 低至$5/天">Ноушн, Hub Bishkek, Impact Hub — от $5/день</span></span>
+    </div>
+    <div class="nomad-benefit">
+      <span class="nomad-icon">💰</span>
+      <span class="nomad-text"><strong data-ru="Низкие налоги" data-en="Low Taxes" data-zh="低税收">Низкие налоги</strong><br/><span data-ru="Работающие удалённо на иностранного работодателя — без налогов в КР" data-en="Remote workers for foreign employers — no taxes in KR" data-zh="为境外雇主远程工作——在吉无需缴税">Работающие удалённо — без налогов в КР</span></span>
+    </div>
+    <div class="nomad-benefit">
+      <span class="nomad-icon">🏔️</span>
+      <span class="nomad-text"><strong data-ru="Природа рядом" data-en="Nature Nearby" data-zh="近在咫尺的自然">Природа рядом</strong><br/><span data-ru="Иссык-Куль, Ала-Арча — за 1-2 часа от Бишкека" data-en="Issyk-Kul, Ala-Archa — 1-2 hours from Bishkek" data-zh="伊塞克湖、阿拉-阿尔恰——距比什凯克1-2小时">Иссык-Куль, Ала-Арча — за 1-2 часа от Бишкека</span></span>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="catalog">
   <div class="catalog-intro fade-up">
     <div class="catalog-intro-text">
@@ -308,6 +412,78 @@
   <div class="consultants-grid" id="specialists-grid">
     <!-- Loaded from specialists.json -->
   </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-eyebrow" data-ru="Истории реальных людей" data-en="Real Expat Stories" data-zh="真实外籍人士故事">Истории реальных людей</div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-up">
+      <p class="testimonial-quote"
+        data-ru="Переехал из Берлина, занялся фрилансом. В Бишкеке открыл ИП за один день — это реально. Аренда квартиры вышла в $350, интернет 100 Мбит/с. Счастлив."
+        data-en="Moved from Berlin, went freelance. In Bishkek I registered as sole trader in one day — that's real. Apartment rent came to $350, internet 100 Mbps. Very happy."
+        data-zh="从柏林搬来，做自由职业。在比什凯克一天就注册了个体户——这是真的。公寓租金350美元，网速100Mbps。非常满意。">
+        Переехал из Берлина, занялся фрилансом. В Бишкеке открыл ИП за один день — это реально. Аренда квартиры вышла в $350, интернет 100 Мбит/с. Счастлив.
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AK</div>
+        <div>
+          <div class="author-name">Alexander K.</div>
+          <div class="author-meta" data-ru="Германия · Digital nomad · 2024" data-en="Germany · Digital nomad · 2024" data-zh="德国 · 数字游民 · 2024">Германия · Digital nomad · 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <p class="testimonial-quote"
+        data-ru="Открыл торговую компанию в Бишкеке. Гульнара помогла с документами за неделю. Налоги минимальные, бюрократия намного проще, чем я ожидал."
+        data-en="Opened a trading company in Bishkek. Gulnara helped with documents in a week. Taxes are minimal, bureaucracy much simpler than I expected."
+        data-zh="在比什凯克开了一家贸易公司。古尔纳拉一周内帮我搞定了所有文件。税收极低，行政手续比我预期的简单得多。">
+        Открыл торговую компанию в Бишкеке. Гульнара помогла с документами за неделю. Налоги минимальные, бюрократия намного проще, чем я ожидал.
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">LW</div>
+        <div>
+          <div class="author-name">Li Wei</div>
+          <div class="author-meta" data-ru="Китай · Предприниматель · 2023" data-en="China · Entrepreneur · 2023" data-zh="中国 · 企业家 · 2023">Китай · Предприниматель · 2023</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <p class="testimonial-quote"
+        data-ru="Переехала с мужем и двумя детьми. Нашла хорошую квартиру, дети учатся в международной школе. Стоимость жизни несравнимо ниже, чем в Лондоне."
+        data-en="Relocated with my husband and two kids. Found a great apartment, kids enrolled in international school. Cost of living incomparably lower than London."
+        data-zh="和丈夫及两个孩子一起搬来。找到了好公寓，孩子们进了国际学校。生活成本远低于伦敦，难以比较。">
+        Переехала с мужем и двумя детьми. Нашла хорошую квартиру, дети учатся в международной школе. Стоимость жизни несравнимо ниже, чем в Лондоне.
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SM</div>
+        <div>
+          <div class="author-name">Sarah M.</div>
+          <div class="author-meta" data-ru="Великобритания · Семья с детьми · 2024" data-en="United Kingdom · Family relocation · 2024" data-zh="英国 · 家庭移居 · 2024">Великобритания · Семья с детьми · 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ACTIONS -->
+<section class="quick-actions fade-up">
+  <a class="quick-card" href="calculator.html">
+    <div class="quick-card-icon">🧮</div>
+    <div class="quick-card-text">
+      <div class="quick-card-title" data-ru="Калькулятор стоимости жизни" data-en="Cost of Living Calculator" data-zh="生活成本计算器">Калькулятор стоимости жизни</div>
+      <p class="quick-card-desc" data-ru="Сравните расходы в Бишкеке с вашим текущим городом. Интерактивно, по категориям." data-en="Compare Bishkek expenses with your current city. Interactive, by category." data-zh="将比什凯克的花销与您当前城市进行对比。交互式，按类别划分。">Сравните расходы в Бишкеке с вашим текущим городом. Интерактивно, по категориям.</p>
+      <div class="quick-card-arrow" data-ru="Открыть калькулятор" data-en="Open Calculator" data-zh="打开计算器">Открыть калькулятор</div>
+    </div>
+  </a>
+  <a class="quick-card" href="checklist.html">
+    <div class="quick-card-icon">✅</div>
+    <div class="quick-card-text">
+      <div class="quick-card-title" data-ru="Чеклист: Первые 30 дней" data-en="Checklist: First 30 Days" data-zh="清单：入境头30天">Чеклист: Первые 30 дней</div>
+      <p class="quick-card-desc" data-ru="Пошаговый план действий с момента пересечения границы. Скачайте и распечатайте." data-en="Step-by-step action plan from the moment you cross the border. Download and print." data-zh="从过境起的逐步行动计划。下载并打印。">Пошаговый план действий с момента пересечения границы. Скачайте и распечатайте.</p>
+      <div class="quick-card-arrow" data-ru="Скачать чеклист" data-en="Get Checklist" data-zh="获取清单">Скачать чеклист</div>
+    </div>
+  </a>
 </section>
 
 <section class="final-cta" id="consult">
