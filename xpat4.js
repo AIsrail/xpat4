@@ -15,6 +15,137 @@ const XPAT4_CONFIG = {
   GULNARA_WA:     '996700522667',
 };
 
+/* ── NAV CSS INJECTION ── */
+/* Injected via JS so there is ONE source of truth across all pages */
+(function() {
+  var style = document.createElement('style');
+  style.id = 'xpat4-nav-css';
+  style.textContent = `
+    nav {
+      position: fixed !important;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 18px 48px;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,24,20,0.12);
+      box-sizing: border-box;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400;
+      color: #1a1814; text-decoration: none;
+      letter-spacing: 0.04em; flex-shrink: 0;
+    }
+    .logo span { color: #2d5a3d; }
+    .nav-center {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 28px;
+      list-style: none !important;
+      margin: 0; padding: 0;
+    }
+    .nav-center li {
+      list-style: none !important;
+      margin: 0; padding: 0;
+      display: inline !important;
+    }
+    .nav-center a {
+      font-size: 13px; font-weight: 400;
+      color: rgba(26,24,20,0.6);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      display: inline !important;
+    }
+    .nav-center a:hover { color: #1a1814; }
+    .nav-right {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 16px; flex-shrink: 0;
+    }
+    .lang-switch {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 2px;
+      background: rgba(26,24,20,0.08);
+      border-radius: 3px; padding: 3px;
+    }
+    .lang-btn {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 5px 10px; border: none;
+      background: transparent; cursor: pointer;
+      color: rgba(26,24,20,0.6);
+      border-radius: 2px;
+      transition: background 0.15s, color 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .lang-btn.active {
+      background: #faf8f4; color: #1a1814;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .nav-cta {
+      font-size: 13px; font-weight: 500;
+      color: #2d5a3d; text-decoration: none;
+      border: 1px solid #2d5a3d;
+      padding: 7px 18px; border-radius: 2px;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: #2d5a3d; color: #fff; }
+    /* Burger — hidden on desktop */
+    .nav-burger {
+      display: none !important;
+      flex-direction: column;
+      gap: 5px; background: none; border: none;
+      cursor: pointer; padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #1a1814; border-radius: 2px;
+    }
+    /* Mobile menu — hidden by default */
+    .mobile-menu {
+      display: none !important;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: #faf8f4;
+      border-bottom: 1px solid rgba(26,24,20,0.12);
+      padding: 16px 24px;
+      z-index: 99;
+      flex-direction: column; gap: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .mobile-menu.open { display: flex !important; }
+    .mobile-menu a {
+      font-size: 16px; color: rgba(26,24,20,0.7);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(26,24,20,0.08);
+      display: block !important;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #1a1814; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px !important; }
+      .nav-center { display: none !important; }
+      .nav-cta { display: none !important; }
+      .nav-burger { display: flex !important; }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
 /* ── LANGUAGE SYSTEM ── */
 window.XPAT4 = window.XPAT4 || {};
 
