@@ -1,3 +1,14 @@
+    .nav-center { display: flex; gap: 24px; list-style: none; }
+    .nav-center a { font-size: 13px; color: var(--ink-60); text-decoration: none; letter-spacing: 0.02em; transition: color .2s; }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 7px 16px; border-radius: 2px; transition: background .2s, color .2s; white-space: nowrap; }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: 62px; left: 0; right: 0; background: var(--warm-white); border-bottom: 1px solid var(--line); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--ink-60); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .mobile-menu a:last-child { border-bottom: none; }
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -58,22 +69,38 @@
     .footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--ink-60); text-decoration:none; }
     .footer-logo span { color:var(--accent); }
     .footer-copy { font-size:12px; color:var(--ink-30); }
-    @media(max-width:700px) { nav, footer { padding:16px 20px; } .page-wrap { padding:120px 24px 80px; } .expert-card { flex-direction:column; gap:20px; padding:28px 24px; } .form-row { grid-template-columns:1fr; } }
+    @media(max-width:700px){ .nav-center{ display:none; } .nav-burger{ display:flex; } { .nav-center{ display:none; } .nav-cta{ display:none; } .nav-burger{ display:flex; }  { nav, footer { padding:16px 20px; } .page-wrap { padding:120px 24px 80px; } .expert-card { flex-direction:column; gap:20px; padding:28px 24px; } .form-row { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
-<nav>
-  <a class="logo" href="index.html">xpat<span>4</span>.org</a>
-  <div class="nav-right">
-    <div class="lang-switch">
-      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
-      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
-      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+  <nav>
+    <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+    <ul class="nav-center">
+      <li><a href="index.html#services" data-ru="Услуги"    data-en="Services"   data-zh="服务">Услуги</a></li>
+      <li><a href="catalog.html"        data-ru="Каталог"   data-en="Catalog"    data-zh="目录">Каталог</a></li>
+      <li><a href="news.html"           data-ru="Новости"   data-en="News"       data-zh="新闻">Новости</a></li>
+      <li><a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
+      <li><a href="contact.html"        data-ru="Контакты"  data-en="Contacts"   data-zh="联系我们">Контакты</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+        <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+      </div>
+      <a class="nav-cta" href="contact.html" data-ru="Консультация" data-en="Consultation" data-zh="咨询">Консультация</a>
     </div>
-    <a class="back-link" href="index.html" data-ru="Главная" data-en="Home" data-zh="首页">Главная</a>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#services" data-ru="Услуги"      data-en="Services"    data-zh="服务">Услуги</a>
+    <a href="catalog.html"        data-ru="Каталог"     data-en="Catalog"     data-zh="目录">Каталог</a>
+    <a href="news.html"           data-ru="Новости"     data-en="News"        data-zh="新闻">Новости</a>
+    <a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator"  data-zh="计算器">Калькулятор</a>
+    <a href="checklist.html"      data-ru="Чеклист"     data-en="Checklist"   data-zh="清单">Чеклист</a>
+    <a href="contact.html"        data-ru="Контакты"    data-en="Contacts"    data-zh="联系我们">Контакты</a>
+    <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
   </div>
-</nav>
-
 <div class="page-wrap">
   <div class="eyebrow" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</div>
   <h1 data-ru="Свяжитесь<br/>с нами" data-en="Get in<br/>touch" data-zh="与我们<br/>取得联系">Свяжитесь<br/>с нами</h1>
@@ -236,6 +263,16 @@
     msg.style.display = 'block';
     msg.textContent = msg.getAttribute('data-' + lang);
   }
+</script>
+<script>
+  (function(){
+    var b = document.getElementById('nav-burger');
+    var m = document.getElementById('mobile-menu');
+    if(b && m){
+      b.addEventListener('click', function(){ m.classList.toggle('open'); });
+      m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
+    }
+  })();
 </script>
 </body>
 </html>
