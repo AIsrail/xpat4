@@ -44,10 +44,15 @@
     "city_ru": "Бишкек",
     "city_en": "Bishkek",
     "city_zh": "比什凯克",
-    "online": true,
     "phone": "+996 702 271 827",
     "email": "prof4dev@gmail.com",
-    "telegram": "@azat_19",
+    "telegram": "azat_19",
+    "online": true,
+    "verified": true,
+    "badge": "",
+    "badge_duration": "",
+    "badge_start": "2026-04-16",
+    "badge_expires": "",
     "categories": [
       "business"
     ]
