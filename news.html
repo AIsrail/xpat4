@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Новости для экспатов в Кыргызстане | Expat News Kyrgyzstan | 吉尔吉斯斯坦外籍人士新闻</title>
-  <meta name="description" content="Актуальные новости о визах, миграции и жизни в Кыргызстане для иностранцев. Latest expat news from Kyrgyzstan.">
+  <title>Expat News Kyrgyzstan | Новости для экспатов | 吉尔吉斯斯坦外籍人士新闻</title>
+  <meta name="description" content="Latest English-language news about visas, migration and life in Kyrgyzstan for expats. Актуальные новости для иностранцев в КР.">
   <link rel="canonical" href="https://xpat4.org/news.html" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"xpat4.org News","url":"https://xpat4.org/news.html","description":"Visa and migration news for expats in Kyrgyzstan"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"xpat4.org News","url":"https://xpat4.org/news.html","description":"Visa and migration news for expats in Kyrgyzstan","inLanguage":"en"}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -13,10 +13,12 @@
     :root{--sand:#f5f0e8;--warm-white:#faf8f4;--ink:#1a1814;--ink-60:rgba(26,24,20,0.6);--ink-30:rgba(26,24,20,0.3);--ink-10:rgba(26,24,20,0.08);--accent:#2d5a3d;--accent-light:#e8f0ea;--line:rgba(26,24,20,0.12)}
     html{scroll-behavior:smooth}
     body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+    /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
     .logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);text-decoration:none}.logo span{color:var(--accent)}
     .nav-center{display:flex;gap:28px;list-style:none}
-    .nav-center a{font-size:13px;color:var(--ink-60);text-decoration:none;letter-spacing:.02em;transition:color .2s}.nav-center a:hover{color:var(--ink)}
+    .nav-center a{font-size:13px;color:var(--ink-60);text-decoration:none;letter-spacing:.02em;transition:color .2s}.nav-center a:hover,.nav-center a.current{color:var(--ink)}
     .nav-right{display:flex;align-items:center;gap:16px}
     .lang-switch{display:flex;gap:2px;background:var(--ink-10);border-radius:3px;padding:3px}
     .lang-btn{font-size:11px;font-weight:500;padding:5px 10px;border:none;background:transparent;cursor:pointer;color:var(--ink-60);border-radius:2px;transition:background .15s,color .15s}
@@ -31,98 +33,117 @@
     .mobile-menu a:last-child{border-bottom:none}
 
     /* PAGE */
-    .page-hero{padding:140px 48px 60px;max-width:1000px;margin:0 auto}
+    .page-hero{padding:140px 48px 56px;max-width:1000px;margin:0 auto}
     .eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px}
     .eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
     h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;line-height:1.1;margin-bottom:14px}
-    .page-sub{font-size:15px;color:var(--ink-60);font-weight:300;line-height:1.7;max-width:560px}
+    .page-sub{font-size:15px;color:var(--ink-60);font-weight:300;line-height:1.7;max-width:580px}
 
     /* TABS */
-    .tabs{padding:0 48px;max-width:1000px;margin:0 auto 0;display:flex;gap:0;border-bottom:1px solid var(--line)}
-    .tab-btn{font-size:13px;font-weight:400;color:var(--ink-60);background:none;border:none;border-bottom:2px solid transparent;padding:14px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.02em;transition:all .2s;margin-bottom:-1px}
+    .tabs{padding:0 48px;max-width:1000px;margin:0 auto;display:flex;border-bottom:1px solid var(--line)}
+    .tab-btn{font-size:13px;font-weight:400;color:var(--ink-60);background:none;border:none;border-bottom:2px solid transparent;padding:14px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-bottom:-1px;letter-spacing:.02em}
     .tab-btn.active{color:var(--ink);border-bottom-color:var(--accent);font-weight:500}
     .tab-btn:hover{color:var(--ink)}
 
     /* CONTENT */
     .content{max-width:1000px;margin:0 auto;padding:0 48px 80px}
+
+    /* SECTION HEADER */
     .section-header{display:flex;align-items:center;justify-content:space-between;padding:32px 0 24px;gap:20px;flex-wrap:wrap}
-    .section-label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-30);display:flex;align-items:center;gap:8px}
-    .live-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;letter-spacing:.06em;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:100px}
-    .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .section-label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-30);display:flex;align-items:center;gap:10px}
+    .en-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;letter-spacing:.06em;background:#e8f0ff;color:#2d4a8a;padding:3px 10px;border-radius:100px}
+    .live-dot{width:6px;height:6px;border-radius:50%;background:#2d4a8a;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     .refresh-btn{font-size:12px;color:var(--ink-30);background:none;border:1px solid var(--line);padding:6px 14px;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
     .refresh-btn:hover{border-color:var(--ink-60);color:var(--ink-60)}
 
     /* NEWS GRID */
     .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .news-card{border:1px solid var(--line);background:var(--warm-white);transition:border-color .2s;display:flex;flex-direction:column}
+    .news-card{border:1px solid var(--line);background:var(--warm-white);display:flex;flex-direction:column;transition:border-color .2s}
     .news-card:hover{border-color:rgba(26,24,20,.3)}
-    .news-card-body{padding:24px 24px 16px}
-    .news-source{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-    .news-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.3;margin-bottom:10px;color:var(--ink)}
+    .news-img{height:160px;background:var(--sand);overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--ink-30);font-size:32px}
+    .news-img img{width:100%;height:100%;object-fit:cover}
+    .news-card-body{padding:20px 22px 14px;flex:1}
+    .news-source{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#2d4a8a;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .news-source-dot{width:3px;height:3px;border-radius:50%;background:#2d4a8a;display:inline-block}
+    .news-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;line-height:1.3;margin-bottom:10px;color:var(--ink)}
     .news-title a{color:inherit;text-decoration:none}.news-title a:hover{color:var(--accent)}
     .news-desc{font-size:13px;color:var(--ink-60);font-weight:300;line-height:1.6}
-    .news-card-footer{padding:12px 24px 20px;margin-top:auto;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line)}
+    .news-card-footer{padding:10px 22px 18px;display:flex;align-items:center;justify-content:space-between}
     .news-date{font-size:11px;color:var(--ink-30)}
     .news-link{font-size:12px;font-weight:500;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:4px}
     .news-link::after{content:'→'}
+    .news-link:hover{opacity:.75}
 
-    /* MANUAL NEWS */
-    .manual-news{display:flex;flex-direction:column;gap:0}
-    .manual-item{padding:28px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+    /* MANUAL NOTES */
+    .manual-notes{display:flex;flex-direction:column}
+    .manual-item{padding:28px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:110px 1fr;gap:24px;align-items:start}
     .manual-item:last-child{border-bottom:none}
-    .manual-date{font-size:11px;color:var(--ink-30);font-weight:400;letter-spacing:.04em;padding-top:4px}
+    .manual-date-col{padding-top:4px}
+    .manual-date{font-size:11px;color:var(--ink-30);letter-spacing:.04em;line-height:1.5}
     .manual-cat{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-bottom:8px}
     .cat-visa{background:#e8f0ea;color:#2d5a3d}
     .cat-life{background:#e8f0f8;color:#2d4a5a}
     .cat-business{background:#f5f0e8;color:#5a4a2d}
     .manual-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:8px;line-height:1.3}
-    .manual-body{font-size:14px;color:var(--ink-60);font-weight:300;line-height:1.7}
+    .manual-body{font-size:14px;color:var(--ink-60);font-weight:300;line-height:1.75}
     .manual-src{font-size:11px;color:var(--ink-30);margin-top:10px}
     .manual-src a{color:var(--accent);text-decoration:none}
 
     /* EVENTS */
     .events-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .event-card{border:1px solid var(--line);background:var(--warm-white);padding:28px;display:flex;gap:20px;transition:border-color .2s}
+    .event-card{border:1px solid var(--line);background:var(--warm-white);padding:26px;display:flex;gap:20px;transition:border-color .2s}
     .event-card:hover{border-color:rgba(26,24,20,.3)}
-    .event-date-block{flex-shrink:0;width:60px;text-align:center;border:1px solid var(--line);padding:10px 8px;background:var(--sand)}
-    .event-day{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1;color:var(--accent)}
+    .event-date-block{flex-shrink:0;width:58px;text-align:center;border:1px solid var(--line);padding:10px 8px;background:var(--sand)}
+    .event-day{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;line-height:1;color:var(--accent)}
     .event-month{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-30);margin-top:4px}
-    .event-info{flex:1}
+    .event-info{flex:1;min-width:0}
     .event-cat{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:8px}
-    .event-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.25;margin-bottom:8px}
+    .event-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;line-height:1.25;margin-bottom:8px}
     .event-meta{font-size:12px;color:var(--ink-30);margin-bottom:8px;display:flex;flex-direction:column;gap:3px}
     .event-desc{font-size:13px;color:var(--ink-60);font-weight:300;line-height:1.6}
     .event-free{display:inline-block;font-size:10px;font-weight:500;background:var(--accent);color:#fff;padding:2px 8px;border-radius:100px;margin-top:10px}
     .event-paid{display:inline-block;font-size:10px;font-weight:500;background:var(--sand);color:var(--ink-60);padding:2px 8px;border-radius:100px;margin-top:10px;border:1px solid var(--line)}
+    .event-link{display:inline-block;margin-top:8px;font-size:12px;color:var(--accent);text-decoration:none}
+    .event-link:hover{text-decoration:underline}
 
-    /* SUGGEST */
+    /* SUGGEST BOX */
     .suggest-box{margin-top:48px;border:1px solid var(--line);padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--sand)}
     .suggest-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:6px}
     .suggest-sub{font-size:13px;color:var(--ink-60);font-weight:300}
-    .btn-suggest{background:var(--accent);color:#fff;font-size:13px;font-weight:500;padding:11px 24px;border-radius:2px;text-decoration:none;white-space:nowrap;transition:opacity .2s}
+    .btn-suggest{background:var(--accent);color:#fff;font-size:13px;font-weight:500;padding:11px 24px;border-radius:2px;text-decoration:none;white-space:nowrap;transition:opacity .2s;flex-shrink:0}
     .btn-suggest:hover{opacity:.88}
 
-    /* LOADING / EMPTY */
-    .loading-msg{text-align:center;padding:60px 0;color:var(--ink-30);font-size:14px;font-weight:300}
-    .loading-dots::after{content:'...';animation:dots 1.5s steps(3,end) infinite}
-    @keyframes dots{0%,100%{clip-path:inset(0 2ch 0 0)}33%{clip-path:inset(0 1ch 0 0)}67%{clip-path:inset(0 0 0 0)}}
+    /* EMPTY / LOADING */
+    .state-msg{text-align:center;padding:60px 0;color:var(--ink-30);font-size:14px;font-weight:300;grid-column:1/-1}
+    .state-msg.error{color:#c04c2a}
+    .spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
+    @keyframes spin{to{transform:rotate(360deg)}}
 
+    /* FOOTER */
     footer{padding:40px 48px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .footer-logo{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink-60);text-decoration:none}.footer-logo span{color:var(--accent)}
     .footer-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap}
     .footer-links a{font-size:12px;color:var(--ink-30);text-decoration:none;transition:color .2s}.footer-links a:hover{color:var(--ink-60)}
     .footer-copy{font-size:12px;color:var(--ink-30)}
-    @media(max-width:900px){nav{padding:16px 20px}.nav-center{display:none}.nav-burger{display:flex}.page-hero,.tabs,.content{padding-left:24px;padding-right:24px}.news-grid{grid-template-columns:1fr}.events-grid{grid-template-columns:1fr}.manual-item{grid-template-columns:1fr}}
+
+    @media(max-width:900px){
+      nav{padding:16px 20px}.nav-center{display:none}.nav-burger{display:flex}
+      .page-hero,.tabs,.content{padding-left:24px;padding-right:24px}
+      .news-grid{grid-template-columns:1fr}
+      .events-grid{grid-template-columns:1fr}
+      .manual-item{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
+
 <nav>
   <a class="logo" href="index.html">xpat<span>4</span>.org</a>
   <ul class="nav-center">
     <li><a href="index.html#services" data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a></li>
     <li><a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
-    <li><a href="news.html" data-ru="Новости" data-en="News" data-zh="新闻">Новости</a></li>
+    <li><a href="news.html" class="current" data-ru="Новости" data-en="News" data-zh="新闻">Новости</a></li>
     <li><a href="contact.html" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
   </ul>
   <div class="nav-right">
@@ -135,6 +156,7 @@
   </div>
   <button class="nav-burger" id="nav-burger"><span></span><span></span><span></span></button>
 </nav>
+
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html#services" data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a>
   <a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a>
@@ -144,14 +166,16 @@
 
 <div class="page-hero">
   <div class="eyebrow" data-ru="Новости и мероприятия" data-en="News & Events" data-zh="新闻与活动">Новости и мероприятия</div>
-  <h1 data-ru="Актуально для<br/>экспатов в КР" data-en="What's happening<br/>for expats in KR" data-zh="吉尔吉斯斯坦<br/>外籍人士最新资讯">Актуально для<br/>экспатов в КР</h1>
-  <p class="page-sub" data-ru="Изменения в визовом законодательстве, жизнь в Бишкеке и мероприятия для иностранцев." data-en="Visa law updates, life in Bishkek and events for foreigners." data-zh="签证法规更新、比什凯克生活动态及面向外籍人士的活动。">Изменения в визовом законодательстве, жизнь в Бишкеке и мероприятия для иностранцев.</p>
+  <h1 data-ru="Актуально для<br/>экспатов в КР" data-en="What's happening<br/>for expats in KR" data-zh="吉尔吉斯斯坦<br/>外籍人士资讯">Актуально для экспатов в КР</h1>
+  <p class="page-sub" data-ru="Последние новости о жизни, визах и бизнесе в Кыргызстане — на английском из международных источников." data-en="Latest news about life, visas and business in Kyrgyzstan — in English from international sources." data-zh="吉尔吉斯斯坦生活、签证和商业最新资讯——来自国际英语媒体。">Последние новости о жизни, визах и бизнесе в Кыргызстане — на английском из международных источников.</p>
 </div>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="showTab('news')" id="tab-news"
+  <button class="tab-btn active" id="tab-news-btn" onclick="showTab('news')"
     data-ru="📰 Новости" data-en="📰 News" data-zh="📰 新闻">📰 Новости</button>
-  <button class="tab-btn" onclick="showTab('events')" id="tab-events"
+  <button class="tab-btn" id="tab-notes-btn" onclick="showTab('notes')"
+    data-ru="📝 Заметки команды" data-en="📝 Team Notes" data-zh="📝 团队笔记">📝 Заметки команды</button>
+  <button class="tab-btn" id="tab-events-btn" onclick="showTab('events')"
     data-ru="📅 Мероприятия" data-en="📅 Events" data-zh="📅 活动">📅 Мероприятия</button>
 </div>
 
@@ -159,24 +183,25 @@
 
   <!-- NEWS TAB -->
   <div id="panel-news">
-    <!-- AUTO RSS NEWS -->
     <div class="section-header">
       <div class="section-label">
-        <span class="live-badge"><span class="live-dot"></span> <span data-ru="Автообновление" data-en="Auto-updated" data-zh="自动更新">Автообновление</span></span>
-        <span data-ru="Новости из открытых источников" data-en="News from open sources" data-zh="来自公开来源的新闻">Новости из открытых источников</span>
+        <span class="en-badge"><span class="live-dot"></span> English only</span>
+        <span data-ru="Автоновости из международных источников" data-en="Auto-news from international sources" data-zh="来自国际媒体的自动新闻">Автоновости из международных источников</span>
       </div>
-      <button class="refresh-btn" onclick="loadRssNews()" data-ru="🔄 Обновить" data-en="🔄 Refresh" data-zh="🔄 刷新">🔄 Обновить</button>
+      <button class="refresh-btn" onclick="loadNews()" data-ru="🔄 Обновить" data-en="🔄 Refresh" data-zh="🔄 刷新">🔄 Обновить</button>
     </div>
-    <div class="news-grid" id="rss-grid">
-      <div class="loading-msg" style="grid-column:1/-1"><span class="loading-dots" data-ru="Загружаем новости" data-en="Loading news" data-zh="正在加载新闻">Загружаем новости</span></div>
+    <div class="news-grid" id="news-grid">
+      <div class="state-msg"><span class="spinner"></span> Loading news...</div>
     </div>
+  </div>
 
-    <!-- MANUAL NEWS -->
-    <div class="section-header" style="margin-top:48px">
+  <!-- NOTES TAB -->
+  <div id="panel-notes" style="display:none">
+    <div class="section-header">
       <div class="section-label" data-ru="Заметки от команды xpat4" data-en="Notes from the xpat4 team" data-zh="xpat4团队笔记">Заметки от команды xpat4</div>
     </div>
-    <div class="manual-news" id="manual-news-list">
-      <div class="loading-msg" data-ru="Загружаем заметки..." data-en="Loading notes..." data-zh="正在加载...">Загружаем заметки...</div>
+    <div class="manual-notes" id="notes-list">
+      <div class="state-msg"><span class="spinner"></span> <span data-ru="Загружаем" data-en="Loading" data-zh="加载中">Загружаем</span>...</div>
     </div>
   </div>
 
@@ -186,20 +211,19 @@
       <div class="section-label" data-ru="Предстоящие мероприятия" data-en="Upcoming events" data-zh="即将举行的活动">Предстоящие мероприятия</div>
     </div>
     <div class="events-grid" id="events-grid">
-      <div class="loading-msg" style="grid-column:1/-1" data-ru="Загружаем мероприятия..." data-en="Loading events..." data-zh="正在加载活动...">Загружаем мероприятия...</div>
+      <div class="state-msg"><span class="spinner"></span> <span data-ru="Загружаем" data-en="Loading" data-zh="加载中">Загружаем</span>...</div>
     </div>
-
     <div class="suggest-box">
       <div>
         <div class="suggest-title" data-ru="Знаете о мероприятии?" data-en="Know about an event?" data-zh="知道有什么活动吗？">Знаете о мероприятии?</div>
-        <p class="suggest-sub" data-ru="Напишите нам — добавим в афишу." data-en="Let us know — we'll add it to the list." data-zh="告诉我们——我们会将其添加到列表中。">Напишите нам — добавим в афишу.</p>
+        <p class="suggest-sub" data-ru="Напишите нам — добавим в афишу." data-en="Let us know — we'll add it to the list." data-zh="告诉我们——我们将添加到列表中。">Напишите нам — добавим в афишу.</p>
       </div>
       <a class="btn-suggest" href="https://wa.me/996700522667" target="_blank" rel="noopener"
         data-ru="💬 Предложить событие" data-en="💬 Suggest an event" data-zh="💬 推荐活动">💬 Предложить событие</a>
     </div>
   </div>
 
-</div>
+</div><!-- /content -->
 
 <footer>
   <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
@@ -218,218 +242,287 @@
 
 <script src="xpat4.js"></script>
 <script>
-// ── TAB SWITCHING ──
+// ── TABS ──
 function showTab(tab) {
-  document.getElementById('panel-news').style.display   = tab==='news'   ? 'block' : 'none';
-  document.getElementById('panel-events').style.display = tab==='events' ? 'block' : 'none';
-  document.getElementById('tab-news').classList.toggle('active',   tab==='news');
-  document.getElementById('tab-events').classList.toggle('active', tab==='events');
+  ['news','notes','events'].forEach(t => {
+    document.getElementById('panel-'+t).style.display = 'none';
+    document.getElementById('tab-'+t+'-btn').classList.remove('active');
+  });
+  document.getElementById('panel-'+tab).style.display = 'block';
+  document.getElementById('tab-'+tab+'-btn').classList.add('active');
+  if (tab === 'notes'  && !notesLoaded)  loadNotes();
+  if (tab === 'events' && !eventsLoaded) loadEvents();
 }
 
-// ── RSS NEWS via rss2json proxy ──
-const RSS_SOURCES = [
-  { url:'https://kabar.kg/eng/rss/', name:'Kabar.kg', lang:'en' },
-  { url:'https://akipress.com/rss/news.rss', name:'AKIpress', lang:'en' },
-  { url:'https://24.kg/rss/', name:'24.kg', lang:'ru' },
+// ── NEWS via Google News RSS + allsides proxy ──
+// Google News RSS for Kyrgyzstan topic — no API key needed
+const NEWS_FEEDS = [
+  {
+    // Google News: search "Kyrgyzstan visa OR migration OR expat"
+    url: 'https://news.google.com/rss/search?q=Kyrgyzstan+visa+OR+migration+OR+expat+OR+foreigner&hl=en-US&gl=US&ceid=US:en',
+    name: 'Google News', icon: '🔍'
+  },
+  {
+    // Google News: Kyrgyzstan business
+    url: 'https://news.google.com/rss/search?q=Kyrgyzstan+business+OR+economy+OR+invest&hl=en-US&gl=US&ceid=US:en',
+    name: 'Google News', icon: '💼'
+  },
+  {
+    // RFE/RL Kyrgyzstan section — reliable English source
+    url: 'https://www.rferl.org/api/epkpizopzjvzfx',
+    name: 'RFE/RL', icon: '📡'
+  },
+  {
+    // Eurasianet — best English coverage of Kyrgyzstan
+    url: 'https://eurasianet.org/feed',
+    name: 'Eurasianet', icon: '🌐'
+  }
 ];
 
-const KEYWORDS = ['visa','migration','expat','foreign','residence','регистрация','виза',
-  'миграция','иностранец','экспат','гражданство','прожив'];
-
-function matchesKeyword(text) {
-  const t = text.toLowerCase();
-  return KEYWORDS.some(k => t.includes(k));
+// We use allorigins as CORS proxy — free, reliable
+function corsProxy(url) {
+  return `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 }
 
-async function fetchRSS(source) {
-  const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&count=20`;
+function parseRSS(xmlText) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmlText, 'text/xml');
+  const items = [...doc.querySelectorAll('item')];
+  return items.map(item => ({
+    title:   item.querySelector('title')?.textContent || '',
+    link:    item.querySelector('link')?.textContent || item.querySelector('guid')?.textContent || '#',
+    desc:    stripHTML(item.querySelector('description')?.textContent || ''),
+    date:    item.querySelector('pubDate')?.textContent || '',
+    img:     item.querySelector('enclosure')?.getAttribute('url') ||
+             item.querySelector('media\\:thumbnail, thumbnail')?.getAttribute('url') || ''
+  }));
+}
+
+function stripHTML(s) {
+  return s.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").trim();
+}
+
+const KG_KEYWORDS = ['kyrgyz','bishkek','kyrgyzstan','кыргыз','бишкек'];
+function isRelevant(item) {
+  const text = (item.title + ' ' + item.desc).toLowerCase();
+  return KG_KEYWORDS.some(k => text.includes(k));
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  if (isNaN(d)) return '';
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+}
+
+async function fetchFeed(feed) {
   try {
-    const r = await fetch(url);
-    if (!r.ok) return [];
-    const d = await r.json();
-    return (d.items || [])
-      .filter(item => matchesKeyword((item.title||'') + ' ' + (item.description||'')))
-      .slice(0, 3)
-      .map(item => ({
-        title: item.title || '',
-        desc:  (item.description || '').replace(/<[^>]+>/g,'').slice(0, 120) + '...',
-        link:  item.link || '#',
-        date:  item.pubDate ? new Date(item.pubDate).toLocaleDateString(
-          XPAT4.currentLang === 'ru' ? 'ru-RU' : XPAT4.currentLang === 'zh' ? 'zh-CN' : 'en-GB',
-          { day:'numeric', month:'short' }) : '',
-        source: source.name
-      }));
+    const res = await fetch(corsProxy(feed.url), { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return [];
+    const data = await res.json();
+    const items = parseRSS(data.contents || '');
+    return items
+      .filter(isRelevant)
+      .slice(0, 4)
+      .map(item => ({ ...item, source: feed.name, icon: feed.icon }));
   } catch { return []; }
 }
 
-async function loadRssNews() {
-  const grid = document.getElementById('rss-grid');
-  const lang = XPAT4.currentLang || 'ru';
-  const loadingText = { ru:'Загружаем новости...', en:'Loading news...', zh:'正在加载新闻...' };
-  grid.innerHTML = `<div class="loading-msg" style="grid-column:1/-1"><span class="loading-dots">${loadingText[lang]||loadingText.en}</span></div>`;
+async function loadNews() {
+  const grid = document.getElementById('news-grid');
+  grid.innerHTML = '<div class="state-msg"><span class="spinner"></span> Loading news from international sources...</div>';
 
-  const results = await Promise.all(RSS_SOURCES.map(fetchRSS));
-  const items = results.flat();
+  const results = await Promise.allSettled(NEWS_FEEDS.map(fetchFeed));
+  const all = results.flatMap(r => r.status === 'fulfilled' ? r.value : []);
 
-  if (!items.length) {
-    const noNews = { ru:'Нет актуальных новостей по вашей теме. Попробуйте обновить позже.', en:'No relevant news found. Try refreshing later.', zh:'暂无相关新闻，请稍后刷新。' };
-    grid.innerHTML = `<div class="loading-msg" style="grid-column:1/-1">${noNews[lang]||noNews.en}</div>`;
+  // Deduplicate by title similarity
+  const seen = new Set();
+  const unique = all.filter(item => {
+    const key = item.title.slice(0, 40).toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key); return true;
+  });
+
+  if (!unique.length) {
+    grid.innerHTML = `<div class="state-msg error">
+      Could not load news right now. This can happen due to network restrictions.<br/>
+      <br/><strong>Try these sources directly:</strong><br/>
+      <a href="https://eurasianet.org/kyrgyzstan" target="_blank" rel="noopener" style="color:var(--accent)">Eurasianet — Kyrgyzstan</a> ·
+      <a href="https://www.rferl.org/kyrgyzstan" target="_blank" rel="noopener" style="color:var(--accent)">RFE/RL Kyrgyzstan</a> ·
+      <a href="https://cabar.asia/en/" target="_blank" rel="noopener" style="color:var(--accent)">Cabar.Asia</a>
+    </div>`;
     return;
   }
 
-  grid.innerHTML = items.slice(0, 6).map(n => `
+  grid.innerHTML = unique.slice(0, 9).map(n => `
     <div class="news-card">
+      <div class="news-img">
+        ${n.img ? `<img src="${n.img}" alt="" loading="lazy" onerror="this.parentNode.textContent='🏔️'"/>` : '🏔️'}
+      </div>
       <div class="news-card-body">
-        <div class="news-source">${n.source}</div>
+        <div class="news-source">${n.icon} ${n.source} <span class="news-source-dot"></span> English</div>
         <div class="news-title"><a href="${n.link}" target="_blank" rel="noopener">${n.title}</a></div>
-        <div class="news-desc">${n.desc}</div>
+        ${n.desc ? `<div class="news-desc">${n.desc.slice(0,120)}${n.desc.length>120?'...':''}</div>` : ''}
       </div>
       <div class="news-card-footer">
-        <span class="news-date">${n.date}</span>
-        <a class="news-link" href="${n.link}" target="_blank" rel="noopener"
-          data-ru="Читать" data-en="Read" data-zh="阅读">Читать</a>
+        <span class="news-date">${formatDate(n.date)}</span>
+        <a class="news-link" href="${n.link}" target="_blank" rel="noopener">Read</a>
       </div>
     </div>
   `).join('');
-  // re-apply lang
-  document.querySelectorAll('#rss-grid [data-ru]').forEach(el=>{
-    const t=el.getAttribute('data-'+lang)||el.getAttribute('data-en');
-    if(t) el.innerHTML=t;
-  });
 }
 
-// ── MANUAL NEWS from news.json ──
-async function loadManualNews() {
+// ── MANUAL NOTES ──
+let notesLoaded = false;
+async function loadNotes() {
+  notesLoaded = true;
   const lang = XPAT4.currentLang || 'ru';
-  const list = document.getElementById('manual-news-list');
+  const list = document.getElementById('notes-list');
+
   try {
     const r = await fetch('news.json?v=' + Date.now());
-    if (!r.ok) throw new Error('not found');
+    if (!r.ok) throw new Error();
     const items = await r.json();
-    if (!items.length) { list.innerHTML = ''; return; }
-
-    const MONTHS = {
-      ru:['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'],
-      en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      zh:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-    };
-    const CAT_CLASS = { visa:'cat-visa', life:'cat-life', business:'cat-business' };
-    const CAT_LABEL = {
-      visa:  { ru:'Виза', en:'Visa', zh:'签证' },
-      life:  { ru:'Жизнь', en:'Life', zh:'生活' },
-      business:{ ru:'Бизнес', en:'Business', zh:'商业' }
-    };
-
-    list.innerHTML = items.map(n => {
-      const d = new Date(n.date);
-      const dateStr = `${d.getDate()} ${(MONTHS[lang]||MONTHS.en)[d.getMonth()]} ${d.getFullYear()}`;
-      const cat = n.category || 'life';
-      const catLabel = (CAT_LABEL[cat]||CAT_LABEL.life)[lang] || cat;
-      const title = n['title_' + lang] || n.title_en || n.title_ru;
-      const body  = n['body_'  + lang] || n.body_en  || n.body_ru  || '';
-      const src   = n.source_url ? `<a href="${n.source_url}" target="_blank" rel="noopener">${n.source_name||'Источник'}</a>` : '';
-      return `
-        <div class="manual-item">
-          <div class="manual-date">${dateStr}</div>
-          <div>
-            <span class="manual-cat ${CAT_CLASS[cat]||'cat-life'}">${catLabel}</span>
-            <div class="manual-title">${title}</div>
-            <div class="manual-body">${body}</div>
-            ${src ? `<div class="manual-src">${src}</div>` : ''}
-          </div>
-        </div>`;
-    }).join('');
+    if (!items || !items.length) {
+      list.innerHTML = '<div class="state-msg" data-ru="Заметок пока нет." data-en="No notes yet." data-zh="暂无笔记。">Заметок пока нет.</div>';
+      return;
+    }
+    renderNotes(items, lang);
   } catch {
-    list.innerHTML = '';
+    list.innerHTML = '<div class="state-msg" data-ru="Не удалось загрузить заметки." data-en="Could not load notes." data-zh="无法加载笔记。">Не удалось загрузить заметки.</div>';
   }
 }
 
-// ── EVENTS from events.json ──
+function renderNotes(items, lang) {
+  const list = document.getElementById('notes-list');
+  const MONTHS = {
+    ru:['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'],
+    en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    zh:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+  };
+  const CAT_CLASS = { visa:'cat-visa', life:'cat-life', business:'cat-business' };
+  const CAT_LABEL = {
+    visa:     { ru:'Виза', en:'Visa', zh:'签证' },
+    life:     { ru:'Жизнь', en:'Life', zh:'生活' },
+    business: { ru:'Бизнес', en:'Business', zh:'商业' }
+  };
+
+  list.innerHTML = items.map(n => {
+    const d = new Date(n.date);
+    const mon = (MONTHS[lang] || MONTHS.en)[d.getMonth()];
+    const dateStr = `${d.getDate()} ${mon}<br/>${d.getFullYear()}`;
+    const cat = n.category || 'life';
+    const catLabel = (CAT_LABEL[cat] || CAT_LABEL.life)[lang];
+    const title = n['title_'+lang] || n.title_en || n.title_ru || '';
+    const body  = n['body_'+lang]  || n.body_en  || n.body_ru  || '';
+    const src   = n.source_url
+      ? `<a href="${n.source_url}" target="_blank" rel="noopener">${n.source_name || 'Source'}</a>`
+      : '';
+    return `
+      <div class="manual-item">
+        <div class="manual-date-col"><div class="manual-date">${dateStr}</div></div>
+        <div>
+          <span class="manual-cat ${CAT_CLASS[cat] || 'cat-life'}">${catLabel}</span>
+          <div class="manual-title">${title}</div>
+          <div class="manual-body">${body}</div>
+          ${src ? `<div class="manual-src">${src}</div>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── EVENTS ──
+let eventsLoaded = false;
 async function loadEvents() {
+  eventsLoaded = true;
   const lang = XPAT4.currentLang || 'ru';
   const grid = document.getElementById('events-grid');
+
   try {
     const r = await fetch('events.json?v=' + Date.now());
     if (!r.ok) throw new Error();
     const items = await r.json();
-
-    const today = new Date(); today.setHours(0,0,0,0);
-    const upcoming = items
-      .filter(e => new Date(e.date) >= today)
-      .sort((a,b) => new Date(a.date) - new Date(b.date));
-
-    if (!upcoming.length) {
-      const noEv = { ru:'Мероприятий пока нет. Следите за обновлениями.', en:'No upcoming events. Stay tuned.', zh:'暂无即将举行的活动，敬请关注。' };
-      grid.innerHTML = `<div class="loading-msg" style="grid-column:1/-1">${noEv[lang]||noEv.en}</div>`;
-      return;
-    }
-
-    const MONTHS = {
-      ru:['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'],
-      en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      zh:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-    };
-    const CAT_LABEL = {
-      meetup:   { ru:'Встреча', en:'Meetup', zh:'聚会' },
-      workshop: { ru:'Семинар', en:'Workshop', zh:'研讨会' },
-      tour:     { ru:'Тур', en:'Tour', zh:'导览' },
-      other:    { ru:'Событие', en:'Event', zh:'活动' }
-    };
-    const FREE_LABEL = { ru:'Бесплатно', en:'Free', zh:'免费' };
-    const PAID_LABEL = { ru:'Платно', en:'Paid', zh:'付费' };
-
-    grid.innerHTML = upcoming.map(e => {
-      const d = new Date(e.date);
-      const day = d.getDate();
-      const mon = (MONTHS[lang]||MONTHS.en)[d.getMonth()];
-      const cat = e.category || 'other';
-      const catLabel = (CAT_LABEL[cat]||CAT_LABEL.other)[lang];
-      const title = e['title_'+lang] || e.title_en;
-      const loc   = e['location_'+lang] || e.location_en;
-      const desc  = e['desc_'+lang] || e.desc_en;
-      const link  = e.link ? `<br/><a href="${e.link}" target="_blank" rel="noopener" style="font-size:12px;color:var(--accent);">🔗 ${lang==='ru'?'Подробнее':lang==='zh'?'详情':'Details'}</a>` : '';
-      return `
-        <div class="event-card">
-          <div class="event-date-block">
-            <div class="event-day">${day}</div>
-            <div class="event-month">${mon}</div>
-          </div>
-          <div class="event-info">
-            <span class="event-cat">${catLabel}</span>
-            <div class="event-title">${title}</div>
-            <div class="event-meta">
-              <span>🕐 ${e.time||''}</span>
-              <span>📍 ${loc}</span>
-            </div>
-            <div class="event-desc">${desc}${link}</div>
-            <span class="${e.free?'event-free':'event-paid'}">${e.free?FREE_LABEL[lang]:PAID_LABEL[lang]}</span>
-          </div>
-        </div>`;
-    }).join('');
+    renderEvents(items, lang);
   } catch {
-    const err = { ru:'Не удалось загрузить мероприятия.', en:'Could not load events.', zh:'无法加载活动。' };
-    grid.innerHTML = `<div class="loading-msg" style="grid-column:1/-1">${err[lang]||err.en}</div>`;
+    grid.innerHTML = '<div class="state-msg">Could not load events.</div>';
   }
 }
 
-// ── MOBILE BURGER ──
-document.getElementById('nav-burger').addEventListener('click', () =>
-  document.getElementById('mobile-menu').classList.toggle('open'));
+function renderEvents(items, lang) {
+  const grid = document.getElementById('events-grid');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const upcoming = items.filter(e => new Date(e.date) >= today)
+                        .sort((a,b) => new Date(a.date) - new Date(b.date));
 
-// ── INIT ──
+  if (!upcoming.length) {
+    const msg = {ru:'Мероприятий пока нет. Следите за обновлениями.', en:'No upcoming events. Stay tuned.', zh:'暂无即将举行的活动。'};
+    grid.innerHTML = `<div class="state-msg">${msg[lang] || msg.en}</div>`;
+    return;
+  }
+
+  const MONTHS = {
+    ru:['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'],
+    en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    zh:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+  };
+  const CAT = {
+    meetup:   {ru:'Встреча',  en:'Meetup',    zh:'聚会'},
+    workshop: {ru:'Семинар',  en:'Workshop',   zh:'研讨会'},
+    tour:     {ru:'Тур',      en:'Tour',       zh:'导览'},
+    other:    {ru:'Событие',  en:'Event',      zh:'活动'}
+  };
+  const FREE  = {ru:'Бесплатно', en:'Free', zh:'免费'};
+  const PAID  = {ru:'Платно',    en:'Paid', zh:'付费'};
+  const MORE  = {ru:'Подробнее', en:'Details', zh:'详情'};
+
+  grid.innerHTML = upcoming.map(e => {
+    const d = new Date(e.date);
+    const mon = (MONTHS[lang] || MONTHS.en)[d.getMonth()];
+    const cat = e.category || 'other';
+    const catLabel = (CAT[cat] || CAT.other)[lang];
+    const title = e['title_'+lang] || e.title_en || e.title_ru || '';
+    const loc   = e['location_'+lang] || e.location_en || '';
+    const desc  = e['desc_'+lang] || e.desc_en || '';
+    return `
+      <div class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">${d.getDate()}</div>
+          <div class="event-month">${mon}</div>
+        </div>
+        <div class="event-info">
+          <span class="event-cat">${catLabel}</span>
+          <div class="event-title">${title}</div>
+          <div class="event-meta">
+            ${e.time ? `<span>🕐 ${e.time}</span>` : ''}
+            ${loc    ? `<span>📍 ${loc}</span>`    : ''}
+          </div>
+          <div class="event-desc">${desc}</div>
+          ${e.link ? `<a class="event-link" href="${e.link}" target="_blank" rel="noopener">🔗 ${MORE[lang]||MORE.en}</a>` : ''}
+          <span class="${e.free ? 'event-free' : 'event-paid'}">${e.free ? FREE[lang] : PAID[lang]}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── LANG CHANGE ──
 document.addEventListener('xpat4-lang-change', () => {
-  loadRssNews();
-  loadManualNews();
-  loadEvents();
+  // Re-render notes and events in new language
+  const lang = XPAT4.currentLang || 'ru';
+  if (notesLoaded)  { fetch('news.json?v='+Date.now()).then(r=>r.json()).then(d=>renderNotes(d,lang)).catch(()=>{}); }
+  if (eventsLoaded) { fetch('events.json?v='+Date.now()).then(r=>r.json()).then(d=>renderEvents(d,lang)).catch(()=>{}); }
+  // Refresh text labels
   document.querySelectorAll('[data-ru]').forEach(el=>{
-    const t=el.getAttribute('data-'+(XPAT4.currentLang||'ru'))||el.getAttribute('data-en');
+    const t=el.getAttribute('data-'+lang)||el.getAttribute('data-en');
     if(t) el.innerHTML=t;
   });
 });
 
-loadRssNews();
-loadManualNews();
-loadEvents();
+// ── BURGER ──
+document.getElementById('nav-burger').addEventListener('click',()=>
+  document.getElementById('mobile-menu').classList.toggle('open'));
+
+// ── INIT ──
+loadNews();
 </script>
 </body>
 </html>
