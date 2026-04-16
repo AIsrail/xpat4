@@ -18,8 +18,11 @@
     "email": "xpat4kg@gmail.com",
     "telegram": "",
     "online": false,
-    "verified": false,
+    "verified": true,
     "badge": "",
+    "badge_duration": "",
+    "badge_start": "2026-04-16",
+    "badge_expires": "",
     "categories": [
       "visa",
       "residence",
