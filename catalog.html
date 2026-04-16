@@ -187,28 +187,34 @@
 
     grid.innerHTML = filtered.map(s => {
       const contacts = [];
-      if (s.phone) contacts.push(`<a class="contact-link" href="https://wa.me/${s.phone.replace(/\D/g,'')}" target="_blank">${cl.wa}</a>`);
-      if (s.telegram) contacts.push(`<a class="contact-link" href="https://t.me/${s.telegram}" target="_blank">${cl.tg}</a>`);
-      if (s.email) contacts.push(`<a class="contact-link" href="mailto:${s.email}">${cl.email}</a>`);
-      if (!contacts.length) contacts.push(`<a class="contact-link" href="contact.html">${cl.nocontact}</a>`);
+      if (s.phone)    contacts.push('<a class="contact-link" href="https://wa.me/' + s.phone.replace(/\D/g,'') + '" target="_blank">' + cl.wa + '</a>');
+      if (s.telegram) contacts.push('<a class="contact-link" href="https://t.me/' + s.telegram + '" target="_blank">' + cl.tg + '</a>');
+      if (s.email)    contacts.push('<a class="contact-link" href="mailto:' + s.email + '">' + cl.email + '</a>');
+      if (!contacts.length) contacts.push('<a class="contact-link" href="contact.html">' + cl.nocontact + '</a>');
 
-      return `
-        <div class=\"specialist-card${s.verified?' is-verified':''}\" id=\"specialist-${s.id}\">
-          ${s.verified?`<div class='verified-ribbon'>${s.badge||'✓ xpat4'}</div><span class='verified-badge'>${s.badge||'Verified by xpat4'}</span>`:''}
-          <div class="card-top">
-            <div class="avatar">${s.initials}</div>
-            <div class="card-meta">
-              <div class="s-role">${s['role_' + lang] || s.role_en}</div>
-              <div class="s-name">${s['name_' + lang] || s.name_en}</div>
-            </div>
-          </div>
-          <p class="s-desc">${s['desc_' + lang] || s.desc_en}</p>
-          <div class="card-bottom">
-            <span class="s-city">${s['city_' + lang] || s.city_en}${s.online ? ' · <span class="online-badge">' + cl.online + '</span>' : ''}</span>
-            <div class="s-contacts">${contacts.join('')}</div>
-          </div>
-        </div>
-      `;
+      // Verified badge — check expiry
+      let isVerified = s.verified;
+      if (isVerified && s.badge_expires) {
+        isVerified = new Date(s.badge_expires) > new Date();
+      }
+      const badgeText  = s.badge || 'Verified by xpat4';
+      const verifiedHtml = isVerified
+        ? '<div class="verified-ribbon">' + badgeText + '</div><span class="verified-badge">' + badgeText + '</span>'
+        : '';
+
+      return '<div class="specialist-card' + (isVerified ? ' is-verified' : '') + '" id="specialist-' + s.id + '">'
+        + verifiedHtml
+        + '<div class="card-top">'
+        + '<div class="avatar">' + s.initials + '</div>'
+        + '<div class="card-meta">'
+        + '<div class="s-role">' + (s['role_' + lang] || s.role_en) + '</div>'
+        + '<div class="s-name">' + (s['name_' + lang] || s.name_en) + '</div>'
+        + '</div></div>'
+        + '<p class="s-desc">' + (s['desc_' + lang] || s.desc_en) + '</p>'
+        + '<div class="card-bottom">'
+        + '<span class="s-city">' + (s['city_' + lang] || s.city_en) + (s.online ? ' · <span class="online-badge">' + cl.online + '</span>' : '') + '</span>'
+        + '<div class="s-contacts">' + contacts.join('') + '</div>'
+        + '</div></div>';
     }).join('');
 
     // Scroll to anchor if hash
