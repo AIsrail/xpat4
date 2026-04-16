@@ -76,6 +76,11 @@
     "email": "mahabat.78@mail.ru",
     "telegram": "",
     "online": false,
+    "verified": true,
+    "badge": "",
+    "badge_duration": "",
+    "badge_start": "2026-04-16",
+    "badge_expires": "",
     "categories": [
       "business"
     ]
