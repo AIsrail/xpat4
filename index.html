@@ -35,7 +35,7 @@
           "contactType": "customer support",
           "availableLanguage": ["Russian", "English", "Chinese", "Kyrgyz"]
         },
-        "sameAs": ["https://t.me/expat4kg"]
+        "sameAs": ["https://t.me/xpat4kg"]
       },
       {
         "@type": "LocalBusiness",
@@ -73,32 +73,32 @@
     body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
     /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(250,248,244,0.88); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; }
-    .logo span { color: var(--accent); }
-    .nav-center { display: flex; gap: 32px; list-style: none; }
-    .nav-center a { font-size: 13px; font-weight: 400; color: var(--ink-60); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
-    .nav-center a:hover { color: var(--ink); }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .lang-switch { display: flex; gap: 2px; background: var(--ink-10); border-radius: 3px; padding: 3px; }
-    .lang-btn { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; padding: 5px 10px; border: none; background: transparent; cursor: pointer; color: var(--ink-60); border-radius: 2px; transition: background 0.15s, color 0.15s; }
-    .lang-btn.active { background: var(--warm-white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 8px 20px; border-radius: 2px; transition: background 0.2s, color 0.2s; }
-    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* MOBILE MENU */
-    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.25s; }
-    .mobile-menu { display: none; position: fixed; top: 62px; left: 0; right: 0; background: var(--warm-white); border-bottom: 1px solid var(--line); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 16px; color: var(--ink-60); text-decoration: none; padding: 6px 0; border-bottom: 1px solid var(--line); }
-    .mobile-menu a:last-child { border-bottom: none; }
+
+
+
+
+
+
 
     /* HERO */
     .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 48px 80px; max-width: 860px; margin: 0 auto; }
@@ -219,9 +219,9 @@
     .fade-up.visible { opacity: 1; transform: none; }
 
     @media (max-width: 900px) {
-      nav { padding: 16px 20px; }
-      .nav-center { display: none; }
-      .nav-burger { display: flex; }
+
+
+
       .hero, .section, .cards-section, .stats-strip, .testimonials-section, .quick-actions { padding-left: 24px; padding-right: 24px; }
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -238,46 +238,71 @@
       .consultants-grid, .testimonials-grid { grid-template-columns: 1fr; }
       h1 { font-size: 42px; }
     }
+  
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(250,248,244,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: 0.04em; }
+    .logo span { color: var(--accent); }
+    .nav-center { display: flex; flex-direction: row; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .nav-center li { list-style: none; margin: 0; padding: 0; }
+    .nav-center a { font-size: 13px; font-weight: 400; color: var(--ink-60); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switch { display: flex; gap: 2px; background: var(--ink-10); border-radius: 3px; padding: 3px; }
+    .lang-btn { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; padding: 5px 10px; border: none; background: transparent; cursor: pointer; color: var(--ink-60); border-radius: 2px; transition: background 0.15s, color 0.15s; }
+    .lang-btn.active { background: var(--warm-white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 7px 18px; border-radius: 2px; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--warm-white); border-bottom: 1px solid var(--line); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 0; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--ink-60); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--line); display: block; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    @media (max-width: 900px) {
+      nav { padding: 16px 20px; }
+      .nav-center { display: none; }
+      .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+    }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="logo" href="/">xpat<span>4</span>.org</a>
-  <ul class="nav-center">
-    <li><a href="#services"
-      data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a></li>
-    <li><a href="catalog.html"
-      data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
-    <li><a href="calculator.html"
-      data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
-    <li><a href="checklist.html"
-      data-ru="Чеклист" data-en="Checklist" data-zh="清单">Чеклист</a></li>
-    <li><a href="https://t.me/expat4kg" target="_blank" rel="noopener"
-      data-ru="Сообщество" data-en="Community" data-zh="社区">Сообщество</a></li>
-    <li><a href="contact.html"
-      data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="lang-switch">
-      <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
-      <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
-      <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+  <nav>
+    <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+    <ul class="nav-center">
+      <li><a href="index.html#services" data-ru="Услуги"      data-en="Services"    data-zh="服务">Услуги</a></li>
+      <li><a href="catalog.html"        data-ru="Каталог"     data-en="Catalog"     data-zh="目录">Каталог</a></li>
+      <li><a href="news.html"           data-ru="Новости"     data-en="News"        data-zh="新闻">Новости</a></li>
+      <li><a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator"  data-zh="计算器">Калькулятор</a></li>
+      <li><a href="contact.html"        data-ru="Контакты"    data-en="Contacts"    data-zh="联系我们">Контакты</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
+        <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
+      </div>
+      <a class="nav-cta" href="contact.html" data-ru="Консультация" data-en="Consultation" data-zh="咨询">Консультация</a>
     </div>
-    <a class="nav-cta" href="contact.html"
-      data-ru="Получить помощь" data-en="Get Help" data-zh="获取帮助">Получить помощь</a>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#services" data-ru="Услуги"         data-en="Services"       data-zh="服务">Услуги</a>
+    <a href="catalog.html"        data-ru="Каталог"        data-en="Catalog"        data-zh="目录">Каталог</a>
+    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">Новости</a>
+    <a href="calculator.html"     data-ru="Калькулятор"    data-en="Calculator"     data-zh="计算器">Калькулятор</a>
+    <a href="checklist.html"      data-ru="Чеклист"        data-en="Checklist"      data-zh="清单">Чеклист</a>
+    <a href="contact.html"        data-ru="Контакты"       data-en="Contacts"       data-zh="联系我们">Контакты</a>
+    <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#services" data-ru="Услуги" data-en="Services" data-zh="服务">Услуги</a>
-  <a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a>
-  <a href="contact.html" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a>
-  <a href="visa.html" data-ru="Виза и въезд" data-en="Visa & Entry" data-zh="签证与入境">Виза и въезд</a>
-</div>
 
 <section class="hero">
   <div class="hero-eyebrow"
@@ -324,11 +349,11 @@
       <div class="stat-label" data-ru="стран с безвизовым въездом в КР" data-en="countries with visa-free entry to KR" data-zh="个国家免签入境">стран с безвизовым въездом в КР</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">3</div>
+      <div class="stat-num">1</div>
       <div class="stat-label" data-ru="день — минимальный срок регистрации компании" data-en="day minimum for company registration" data-zh="天最快注册公司">день — минимальный срок регистрации компании</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">$500</div>
+      <div class="stat-num">$300</div>
       <div class="stat-label" data-ru="средняя аренда квартиры в Бишкеке" data-en="average apartment rent in Bishkek" data-zh="比什凯克平均月租">средняя аренда квартиры в Бишкеке</div>
     </div>
     <div class="stat-cell">
@@ -575,7 +600,7 @@
     <li><a href="terms.html" data-ru="Оферта" data-en="Terms" data-zh="条款">Оферта</a></li>
     <li><a href="privacy.html" data-ru="Конфиденциальность" data-en="Privacy" data-zh="隐私">Конфиденциальность</a></li>
   </ul>
-  <span class="footer-copy">© 2025 xpat4.org</span>
+  <span class="footer-copy">© 2026 xpat4.org</span>
 </footer>
 
 <!-- AI Widget + Language system -->
@@ -636,6 +661,17 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+<script>
+(function(){
+  var burger = document.getElementById('nav-burger');
+  var menu   = document.getElementById('mobile-menu');
+  if (!burger || !menu) return;
+  burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.classList.remove('open'); });
+  });
+})();
 </script>
 </body>
 </html>

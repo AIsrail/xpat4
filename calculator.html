@@ -1,14 +1,14 @@
-    .nav-center { display: flex; gap: 24px; list-style: none; }
-    .nav-center a { font-size: 13px; color: var(--ink-60); text-decoration: none; letter-spacing: 0.02em; transition: color .2s; }
-    .nav-center a:hover { color: var(--ink); }
-    .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 7px 16px; border-radius: 2px; transition: background .2s, color .2s; white-space: nowrap; }
-    .nav-cta:hover { background: var(--accent); color: #fff; }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
-    .mobile-menu { display: none; position: fixed; top: 62px; left: 0; right: 0; background: var(--warm-white); border-bottom: 1px solid var(--line); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 16px; color: var(--ink-60); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--line); }
-    .mobile-menu a:last-child { border-bottom: none; }
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,13 +27,13 @@
     }
     body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
 
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(250,248,244,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
-    .logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--ink); text-decoration:none; }
-    .logo span { color:var(--accent); }
-    .nav-right { display:flex; align-items:center; gap:16px; }
-    .lang-switch { display:flex; gap:2px; background:var(--ink-10); border-radius:3px; padding:3px; }
-    .lang-btn { font-size:11px; font-weight:500; padding:5px 10px; border:none; background:transparent; cursor:pointer; color:var(--ink-60); border-radius:2px; transition:background 0.15s,color 0.15s; }
-    .lang-btn.active { background:var(--warm-white); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+
+
+
+
+
+
+
     .back { font-size:13px; color:var(--ink-60); text-decoration:none; }
     .back::before { content:'← '; }
     .back:hover { color:var(--ink); }
@@ -108,17 +108,50 @@
       .savings-box { flex-direction:column; align-items:flex-start; }
       .savings-pct { text-align:left; }
     }
+  
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(250,248,244,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: 0.04em; }
+    .logo span { color: var(--accent); }
+    .nav-center { display: flex; flex-direction: row; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .nav-center li { list-style: none; margin: 0; padding: 0; }
+    .nav-center a { font-size: 13px; font-weight: 400; color: var(--ink-60); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switch { display: flex; gap: 2px; background: var(--ink-10); border-radius: 3px; padding: 3px; }
+    .lang-btn { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; padding: 5px 10px; border: none; background: transparent; cursor: pointer; color: var(--ink-60); border-radius: 2px; transition: background 0.15s, color 0.15s; }
+    .lang-btn.active { background: var(--warm-white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 7px 18px; border-radius: 2px; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--warm-white); border-bottom: 1px solid var(--line); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 0; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--ink-60); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--line); display: block; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    @media (max-width: 900px) {
+      nav { padding: 16px 20px; }
+      .nav-center { display: none; }
+      .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+    }
   </style>
 </head>
 <body>
-  <nav>
+    <nav>
     <a class="logo" href="index.html">xpat<span>4</span>.org</a>
     <ul class="nav-center">
-      <li><a href="index.html#services" data-ru="Услуги"    data-en="Services"   data-zh="服务">Услуги</a></li>
-      <li><a href="catalog.html"        data-ru="Каталог"   data-en="Catalog"    data-zh="目录">Каталог</a></li>
-      <li><a href="news.html"           data-ru="Новости"   data-en="News"       data-zh="新闻">Новости</a></li>
-      <li><a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
-      <li><a href="contact.html"        data-ru="Контакты"  data-en="Contacts"   data-zh="联系我们">Контакты</a></li>
+      <li><a href="index.html#services" data-ru="Услуги"      data-en="Services"    data-zh="服务">Услуги</a></li>
+      <li><a href="catalog.html"        data-ru="Каталог"     data-en="Catalog"     data-zh="目录">Каталог</a></li>
+      <li><a href="news.html"           data-ru="Новости"     data-en="News"        data-zh="新闻">Новости</a></li>
+      <li><a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator"  data-zh="计算器">Калькулятор</a></li>
+      <li><a href="contact.html"        data-ru="Контакты"    data-en="Contacts"    data-zh="联系我们">Контакты</a></li>
     </ul>
     <div class="nav-right">
       <div class="lang-switch">
@@ -131,12 +164,12 @@
     <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#services" data-ru="Услуги"      data-en="Services"    data-zh="服务">Услуги</a>
-    <a href="catalog.html"        data-ru="Каталог"     data-en="Catalog"     data-zh="目录">Каталог</a>
-    <a href="news.html"           data-ru="Новости"     data-en="News"        data-zh="新闻">Новости</a>
-    <a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator"  data-zh="计算器">Калькулятор</a>
-    <a href="checklist.html"      data-ru="Чеклист"     data-en="Checklist"   data-zh="清单">Чеклист</a>
-    <a href="contact.html"        data-ru="Контакты"    data-en="Contacts"    data-zh="联系我们">Контакты</a>
+    <a href="index.html#services" data-ru="Услуги"         data-en="Services"       data-zh="服务">Услуги</a>
+    <a href="catalog.html"        data-ru="Каталог"        data-en="Catalog"        data-zh="目录">Каталог</a>
+    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">Новости</a>
+    <a href="calculator.html"     data-ru="Калькулятор"    data-en="Calculator"     data-zh="计算器">Калькулятор</a>
+    <a href="checklist.html"      data-ru="Чеклист"        data-en="Checklist"      data-zh="清单">Чеклист</a>
+    <a href="contact.html"        data-ru="Контакты"       data-en="Contacts"       data-zh="联系我们">Контакты</a>
     <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
   </div>
 <div class="page-hero">
@@ -184,7 +217,7 @@
     <li><a href="terms.html" data-ru="Оферта" data-en="Terms" data-zh="条款">Оферта</a></li>
     <li><a href="privacy.html" data-ru="Конфиденциальность" data-en="Privacy" data-zh="隐私">Конфиденциальность</a></li>
   </ul>
-  <span class="footer-copy">© 2025 xpat4.org</span>
+  <span class="footer-copy">© 2026 xpat4.org</span>
 </footer>
 
 <script src="xpat4.js"></script>
@@ -369,15 +402,17 @@ function renderSavings(bTotal, hTotal) {
 document.addEventListener('xpat4-lang-change', renderAll);
 renderAll();
 </script>
+
 <script>
-  (function(){
-    var b = document.getElementById('nav-burger');
-    var m = document.getElementById('mobile-menu');
-    if(b && m){
-      b.addEventListener('click', function(){ m.classList.toggle('open'); });
-      m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
-    }
-  })();
+(function(){
+  var burger = document.getElementById('nav-burger');
+  var menu   = document.getElementById('mobile-menu');
+  if (!burger || !menu) return;
+  burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.classList.remove('open'); });
+  });
+})();
 </script>
 </body>
 </html>
