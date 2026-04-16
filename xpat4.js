@@ -7,13 +7,36 @@
 
 /* ── CONFIG ── */
 const XPAT4_CONFIG = {
-  CLAUDE_API_KEY: '',          // Set your Anthropic API key here, or use a proxy
+  // Добавь до 5 ключей — система автоматически переключается при исчерпании лимита
+  CLAUDE_API_KEYS: [
+    '',   // Ключ 1 (основной)
+    '',   // Ключ 2 (резервный)
+    '',   // Ключ 3
+  ],
   CLAUDE_API_URL: 'https://api.anthropic.com/v1/messages',
   CLAUDE_MODEL:   'claude-sonnet-4-20250514',
-  OLLAMA_URL:     'http://localhost:11434',  // Ollama fallback (local or remote)
+  OLLAMA_URL:     'http://localhost:11434',
   OLLAMA_MODEL:   'llama3',
   GULNARA_WA:     '996700522667',
 };
+
+// Индекс текущего активного ключа (хранится в сессии)
+let _apiKeyIndex = parseInt(sessionStorage.getItem('xpat4-key-idx') || '0');
+
+function getActiveApiKey() {
+  const keys = XPAT4_CONFIG.CLAUDE_API_KEYS.filter(k => k && k.length > 10);
+  if (!keys.length) return '';
+  return keys[_apiKeyIndex % keys.length];
+}
+
+function rotateApiKey() {
+  const keys = XPAT4_CONFIG.CLAUDE_API_KEYS.filter(k => k && k.length > 10);
+  if (!keys.length) return false;
+  _apiKeyIndex = (_apiKeyIndex + 1) % keys.length;
+  sessionStorage.setItem('xpat4-key-idx', _apiKeyIndex);
+  console.warn(`xpat4: rotated to API key #${_apiKeyIndex + 1}`);
+  return _apiKeyIndex !== 0; // false если прошли все ключи по кругу
+}
 
 /* ── NAV CSS INJECTION ── */
 /* Injected via JS so there is ONE source of truth across all pages */
@@ -585,13 +608,17 @@ XPAT4.initWidget = function() {
     }
   }
 
-  async function callClaude(messages) {
-    const headers = { 'Content-Type': 'application/json' };
-    if (XPAT4_CONFIG.CLAUDE_API_KEY) {
-      headers['x-api-key'] = XPAT4_CONFIG.CLAUDE_API_KEY;
-      headers['anthropic-version'] = '2023-06-01';
-      headers['anthropic-dangerous-direct-browser-access'] = 'true';
-    }
+  async function callClaude(messages, attempt) {
+    attempt = attempt || 0;
+    const key = getActiveApiKey();
+    if (!key) throw new Error('No API key configured');
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    };
 
     const res = await fetch(XPAT4_CONFIG.CLAUDE_API_URL, {
       method: 'POST',
@@ -603,6 +630,12 @@ XPAT4.initWidget = function() {
         messages:   messages
       })
     });
+
+    // Rate limit or auth error → try next key (max 1 rotation per call)
+    if ((res.status === 429 || res.status === 401) && attempt === 0) {
+      const rotated = rotateApiKey();
+      return callClaude(messages, 1);
+    }
 
     if (!res.ok) throw new Error(`Claude HTTP ${res.status}`);
     const data = await res.json();

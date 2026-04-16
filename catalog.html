@@ -44,8 +44,12 @@
     .filter-btn.active { background:var(--ink); color:#fff; border-color:var(--ink); }
 
     .catalog-grid { padding:0 48px 80px; max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; }
-    .specialist-card { border:1px solid var(--line); padding:32px 28px; background:var(--warm-white); display:flex; flex-direction:column; gap:10px; transition:border-color 0.2s; }
+    .specialist-card { border:1px solid var(--line); padding:32px 28px; background:var(--warm-white); display:flex; flex-direction:column; gap:10px; transition:border-color 0.2s; position:relative; overflow:hidden; }
     .specialist-card:hover { border-color:rgba(26,24,20,0.3); }
+    .specialist-card.is-verified { border-color:rgba(45,90,61,0.35); box-shadow:0 0 0 1px rgba(45,90,61,0.15); }
+    .verified-badge { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#fff; background:#2d5a3d; padding:4px 12px; border-radius:100px; margin-bottom:4px; }
+    .verified-badge::before { content:'✓ '; }
+    .verified-ribbon { position:absolute; top:14px; right:-22px; background:#2d5a3d; color:#fff; font-size:9px; font-weight:600; letter-spacing:0.06em; padding:5px 32px; text-transform:uppercase; transform:rotate(35deg); white-space:nowrap; }
     .card-top { display:flex; align-items:flex-start; gap:16px; }
     .avatar { width:48px; height:48px; border-radius:50%; background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--accent); font-weight:500; flex-shrink:0; }
     .card-meta { flex:1; }
@@ -189,7 +193,8 @@
       if (!contacts.length) contacts.push(`<a class="contact-link" href="contact.html">${cl.nocontact}</a>`);
 
       return `
-        <div class="specialist-card" id="specialist-${s.id}">
+        <div class=\"specialist-card${s.verified?' is-verified':''}\" id=\"specialist-${s.id}\">
+          ${s.verified?`<div class='verified-ribbon'>${s.badge||'✓ xpat4'}</div><span class='verified-badge'>${s.badge||'Verified by xpat4'}</span>`:''}
           <div class="card-top">
             <div class="avatar">${s.initials}</div>
             <div class="card-meta">
