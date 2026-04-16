@@ -259,6 +259,13 @@
   </div>
 </div>
 
+
+  <!-- Unpublished changes banner -->
+  <div id="unpublished-banner" style="display:none;position:fixed;bottom:80px;right:24px;z-index:200;background:#1a1814;color:#fff;padding:14px 20px;border-radius:4px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,0.3);align-items:center;gap:14px;">
+    <span>⚠️ Есть несохранённые изменения</span>
+    <button onclick="publishToGitHub();document.getElementById('unpublished-banner').style.display='none';" style="background:#2d5a3d;color:#fff;border:none;padding:8px 16px;border-radius:2px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">🌐 Опубликовать сейчас</button>
+    <button onclick="document.getElementById('unpublished-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:18px;padding:0;">×</button>
+  </div>
 <div id="toast"></div>
 
 <script>
@@ -657,6 +664,7 @@ function saveSpecialist() {
   renderList();
   renderForm(data);
   showToast('✅ Сохранено — не забудьте опубликовать!');
+  document.getElementById('unpublished-banner') && (document.getElementById('unpublished-banner').style.display='flex');
 }
 
 function deleteSpecialist(id) {

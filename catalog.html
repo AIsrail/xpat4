@@ -222,7 +222,7 @@
     if (hash) { setTimeout(() => { const el = document.querySelector(hash); if (el) el.scrollIntoView({ behavior:'smooth', block:'center' }); }, 100); }
   }
 
-  fetch('specialists.json').then(r => r.json()).then(data => {
+  fetch('specialists.json?v=' + Date.now()).then(r => r.json()).then(data => {
     specialists = data;
     renderFilters();
     renderCards();
