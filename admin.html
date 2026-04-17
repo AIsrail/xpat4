@@ -106,6 +106,12 @@
     .form-actions { display: flex; gap: 10px; }
     .btn-save { background: var(--accent); color: #fff; border: none; padding: 11px 24px; border-radius: 2px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; }
     .btn-save:hover { opacity: 0.88; }
+    .btn-translate { background: none; color: #2d5a3d; border: 1px solid rgba(45,90,61,0.4); padding: 6px 14px; border-radius: 2px; font-size: 12px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-translate:hover { background: var(--accent-light); }
+    .btn-translate.loading { opacity: 0.6; pointer-events: none; }
+    .translate-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .translate-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-60); }
+    .translate-hint { font-size: 11px; color: var(--ink-30); }
     .btn-delete { background: none; color: var(--red); border: 1px solid rgba(192,76,42,0.25); padding: 10px 18px; border-radius: 2px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
     .btn-delete:hover { background: var(--red-light); }
     .form-section-title { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30); margin-bottom: 16px; margin-top: 28px; }
@@ -447,12 +453,15 @@ function getFormData() {
     name_ru:  nameRu,
     name_en:  document.getElementById('f-name-en').value.trim(),
     name_zh:  document.getElementById('f-name-zh').value.trim(),
+    name_ar:  document.getElementById('f-name-ar')?.value.trim() || '',
     role_ru:  document.getElementById('f-role-ru').value.trim(),
     role_en:  document.getElementById('f-role-en').value.trim(),
     role_zh:  document.getElementById('f-role-zh').value.trim(),
+    role_ar:  document.getElementById('f-role-ar')?.value.trim() || '',
     desc_ru:  document.getElementById('f-desc-ru').value.trim(),
     desc_en:  document.getElementById('f-desc-en').value.trim(),
     desc_zh:  document.getElementById('f-desc-zh').value.trim(),
+    desc_ar:  document.getElementById('f-desc-ar')?.value.trim() || '',
     city_ru:  document.getElementById('f-city-ru').value.trim()||'Бишкек',
     city_en:  document.getElementById('f-city-en').value.trim()||'Bishkek',
     city_zh:  document.getElementById('f-city-zh').value.trim()||'比什凯克',
@@ -485,6 +494,7 @@ function renderForm(s) {
       <div class="form-actions">
         ${!isNew ? `<button class="btn-delete" onclick="deleteSpecialist(${d.id})">🗑 Удалить</button>` : ''}
         <button class="btn-save" onclick="saveSpecialist()">💾 Сохранить</button>
+      <button class="btn-translate" id="btn-translate" onclick="translateSpecialist()">✨ Перевести RU→EN/ZH/AR</button>
       </div>
     </div>
 
@@ -513,6 +523,10 @@ function renderForm(s) {
         <label>姓名 <span class="lang-flag">🇨🇳 ZH</span></label>
         <input type="text" id="f-name-zh" value="${d.name_zh||''}" placeholder="艾古尔·马米托娃" />
       </div>
+      <div class="form-group full">
+        <label>الاسم <span class="lang-flag">🇸🇦 AR</span></label>
+        <input type="text" id="f-name-ar" value="${d.name_ar||''}" placeholder="أيغول ماميتوفا" dir="rtl" />
+      </div>
     </div>
 
     <div class="form-section-title">Специализация / Роль</div>
@@ -529,6 +543,10 @@ function renderForm(s) {
         <label>职务 <span class="lang-flag">🇨🇳 ZH</span></label>
         <input type="text" id="f-role-zh" value="${d.role_zh||''}" placeholder="移民律师" />
       </div>
+      <div class="form-group full">
+        <label>المهنة <span class="lang-flag">🇸🇦 AR</span></label>
+        <input type="text" id="f-role-ar" value="${d.role_ar||''}" placeholder="محامي هجرة" dir="rtl" />
+      </div>
     </div>
 
     <div class="form-section-title">Описание</div>
@@ -544,6 +562,10 @@ function renderForm(s) {
       <div class="form-group full">
         <label>简介 <span class="lang-flag">🇨🇳 ZH</span></label>
         <textarea id="f-desc-zh" placeholder="1-2句话...">${d.desc_zh||''}</textarea>
+      </div>
+      <div class="form-group full">
+        <label>الوصف <span class="lang-flag">🇸🇦 AR</span></label>
+        <textarea id="f-desc-ar" placeholder="جملة أو جملتان..." dir="rtl">${d.desc_ar||''}</textarea>
       </div>
     </div>
 
@@ -648,6 +670,94 @@ function renderForm(s) {
 
 function newSpecialist() { editingId=null; renderList(); renderForm(null); }
 function editSpecialist(id) { editingId=id; renderList(); renderForm(specialists.find(x=>x.id===id)); }
+
+// ── AUTO-TRANSLATE ──
+async function translateSpecialist() {
+  const nameRu = document.getElementById('f-name-ru')?.value.trim();
+  const roleRu = document.getElementById('f-role-ru')?.value.trim();
+  const descRu = document.getElementById('f-desc-ru')?.value.trim();
+
+  if (!nameRu && !roleRu && !descRu) {
+    showToast('⚠️ Заполните поля на русском сначала'); return;
+  }
+
+  const key = getActiveApiKey ? getActiveApiKey() : XPAT4_CONFIG?.CLAUDE_API_KEYS?.find(k=>k);
+  if (!key) {
+    showToast('⚠️ Нет API-ключа Claude. Добавьте в CLAUDE_API_KEYS в xpat4.js'); return;
+  }
+
+  const btn = document.getElementById('btn-translate');
+  btn.classList.add('loading');
+  btn.textContent = '⏳ Перевожу...';
+
+  const prompt = `Переведи данные специалиста с русского на английский (en), китайский (zh) и арабский (ar).
+Отвечай ТОЛЬКО валидным JSON без markdown, без пояснений.
+
+Данные:
+name_ru: "${nameRu || ''}"
+role_ru: "${roleRu || ''}"
+desc_ru: "${descRu || ''}"
+
+Формат ответа:
+{
+  "name_en": "...", "name_zh": "...", "name_ar": "...",
+  "role_en": "...", "role_zh": "...", "role_ar": "...",
+  "desc_en": "...", "desc_zh": "...", "desc_ar": "..."
+}
+
+Правила:
+- Имена транслитерируй (не переводи) на EN, для ZH и AR используй фонетическую транскрипцию
+- Профессиональные термины (ВНЖ, ОсОО, КР) переводи корректно: VNJ/residence permit, OsOO/LLC, KR/Kyrgyzstan
+- Описание переводи точно, сохраняй профессиональный тон
+- Arabic: используй современный стандартный арабский`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 800,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const t = JSON.parse(clean);
+
+    // Fill EN fields
+    if (t.name_en) document.getElementById('f-name-en').value = t.name_en;
+    if (t.role_en) document.getElementById('f-role-en').value = t.role_en;
+    if (t.desc_en) document.getElementById('f-desc-en').value = t.desc_en;
+    // Fill ZH fields
+    if (t.name_zh) document.getElementById('f-name-zh').value = t.name_zh;
+    if (t.role_zh) document.getElementById('f-role-zh').value = t.role_zh;
+    if (t.desc_zh) document.getElementById('f-desc-zh').value = t.desc_zh;
+    // Fill AR fields (if present)
+    const nameAr = document.getElementById('f-name-ar');
+    const roleAr = document.getElementById('f-role-ar');
+    const descAr = document.getElementById('f-desc-ar');
+    if (nameAr && t.name_ar) nameAr.value = t.name_ar;
+    if (roleAr && t.role_ar) roleAr.value = t.role_ar;
+    if (descAr && t.desc_ar) descAr.value = t.desc_ar;
+
+    showToast('✅ Переведено на EN / ZH / AR');
+  } catch(err) {
+    showToast('❌ Ошибка перевода: ' + err.message);
+    console.error(err);
+  } finally {
+    btn.classList.remove('loading');
+    btn.textContent = '✨ Перевести RU→EN/ZH/AR';
+  }
+}
 
 function saveSpecialist() {
   const data = getFormData();

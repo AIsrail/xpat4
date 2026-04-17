@@ -62,8 +62,84 @@
 
 
 
-    @media(max-width:700px){ nav,footer{ padding:18px 24px; } .page-hero,.content{ padding-left:24px; padding-right:24px; } }
     
+    
+  
+    /* ── MOBILE FIXES ── */
+    @media (max-width: 768px) {
+      /* Page layout */
+      body { font-size: 15px; }
+      .page-hero, .content, .page-wrap, .wrap,
+      .calc-wrap, .city-selector, .checklist-wrap,
+      .filters-bar, .catalog-grid, .page-hero { padding-left: 20px !important; padding-right: 20px !important; }
+
+      /* Cards grids → single column */
+      .cards-grid,
+      .consultants-grid,
+      .testimonials-grid,
+      .catalog-grid,
+      .events-grid,
+      .why-grid,
+      .form-grid,
+      .form-grid-3,
+      .quick-actions,
+      .stats-grid,
+      .price-grid,
+      .news-grid { grid-template-columns: 1fr !important; }
+
+      /* Nomad section */
+      .nomad-section { grid-template-columns: 1fr !important; padding: 40px 24px !important; margin: 0 20px 60px !important; }
+
+      /* Calculator */
+      .calc-grid { grid-template-columns: 1fr !important; }
+      .calc-cell.home, .calc-col-header.home { border-left: 1px solid var(--line) !important; }
+
+      /* Catalog specialist cards */
+      .specialist-card { padding: 20px 16px !important; }
+      .card-top { gap: 12px !important; }
+      .card-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
+      .s-contacts { flex-wrap: wrap !important; }
+
+      /* Contact page */
+      .expert-card { flex-direction: column !important; padding: 24px 20px !important; gap: 16px !important; }
+      .form-row { grid-template-columns: 1fr !important; }
+
+      /* Savings box */
+      .savings-box { flex-direction: column !important; align-items: flex-start !important; }
+
+      /* Final CTA */
+      .final-cta, .bottom-cta { padding: 60px 20px !important; }
+
+      /* Sections */
+      .section, .cards-section, .stats-strip,
+      .testimonials-section, .quick-actions { padding-left: 20px !important; padding-right: 20px !important; }
+
+      /* Catalog intro */
+      .catalog-intro { flex-direction: column !important; align-items: flex-start !important; }
+
+      /* Hero */
+      .hero { padding: 120px 20px 60px !important; }
+      h1 { font-size: clamp(36px, 10vw, 54px) !important; }
+
+      /* Suggest box */
+      .suggest-box { flex-direction: column !important; align-items: flex-start !important; }
+
+      /* Manual news items */
+      .manual-item { grid-template-columns: 1fr !important; }
+
+      /* Event cards */
+      .event-card { flex-direction: column !important; gap: 16px !important; }
+
+      /* Join page why-grid */
+      .why-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+
+    @media (max-width: 480px) {
+      .why-grid { grid-template-columns: 1fr !important; }
+      .cat-toggles { gap: 6px !important; }
+      .hero-actions { flex-direction: column !important; align-items: flex-start !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -221,6 +297,29 @@
   burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
   menu.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){ menu.classList.remove('open'); });
+  });
+})();
+</script>
+<script>
+(function(){
+  var b = document.getElementById('nav-burger');
+  var m = document.getElementById('mobile-menu');
+  if (!b || !m) return;
+  // Remove duplicate listeners by cloning
+  var b2 = b.cloneNode(true);
+  b.parentNode.replaceChild(b2, b);
+  b2.addEventListener('click', function(e){
+    e.stopPropagation();
+    m.classList.toggle('open');
+  });
+  m.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ m.classList.remove('open'); });
+  });
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if (!b2.contains(e.target) && !m.contains(e.target)){
+      m.classList.remove('open');
+    }
   });
 })();
 </script>
