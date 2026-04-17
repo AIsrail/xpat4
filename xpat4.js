@@ -111,6 +111,8 @@ function rotateApiKey() {
       background: #faf8f4; color: #1a1814;
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
+    .gt-btn { font-size: 14px !important; padding: 4px 8px !important; opacity: 0.7; }
+    .gt-btn:hover { opacity: 1 !important; background: rgba(45,90,61,0.08) !important; }
     .nav-cta {
       font-size: 13px; font-weight: 500;
       color: #2d5a3d; text-decoration: none;
@@ -215,11 +217,9 @@ window.XPAT4 = window.XPAT4 || {};
 
 XPAT4.detectLang = function() {
   const saved = localStorage.getItem('xpat4-lang');
-  if (saved) return saved;
+  if (saved && (saved === 'ru' || saved === 'en')) return saved;
   const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
   if (nav.startsWith('ru') || nav.startsWith('ky')) return 'ru';
-  if (nav.startsWith('zh')) return 'zh';
-  if (nav.startsWith('ar')) return 'ar';
   return 'en';
 };
 
@@ -228,51 +228,22 @@ XPAT4.currentLang = XPAT4.detectLang();
 XPAT4.setLang = function(lang) {
   XPAT4.currentLang = lang;
   localStorage.setItem('xpat4-lang', lang);
+  document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+  document.documentElement.dir = 'ltr';
+  document.body.style.direction = '';
 
-  // RTL for Arabic
-  const isRTL = lang === 'ar';
-  document.documentElement.lang = lang === 'zh' ? 'zh' : lang === 'ru' ? 'ru' : lang === 'ar' ? 'ar' : 'en';
-  document.documentElement.dir  = isRTL ? 'rtl' : 'ltr';
-  document.body.style.direction  = isRTL ? 'rtl' : 'ltr';
-  document.body.style.textAlign  = isRTL ? 'right' : '';
+  // Remove RTL style if any
+  const rtl = document.getElementById('xpat4-rtl');
+  if (rtl) rtl.remove();
 
-  // Inject RTL CSS if needed
-  let rtlStyle = document.getElementById('xpat4-rtl');
-  if (isRTL && !rtlStyle) {
-    rtlStyle = document.createElement('style');
-    rtlStyle.id = 'xpat4-rtl';
-    rtlStyle.textContent = `
-      [dir="rtl"] nav { flex-direction: row-reverse; }
-      [dir="rtl"] .nav-center { flex-direction: row-reverse; }
-      [dir="rtl"] .nav-right { flex-direction: row-reverse; }
-      [dir="rtl"] .eyebrow::before, [dir="rtl"] .eyebrow::after { display: none; }
-      [dir="rtl"] .hero { text-align: right; }
-      [dir="rtl"] .footer-links { flex-direction: row-reverse; }
-      [dir="rtl"] .card-top { flex-direction: row-reverse; }
-      [dir="rtl"] .card-bottom { flex-direction: row-reverse; }
-      [dir="rtl"] .check-item { flex-direction: row-reverse; }
-      [dir="rtl"] .verified-badge { flex-direction: row-reverse; }
-      [dir="rtl"] .list-item { flex-direction: row-reverse; }
-      [dir="rtl"] .phase-header { flex-direction: row-reverse; }
-      [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3,
-      [dir="rtl"] p, [dir="rtl"] .page-sub { text-align: right; }
-      body { font-family: 'Segoe UI', 'Arial', 'Tahoma', sans-serif; }
-    `;
-    document.head.appendChild(rtlStyle);
-  } else if (!isRTL && rtlStyle) {
-    rtlStyle.remove();
-  }
-
-  // Update buttons
+  // Update active button
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.lang === lang);
   });
 
   // Update all tagged elements
   document.querySelectorAll('[data-ru]').forEach(el => {
-    const text = el.getAttribute('data-' + lang)
-               || el.getAttribute('data-en')
-               || el.getAttribute('data-ru');
+    const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-ru');
     if (text !== null) el.innerHTML = text;
   });
 
@@ -282,9 +253,14 @@ XPAT4.setLang = function(lang) {
     if (t) opt.textContent = t;
   });
 
-  // Trigger custom event for pages that need it
   document.dispatchEvent(new CustomEvent('xpat4-lang-change', { detail: { lang } }));
+};
 
+// Google Translate — opens translation in new tab
+window.openGoogleTranslate = function() {
+  const url = encodeURIComponent(window.location.href);
+  window.open('https://translate.google.com/translate?sl=auto&tl=auto&u=' + url, '_blank');
+};
 
   // Update chat widget language
   XPAT4.updateWidgetLang && XPAT4.updateWidgetLang(lang);
