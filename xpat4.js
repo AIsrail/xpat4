@@ -7,12 +7,9 @@
 
 /* ── CONFIG ── */
 const XPAT4_CONFIG = {
-  // Добавь до 5 ключей — система автоматически переключается при исчерпании лимита
-  CLAUDE_API_KEYS: [
-    '',   // Ключ 1 (основной)
-    '',   // Ключ 2 (резервный)
-    '',   // Ключ 3
-  ],
+  // API-ключи НЕ хранить здесь — репозиторий публичный!
+  // Ключ вводится через admin.html → кнопка "🤖 API" → сохраняется в localStorage браузера
+  CLAUDE_API_KEYS: [], // оставить пустым
   CLAUDE_API_URL: 'https://api.anthropic.com/v1/messages',
   CLAUDE_MODEL:   'claude-sonnet-4-20250514',
   OLLAMA_URL:     'http://localhost:11434',
@@ -20,22 +17,22 @@ const XPAT4_CONFIG = {
   GULNARA_WA:     '996700522667',
 };
 
-// Индекс текущего активного ключа (хранится в сессии)
-let _apiKeyIndex = parseInt(sessionStorage.getItem('xpat4-key-idx') || '0');
+let _apiKeyIndex = 0;
 
 function getActiveApiKey() {
+  // Читаем из localStorage — туда ключ вводится через admin.html
+  const stored = localStorage.getItem('xpat4-claude-key');
+  if (stored && stored.startsWith('sk-ant')) return stored;
+  // Запасной вариант — массив в конфиге (если вдруг заполнен)
   const keys = XPAT4_CONFIG.CLAUDE_API_KEYS.filter(k => k && k.length > 10);
-  if (!keys.length) return '';
-  return keys[_apiKeyIndex % keys.length];
+  if (keys.length) return keys[_apiKeyIndex % keys.length];
+  return '';
 }
 
 function rotateApiKey() {
-  const keys = XPAT4_CONFIG.CLAUDE_API_KEYS.filter(k => k && k.length > 10);
-  if (!keys.length) return false;
-  _apiKeyIndex = (_apiKeyIndex + 1) % keys.length;
-  sessionStorage.setItem('xpat4-key-idx', _apiKeyIndex);
-  console.warn(`xpat4: rotated to API key #${_apiKeyIndex + 1}`);
-  return _apiKeyIndex !== 0; // false если прошли все ключи по кругу
+  _apiKeyIndex++;
+  console.warn('xpat4: API key rotated');
+  return true;
 }
 
 /* ── NAV CSS INJECTION ── */

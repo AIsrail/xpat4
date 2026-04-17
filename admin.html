@@ -34,6 +34,8 @@
     /* GITHUB SETUP MODAL */
     #gh-setup { display: none; position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; align-items: center; justify-content: center; }
     #gh-setup.show { display: flex; }
+    #claude-setup { display: none; position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; align-items: center; justify-content: center; }
+    #claude-setup.show { display: flex; }
     .gh-setup-box { background: var(--warm-white); border: 1px solid var(--line); padding: 44px 40px; width: 440px; }
     .gh-setup-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; margin-bottom: 8px; }
     .gh-setup-sub { font-size: 13px; color: var(--ink-60); margin-bottom: 24px; line-height: 1.65; }
@@ -178,6 +180,23 @@
   </div>
 </div>
 
+<!-- CLAUDE API KEY MODAL -->
+<div id="claude-setup">
+  <div class="gh-setup-box">
+    <div class="gh-setup-title">🤖 Claude API Key</div>
+    <div class="gh-setup-sub">
+      Ключ хранится только в этом браузере — в коде сайта его нет.<br/><br/>
+      1. Зайди на <a href="https://platform.anthropic.com/settings/keys" target="_blank">platform.anthropic.com/settings/keys</a><br/>
+      2. Нажми <strong>Create Key</strong><br/>
+      3. Скопируй и вставь ниже (начинается с <code>sk-ant-</code>)<br/><br/>
+      Без ключа: чат-виджет и автоперевод не работают.
+    </div>
+    <input type="password" id="claude-key-input" placeholder="sk-ant-api03-..." />
+    <button class="gh-btn" onclick="saveClaudeKey()">Сохранить ключ</button>
+    <span class="gh-skip" onclick="closeClaudeSetup()">Пропустить</span>
+  </div>
+</div>
+
 <!-- GITHUB TOKEN MODAL -->
 <div id="gh-setup">
   <div class="gh-setup-box">
@@ -206,6 +225,7 @@
       <button class="topbar-tab" id="tab-news" onclick="showTab('news')">📰 Новости</button>
       <button class="topbar-tab" id="tab-events" onclick="showTab('events')">📅 События</button>
       <span class="topbar-badge" id="topbar-count"></span>
+      <button class="topbar-tab" id="btn-claude-key" onclick="openClaudeSetup()" style="opacity:0.6" title="Claude API Key">🤖 API</button>
       <button class="logout-btn" onclick="logout()">Выйти</button>
     </div>
   </div>
@@ -826,6 +846,53 @@ function renderExport() {
 }
 
 // ── GITHUB API ──
+// ── CLAUDE API KEY (localStorage — never in code) ──
+function getActiveApiKey() {
+  const stored = localStorage.getItem('xpat4-claude-key');
+  if (stored && stored.startsWith('sk-ant')) return stored;
+  if (typeof XPAT4_CONFIG !== 'undefined') {
+    const keys = (XPAT4_CONFIG.CLAUDE_API_KEYS || []).filter(k => k && k.length > 10);
+    if (keys.length) return keys[0];
+  }
+  return '';
+}
+
+function saveClaudeKey() {
+  const key = document.getElementById('claude-key-input').value.trim();
+  if (!key.startsWith('sk-ant')) {
+    alert('Ключ должен начинаться с sk-ant-'); return;
+  }
+  localStorage.setItem('xpat4-claude-key', key);
+  closeClaudeSetup();
+  updateClaudeKeyStatus();
+  showToast('✅ Claude API ключ сохранён');
+}
+
+function openClaudeSetup() {
+  document.getElementById('claude-setup').classList.add('show');
+  document.getElementById('claude-key-input').value = '';
+}
+
+function closeClaudeSetup() {
+  document.getElementById('claude-setup').classList.remove('show');
+}
+
+function updateClaudeKeyStatus() {
+  const btn = document.getElementById('btn-claude-key');
+  if (!btn) return;
+  const key = localStorage.getItem('xpat4-claude-key');
+  if (key && key.startsWith('sk-ant')) {
+    btn.style.opacity = '1'; btn.style.color = '#7ab88a';
+    btn.title = 'Claude API: подключён ✓';
+    btn.textContent = '🤖 API ✓';
+  } else {
+    btn.style.opacity = '0.6'; btn.style.color = '';
+    btn.title = 'Claude API: не настроен';
+    btn.textContent = '🤖 API';
+  }
+}
+
+// ── GITHUB INTEGRATION ──
 function saveGithubToken() {
   const token = document.getElementById('gh-token-input').value.trim();
   if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
@@ -1272,6 +1339,7 @@ function init() {
     updatePendingBadge();
     loadNewsData();
     loadEventsData();
+    updateClaudeKeyStatus();
   }, 150);
 }
 if (sessionStorage.getItem('xpat4-auth')==='1') { init(); }
