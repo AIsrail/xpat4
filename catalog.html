@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -162,7 +173,7 @@
     <a href="checklist.html"      data-ru="Чеклист"        data-en="Checklist"      data-zh="清单">Чеклист</a>
     <a href="calculator.html"     data-ru="Калькулятор"    data-en="Calculator"     data-zh="计算器">Калькулятор</a>
     <a href="contact.html"        data-ru="Контакты"       data-en="Contacts"       data-zh="联系我们">Контакты</a>
-    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">Новости</a>
+    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">События</a>
     <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
   </div>
 <div class="page-hero">
@@ -209,10 +220,6 @@
 
 <script src="xpat4.js"></script>
 <script>
-  // Show loading state immediately
-  document.getElementById('catalog-grid').innerHTML =
-    '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:rgba(26,24,20,0.3);font-size:15px;">⏳ Загружаем специалистов...</div>';
-
   let currentFilter = 'all';
   let specialists = [];
 
@@ -290,27 +297,11 @@
     if (hash) { setTimeout(() => { const el = document.querySelector(hash); if (el) el.scrollIntoView({ behavior:'smooth', block:'center' }); }, 100); }
   }
 
-  fetch('specialists.json?nocache=' + Date.now(), {cache: 'no-store'})
-    .then(function(r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + r.url);
-      return r.json();
-    })
-    .then(function(data) {
-      if (!Array.isArray(data)) throw new Error('JSON is not an array');
-      specialists = data;
-      renderFilters();
-      renderCards();
-    })
-    .catch(function(err) {
-      console.error('Catalog load error:', err);
-      var grid = document.getElementById('catalog-grid');
-      if (grid) grid.innerHTML =
-        '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:#c04c2a;font-size:14px;">' +
-        '❌ Не удалось загрузить каталог.<br><br>' +
-        '<small style="color:rgba(26,24,20,0.4)">Ошибка: ' + err.message + '</small><br><br>' +
-        '<button onclick="location.reload()" style="background:#2d5a3d;color:#fff;border:none;padding:10px 24px;border-radius:2px;cursor:pointer;font-size:13px;">↻ Обновить страницу</button>' +
-        '</div>';
-    });
+  fetch('specialists.json?v=' + Date.now()).then(r => r.json()).then(data => {
+    specialists = data;
+    renderFilters();
+    renderCards();
+  });
 
   document.addEventListener('xpat4-lang-change', () => { renderFilters(); renderCards(); });
 </script>

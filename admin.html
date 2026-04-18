@@ -223,6 +223,7 @@
       <button class="topbar-tab active" id="tab-catalog" onclick="showTab('catalog')">📋 Специалисты</button>
       <button class="topbar-tab" id="tab-pending" onclick="showTab('pending')">⏳ Заявки <span class="pending-badge" id="pending-badge">0</span></button>
       <button class="topbar-tab" id="tab-news" onclick="showTab('news')">📰 Новости</button>
+      <button class="topbar-tab" id="tab-event-apps" onclick="showTab('event-apps')">📅 Заявки событий <span class="pending-badge" id="event-apps-badge">0</span></button>
       <button class="topbar-tab" id="tab-events" onclick="showTab('events')">📅 События</button>
       <span class="topbar-badge" id="topbar-count"></span>
       <button class="topbar-tab" id="btn-claude-key" onclick="openClaudeSetup()" style="opacity:0.6" title="Claude API Key">🤖 API</button>
@@ -258,6 +259,20 @@
     <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Мероприятия отображаются на <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a> во вкладке «Мероприятия». После изменений — «Опубликовать».</p>
     <div id="events-list"></div>
     <div id="event-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
+  </div>
+
+
+  <!-- EVENT APPLICATIONS PANEL -->
+  <div id="event-apps-panel" style="display:none;padding:32px 40px;max-width:860px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line);">
+      <div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Заявки на мероприятия</h2>
+        <p style="font-size:13px;color:var(--ink-60);margin-top:4px;font-weight:300;">Поступают через форму на странице «События». После одобрения добавляются в events.json.</p>
+      </div>
+      <button class="btn-save" onclick="loadEventApps()">↻ Обновить</button>
+    </div>
+    <div id="event-apps-list"></div>
+    <div id="event-apps-empty" style="text-align:center;color:var(--ink-30);padding:60px 0;font-size:15px;display:none;">Заявок пока нет</div>
   </div>
 
   <!-- CATALOG PANEL -->
@@ -374,7 +389,7 @@ function init() {
 
 // ── TABS ──
 function showTab(tab) {
-  const panels = ['catalog','pending','news','events'];
+  const panels = ['catalog','pending','news','events','event-apps'];
   panels.forEach(p => {
     const el = document.getElementById(p+'-panel');
     if (el) el.style.display = 'none';
@@ -472,10 +487,16 @@ function getFormData() {
     id: editingId || nextId(), initials,
     name_ru:  nameRu,
     name_en:  document.getElementById('f-name-en').value.trim(),
+    name_zh:  document.getElementById('f-name-zh').value.trim(),
+    name_ar:  document.getElementById('f-name-ar')?.value.trim() || '',
     role_ru:  document.getElementById('f-role-ru').value.trim(),
     role_en:  document.getElementById('f-role-en').value.trim(),
+    role_zh:  document.getElementById('f-role-zh').value.trim(),
+    role_ar:  document.getElementById('f-role-ar')?.value.trim() || '',
     desc_ru:  document.getElementById('f-desc-ru').value.trim(),
     desc_en:  document.getElementById('f-desc-en').value.trim(),
+    desc_zh:  document.getElementById('f-desc-zh').value.trim(),
+    desc_ar:  document.getElementById('f-desc-ar')?.value.trim() || '',
     city_ru:  document.getElementById('f-city-ru').value.trim()||'Бишкек',
     city_en:  document.getElementById('f-city-en').value.trim()||'Bishkek',
     city_zh:  document.getElementById('f-city-zh').value.trim()||'比什凯克',
@@ -508,7 +529,7 @@ function renderForm(s) {
       <div class="form-actions">
         ${!isNew ? `<button class="btn-delete" onclick="deleteSpecialist(${d.id})">🗑 Удалить</button>` : ''}
         <button class="btn-save" onclick="saveSpecialist()">💾 Сохранить</button>
-      <button class="btn-translate" id="btn-translate" onclick="translateSpecialist()">✨ Перевести RU→EN</button>
+      <button class="btn-translate" id="btn-translate" onclick="translateSpecialist()">✨ Перевести RU→EN/ZH/AR</button>
       </div>
     </div>
 
@@ -533,6 +554,14 @@ function renderForm(s) {
         <label>Name <span class="lang-flag">🇬🇧 EN</span></label>
         <input type="text" id="f-name-en" value="${d.name_en||''}" placeholder="Aigul Mamytova" />
       </div>
+      <div class="form-group full">
+        <label>姓名 <span class="lang-flag">🇨🇳 ZH</span></label>
+        <input type="text" id="f-name-zh" value="${d.name_zh||''}" placeholder="艾古尔·马米托娃" />
+      </div>
+      <div class="form-group full">
+        <label>الاسم <span class="lang-flag">🇸🇦 AR</span></label>
+        <input type="text" id="f-name-ar" value="${d.name_ar||''}" placeholder="أيغول ماميتوفا" dir="rtl" />
+      </div>
     </div>
 
     <div class="form-section-title">Специализация / Роль</div>
@@ -545,6 +574,14 @@ function renderForm(s) {
         <label>Role <span class="lang-flag">🇬🇧 EN</span></label>
         <input type="text" id="f-role-en" value="${d.role_en||''}" placeholder="Immigration Lawyer" />
       </div>
+      <div class="form-group full">
+        <label>职务 <span class="lang-flag">🇨🇳 ZH</span></label>
+        <input type="text" id="f-role-zh" value="${d.role_zh||''}" placeholder="移民律师" />
+      </div>
+      <div class="form-group full">
+        <label>المهنة <span class="lang-flag">🇸🇦 AR</span></label>
+        <input type="text" id="f-role-ar" value="${d.role_ar||''}" placeholder="محامي هجرة" dir="rtl" />
+      </div>
     </div>
 
     <div class="form-section-title">Описание</div>
@@ -556,6 +593,14 @@ function renderForm(s) {
       <div class="form-group full">
         <label>Description <span class="lang-flag">🇬🇧 EN</span></label>
         <textarea id="f-desc-en" placeholder="1–2 sentences...">${d.desc_en||''}</textarea>
+      </div>
+      <div class="form-group full">
+        <label>简介 <span class="lang-flag">🇨🇳 ZH</span></label>
+        <textarea id="f-desc-zh" placeholder="1-2句话...">${d.desc_zh||''}</textarea>
+      </div>
+      <div class="form-group full">
+        <label>الوصف <span class="lang-flag">🇸🇦 AR</span></label>
+        <textarea id="f-desc-ar" placeholder="جملة أو جملتان..." dir="rtl">${d.desc_ar||''}</textarea>
       </div>
     </div>
 
@@ -680,21 +725,26 @@ async function translateSpecialist() {
   btn.classList.add('loading');
   btn.textContent = '⏳ Перевожу...';
 
-  const prompt = `Translate specialist data from Russian to English.
-Reply ONLY with valid JSON, no markdown, no explanation.
+  const prompt = `Переведи данные специалиста с русского на английский (en), китайский (zh) и арабский (ar).
+Отвечай ТОЛЬКО валидным JSON без markdown, без пояснений.
 
-Data:
+Данные:
 name_ru: "${nameRu || ''}"
 role_ru: "${roleRu || ''}"
 desc_ru: "${descRu || ''}"
 
-Response format:
-{"name_en": "...", "role_en": "...", "desc_en": "..."}
+Формат ответа:
+{
+  "name_en": "...", "name_zh": "...", "name_ar": "...",
+  "role_en": "...", "role_zh": "...", "role_ar": "...",
+  "desc_en": "...", "desc_zh": "...", "desc_ar": "..."
+}
 
-Rules:
-- Transliterate names (do not translate): e.g. Айгуль → Aigul
-- Translate terms correctly: ВНЖ → residence permit, ОсОО → LLC, КР → Kyrgyzstan
-- Keep professional tone`;
+Правила:
+- Имена транслитерируй (не переводи) на EN, для ZH и AR используй фонетическую транскрипцию
+- Профессиональные термины (ВНЖ, ОсОО, КР) переводи корректно: VNJ/residence permit, OsOO/LLC, KR/Kyrgyzstan
+- Описание переводи точно, сохраняй профессиональный тон
+- Arabic: используй современный стандартный арабский`;
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -706,7 +756,7 @@ Rules:
         'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-4-20250514',
         max_tokens: 800,
         messages: [{ role: 'user', content: prompt }]
       })
@@ -722,14 +772,25 @@ Rules:
     if (t.name_en) document.getElementById('f-name-en').value = t.name_en;
     if (t.role_en) document.getElementById('f-role-en').value = t.role_en;
     if (t.desc_en) document.getElementById('f-desc-en').value = t.desc_en;
+    // Fill ZH fields
+    if (t.name_zh) document.getElementById('f-name-zh').value = t.name_zh;
+    if (t.role_zh) document.getElementById('f-role-zh').value = t.role_zh;
+    if (t.desc_zh) document.getElementById('f-desc-zh').value = t.desc_zh;
+    // Fill AR fields (if present)
+    const nameAr = document.getElementById('f-name-ar');
+    const roleAr = document.getElementById('f-role-ar');
+    const descAr = document.getElementById('f-desc-ar');
+    if (nameAr && t.name_ar) nameAr.value = t.name_ar;
+    if (roleAr && t.role_ar) roleAr.value = t.role_ar;
+    if (descAr && t.desc_ar) descAr.value = t.desc_ar;
 
-    showToast('✅ Переведено на EN');
+    showToast('✅ Переведено на EN / ZH / AR');
   } catch(err) {
     showToast('❌ Ошибка перевода: ' + err.message);
     console.error(err);
   } finally {
     btn.classList.remove('loading');
-    btn.textContent = '✨ Перевести RU→EN';
+    btn.textContent = '✨ Перевести RU→EN/ZH/AR';
   }
 }
 
@@ -1284,6 +1345,102 @@ function deleteEvent(id) {
   saveEventsData(); renderEventsList(); showToast('🗑 Удалено');
 }
 
+
+// ── EVENT APPLICATIONS ──
+function updateEventAppsBadge() {
+  var pending = JSON.parse(localStorage.getItem('xpat4-pending-events')||'[]');
+  var count   = pending.filter(function(e){return e.status==='pending';}).length;
+  var badge   = document.getElementById('event-apps-badge');
+  if(badge){ badge.textContent=count; badge.style.display=count?'inline':'none'; }
+}
+
+async function loadEventApps() {
+  updateEventAppsBadge();
+  // Try to load from GitHub first
+  var token = localStorage.getItem('xpat4-gh-token');
+  if(token) {
+    try {
+      var res = await fetch('https://api.github.com/repos/AIsrail/xpat4/contents/pending_events.json?ref=main',
+        {headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});
+      if(res.ok) {
+        var data = await res.json();
+        var items = JSON.parse(atob(data.content.replace(/\n/g,'')));
+        localStorage.setItem('xpat4-pending-events', JSON.stringify(items));
+      }
+    } catch(e){ console.warn('Could not load from GitHub:', e); }
+  }
+  renderEventApps();
+}
+
+function renderEventApps() {
+  var pending = JSON.parse(localStorage.getItem('xpat4-pending-events')||'[]');
+  var active  = pending.filter(function(e){return e.status==='pending';});
+  var list    = document.getElementById('event-apps-list');
+  var empty   = document.getElementById('event-apps-empty');
+  updateEventAppsBadge();
+
+  if(!active.length){ if(list)list.innerHTML=''; if(empty)empty.style.display='block'; return; }
+  if(empty)empty.style.display='none';
+
+  list.innerHTML = active.map(function(e){
+    return '<div style="border:1px solid var(--line);padding:24px;margin-bottom:12px;background:var(--warm-white);">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px;">'+
+        '<div>'+
+          '<div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;">'+e.title_ru+'</div>'+
+          '<div style="font-size:12px;color:var(--accent);margin-top:3px;">📅 '+e.date+(e.location_ru?' · 📍 '+e.location_ru:'')+'</div>'+
+        '</div>'+
+        '<div style="font-size:11px;color:var(--ink-30);">'+new Date(e.submitted_at).toLocaleDateString('ru-RU')+'</div>'+
+      '</div>'+
+      (e.desc_ru?'<div style="font-size:13px;color:var(--ink-60);margin-bottom:10px;padding:10px;background:var(--sand);">'+e.desc_ru+'</div>':'')+
+      (e.link?'<div style="font-size:12px;color:var(--ink-30);margin-bottom:10px;">🔗 '+e.link+'</div>':'')+
+      (e.email?'<div style="font-size:12px;color:var(--ink-30);margin-bottom:12px;">✉️ '+e.email+'</div>':'')+
+      '<div style="display:flex;gap:10px;padding-top:12px;border-top:1px solid var(--line);">'+
+        '<button onclick="approveEventApp('+e.id+')" style="background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:2px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500;">✅ Одобрить → в events.json</button>'+
+        '<button onclick="rejectEventApp('+e.id+')" style="background:none;color:var(--red);border:1px solid rgba(192,76,42,.25);padding:10px 18px;border-radius:2px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;">✗ Отклонить</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function approveEventApp(id) {
+  var pending = JSON.parse(localStorage.getItem('xpat4-pending-events')||'[]');
+  var app = pending.find(function(e){return e.id===id;});
+  if(!app) return;
+
+  // Add to eventsData
+  var newEvent = {
+    id: Date.now(),
+    title_ru:    app.title_ru||'',
+    title_en:    app.title_en||app.title_ru||'',
+    date:        app.date||'',
+    time:        app.time||'',
+    location_ru: app.location_ru||'Бишкек',
+    location_en: app.location_en||app.location_ru||'Bishkek',
+    desc_ru:     app.desc_ru||'',
+    desc_en:     app.desc_en||app.desc_ru||'',
+    link:        app.link||'',
+    category:    app.category||'other',
+    free:        true
+  };
+  eventsData.push(newEvent);
+  saveEventsData();
+
+  app.status = 'approved';
+  localStorage.setItem('xpat4-pending-events', JSON.stringify(pending));
+  showToast('✅ Мероприятие добавлено — опубликуй!');
+  renderEventApps();
+  renderEventsList();
+}
+
+function rejectEventApp(id) {
+  if(!confirm('Отклонить заявку?')) return;
+  var pending = JSON.parse(localStorage.getItem('xpat4-pending-events')||'[]');
+  var app = pending.find(function(e){return e.id===id;});
+  if(app){ app.status='rejected'; localStorage.setItem('xpat4-pending-events',JSON.stringify(pending)); }
+  showToast('✗ Заявка отклонена');
+  renderEventApps();
+}
+
 // ── BOOT ──
 function init() {
   loadData();
@@ -1294,6 +1451,7 @@ function init() {
     loadNewsData();
     loadEventsData();
     updateClaudeKeyStatus();
+    loadEventApps();
   }, 150);
 }
 if (sessionStorage.getItem('xpat4-auth')==='1') { init(); }
