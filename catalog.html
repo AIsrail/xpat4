@@ -1,373 +1,1302 @@
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Specialists Catalog — xpat4.org | Каталог специалистов | 专家目录</title>
-  <meta name="description" content="Find immigration lawyers, visa consultants and relocation agents in Kyrgyzstan. 在吉尔吉斯斯坦寻找移民律师和签证顾问。">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style><style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Админ-панель — xpat4.org</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --sand: #f5f0e8; --warm-white: #faf8f4; --ink: #1a1814; --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3); --ink-10: rgba(26,24,20,0.08); --accent: #2d5a3d; --accent-light: #e8f0ea; --line: rgba(26,24,20,0.12); }
-    body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--ink); -webkit-font-smoothing: antialiased; }
-
-
-
-
-
-
-
-    .back-link { font-size:13px; color:var(--ink-60); text-decoration:none; display:flex; align-items:center; gap:5px; }
-    .back-link::before { content:'←'; }
-    .back-link:hover { color:var(--ink); }
-
-    .page-hero { padding:140px 48px 60px; max-width:900px; margin:0 auto; }
-    .eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:22px; display:flex; align-items:center; gap:10px; }
-    .eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
-    h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(38px,6vw,62px); font-weight:300; line-height:1.1; margin-bottom:18px; }
-    .page-sub { font-size:16px; color:var(--ink-60); font-weight:300; line-height:1.7; max-width:520px; }
-
-    .filters-bar { padding:0 48px 48px; max-width:900px; margin:0 auto; display:flex; gap:8px; flex-wrap:wrap; }
-    .filter-btn { font-size:12px; font-weight:400; color:var(--ink-60); border:1px solid var(--line); background:transparent; padding:8px 18px; border-radius:100px; cursor:pointer; transition:all 0.2s; letter-spacing:0.02em; }
-    .filter-btn:hover { border-color:rgba(26,24,20,0.3); color:var(--ink); }
-    .filter-btn.active { background:var(--ink); color:#fff; border-color:var(--ink); }
-
-    .catalog-grid { padding:0 48px 80px; max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; }
-    .specialist-card { border:1px solid var(--line); padding:32px 28px; background:var(--warm-white); display:flex; flex-direction:column; gap:10px; transition:border-color 0.2s; position:relative; overflow:hidden; }
-    .specialist-card:hover { border-color:rgba(26,24,20,0.3); }
-    .specialist-card.is-verified { border-color:rgba(45,90,61,0.25); }
-    .verified-badge { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:500; letter-spacing:0.07em; text-transform:uppercase; color:#2d5a3d; background:#e8f0ea; padding:4px 12px; border-radius:100px; margin-bottom:6px; border:1px solid rgba(45,90,61,0.2); }
-    .verified-badge::before { content:'✓  '; }
-    .card-top { display:flex; align-items:flex-start; gap:16px; }
-    .avatar { width:48px; height:48px; border-radius:50%; background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--accent); font-weight:500; flex-shrink:0; }
-    .card-meta { flex:1; }
-    .s-role { font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
-    .s-name { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; line-height:1.1; }
-    .s-desc { font-size:13px; color:var(--ink-60); font-weight:300; line-height:1.6; }
-    .card-bottom { display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid var(--line); margin-top:auto; flex-wrap:wrap; gap:10px; }
-    .s-city { font-size:12px; color:var(--ink-30); }
-    .s-contacts { display:flex; gap:10px; }
-    .contact-link { font-size:12px; font-weight:500; color:var(--accent); text-decoration:none; border:1px solid var(--accent-light); padding:5px 12px; border-radius:2px; transition:background 0.2s; }
-    .contact-link:hover { background:var(--accent-light); }
-    .online-badge { font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); background:var(--accent-light); padding:3px 8px; border-radius:100px; }
-    .empty-state { padding:60px 48px; text-align:center; color:var(--ink-30); font-size:15px; font-weight:300; grid-column:1/-1; }
-    
-    
-  
-    /* ── MOBILE FIXES ── */
-    @media (max-width: 768px) {
-      /* Page layout */
-      body { font-size: 15px; }
-      .page-hero, .content, .page-wrap, .wrap,
-      .calc-wrap, .city-selector, .checklist-wrap,
-      .filters-bar, .catalog-grid, .page-hero { padding-left: 20px !important; padding-right: 20px !important; }
-
-      /* Cards grids → single column */
-      .cards-grid,
-      .consultants-grid,
-      .testimonials-grid,
-      .catalog-grid,
-      .events-grid,
-      .why-grid,
-      .form-grid,
-      .form-grid-3,
-      .quick-actions,
-      .stats-grid,
-      .price-grid,
-      .news-grid { grid-template-columns: 1fr !important; }
-
-      /* Nomad section */
-      .nomad-section { grid-template-columns: 1fr !important; padding: 40px 24px !important; margin: 0 20px 60px !important; }
-
-      /* Calculator */
-      .calc-grid { grid-template-columns: 1fr !important; }
-      .calc-cell.home, .calc-col-header.home { border-left: 1px solid var(--line) !important; }
-
-      /* Catalog specialist cards */
-      .specialist-card { padding: 20px 16px !important; }
-      .card-top { gap: 12px !important; }
-      .card-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
-      .s-contacts { flex-wrap: wrap !important; }
-
-      /* Contact page */
-      .expert-card { flex-direction: column !important; padding: 24px 20px !important; gap: 16px !important; }
-      .form-row { grid-template-columns: 1fr !important; }
-
-      /* Savings box */
-      .savings-box { flex-direction: column !important; align-items: flex-start !important; }
-
-      /* Final CTA */
-      .final-cta, .bottom-cta { padding: 60px 20px !important; }
-
-      /* Sections */
-      .section, .cards-section, .stats-strip,
-      .testimonials-section, .quick-actions { padding-left: 20px !important; padding-right: 20px !important; }
-
-      /* Catalog intro */
-      .catalog-intro { flex-direction: column !important; align-items: flex-start !important; }
-
-      /* Hero */
-      .hero { padding: 120px 20px 60px !important; }
-      h1 { font-size: clamp(36px, 10vw, 54px) !important; }
-
-      /* Suggest box */
-      .suggest-box { flex-direction: column !important; align-items: flex-start !important; }
-
-      /* Manual news items */
-      .manual-item { grid-template-columns: 1fr !important; }
-
-      /* Event cards */
-      .event-card { flex-direction: column !important; gap: 16px !important; }
-
-      /* Join page why-grid */
-      .why-grid { grid-template-columns: 1fr 1fr !important; }
+    :root {
+      --sand: #f5f0e8; --warm-white: #faf8f4; --ink: #1a1814;
+      --ink-60: rgba(26,24,20,0.6); --ink-30: rgba(26,24,20,0.3);
+      --ink-10: rgba(26,24,20,0.08); --accent: #2d5a3d;
+      --accent-light: #e8f0ea; --line: rgba(26,24,20,0.12);
+      --red: #c04c2a; --red-light: #fef3ef;
     }
+    body { font-family: 'DM Sans', sans-serif; background: #f0ede8; color: var(--ink); min-height: 100vh; }
 
-    @media (max-width: 480px) {
-      .why-grid { grid-template-columns: 1fr !important; }
-      .cat-toggles { gap: 6px !important; }
-      .hero-actions { flex-direction: column !important; align-items: flex-start !important; }
-    }
+    /* LOGIN */
+    #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-box { background: var(--warm-white); border: 1px solid var(--line); padding: 52px 48px; width: 360px; text-align: center; }
+    .login-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--ink); margin-bottom: 6px; }
+    .login-logo span { color: var(--accent); }
+    .login-sub { font-size: 12px; color: var(--ink-30); margin-bottom: 36px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .login-box input { width: 100%; border: 1px solid var(--line); border-radius: 2px; padding: 12px 16px; font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; background: var(--warm-white); margin-bottom: 12px; transition: border-color 0.2s; }
+    .login-box input:focus { border-color: rgba(26,24,20,0.35); }
+    .login-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 13px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif; border-radius: 2px; cursor: pointer; transition: opacity 0.2s; }
+    .login-btn:hover { opacity: 0.88; }
+    .login-error { font-size: 12px; color: var(--red); margin-top: 10px; display: none; }
 
+    /* APP */
+    #app { display: none; }
+
+    /* GITHUB SETUP MODAL */
+    #gh-setup { display: none; position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; align-items: center; justify-content: center; }
+    #gh-setup.show { display: flex; }
+    #claude-setup { display: none; position: fixed; inset: 0; background: rgba(26,24,20,0.7); z-index: 200; align-items: center; justify-content: center; }
+    #claude-setup.show { display: flex; }
+    .gh-setup-box { background: var(--warm-white); border: 1px solid var(--line); padding: 44px 40px; width: 440px; }
+    .gh-setup-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; margin-bottom: 8px; }
+    .gh-setup-sub { font-size: 13px; color: var(--ink-60); margin-bottom: 24px; line-height: 1.65; }
+    .gh-setup-sub a { color: var(--accent); }
+    .gh-setup-box input { width: 100%; border: 1px solid var(--line); border-radius: 2px; padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 12px; transition: border-color 0.2s; }
+    .gh-setup-box input:focus { border-color: rgba(45,90,61,.5); }
+    .gh-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 12px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif; border-radius: 2px; cursor: pointer; transition: opacity 0.2s; }
+    .gh-btn:hover { opacity: 0.88; }
+    .gh-skip { display: block; text-align: center; margin-top: 12px; font-size: 12px; color: var(--ink-30); cursor: pointer; }
+    .gh-skip:hover { color: var(--ink-60); }
+
+    /* TOPBAR */
+    .topbar { position: sticky; top: 0; z-index: 50; background: var(--ink); padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 12px; }
+    .topbar-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #fff; white-space: nowrap; }
+    .topbar-logo span { color: #7ab88a; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .topbar-tab { color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.15); background: transparent; padding: 6px 14px; border-radius: 2px; font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; white-space: nowrap; }
+    .topbar-tab.active { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+    .topbar-badge { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; text-transform: uppercase; }
+    .logout-btn { font-size: 12px; color: rgba(255,255,255,0.5); background: none; border: 1px solid rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 2px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+    .logout-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+    .pending-badge { background: #e05c3a; color: #fff; border-radius: 100px; padding: 1px 6px; font-size: 10px; margin-left: 4px; display: none; }
+
+    /* LAYOUT */
+    .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 56px); }
+
+    /* SIDEBAR */
+    .sidebar { background: var(--warm-white); border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+    .sidebar-header { padding: 20px 24px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+    .sidebar-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .sidebar-count { font-size: 11px; color: var(--ink-30); background: var(--sand); padding: 3px 10px; border-radius: 100px; }
+    .add-btn { margin: 16px 16px 0; background: var(--accent); color: #fff; border: none; padding: 11px 18px; border-radius: 2px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; display: flex; align-items: center; gap: 8px; }
+    .add-btn:hover { opacity: 0.88; }
+    .specialist-list { flex: 1; overflow-y: auto; padding: 12px 0; }
+    .list-item { padding: 14px 20px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; display: flex; align-items: center; gap: 12px; }
+    .list-item:hover { background: var(--sand); }
+    .list-item.active { background: var(--accent-light); border-left-color: var(--accent); }
+    .list-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--accent); font-weight: 500; flex-shrink: 0; }
+    .list-info { flex: 1; min-width: 0; }
+    .list-name { font-size: 14px; font-weight: 400; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .list-role { font-size: 11px; color: var(--ink-30); margin-top: 2px; }
+    .list-cats { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+    .cat-badge { font-size: 10px; background: var(--sand); color: var(--ink-60); padding: 2px 7px; border-radius: 100px; }
+    .list-empty { padding: 32px 20px; text-align: center; color: var(--ink-30); font-size: 13px; }
+
+    /* EXPORT PANEL (bottom of sidebar) */
+    .export-section { padding: 20px 16px; border-top: 1px solid var(--line); background: var(--warm-white); }
+    .export-title { font-size: 12px; font-weight: 500; margin-bottom: 10px; color: var(--ink); }
+    .export-desc { font-size: 11px; color: var(--ink-60); margin-bottom: 12px; line-height: 1.55; }
+    .export-desc code { background: var(--sand); padding: 1px 5px; border-radius: 2px; font-size: 10px; }
+    .btn-publish { width: 100%; background: var(--accent); color: #fff; border: none; padding: 10px 16px; border-radius: 2px; font-size: 12px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-publish:hover { opacity: 0.85; }
+    .btn-publish.loading { opacity: 0.6; pointer-events: none; }
+    .btn-dl { width: 100%; background: none; color: var(--ink-60); border: 1px solid var(--line); padding: 9px 16px; border-radius: 2px; font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .btn-dl:hover { border-color: var(--ink); color: var(--ink); }
+    .gh-status { font-size: 11px; margin-top: 8px; line-height: 1.5; }
+    .gh-status.ok { color: var(--accent); }
+    .gh-status.err { color: var(--red); }
+    .gh-token-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .gh-token-badge { font-size: 10px; color: var(--accent); background: var(--accent-light); padding: 3px 8px; border-radius: 100px; }
+    .gh-token-reset { font-size: 10px; color: var(--ink-30); cursor: pointer; text-decoration: underline; }
+    .gh-token-reset:hover { color: var(--ink-60); }
+    .btn-connect { width: 100%; background: none; color: var(--accent); border: 1px solid var(--accent); padding: 9px 16px; border-radius: 2px; font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-bottom: 6px; transition: all 0.2s; }
+    .btn-connect:hover { background: var(--accent); color: #fff; }
+
+    /* MAIN FORM */
+    .main { padding: 32px 40px; overflow-y: auto; }
+    .form-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .form-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; }
+    .form-actions { display: flex; gap: 10px; }
+    .btn-save { background: var(--accent); color: #fff; border: none; padding: 11px 24px; border-radius: 2px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; }
+    .btn-save:hover { opacity: 0.88; }
+    .btn-translate { background: none; color: #2d5a3d; border: 1px solid rgba(45,90,61,0.4); padding: 6px 14px; border-radius: 2px; font-size: 12px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-translate:hover { background: var(--accent-light); }
+    .btn-translate.loading { opacity: 0.6; pointer-events: none; }
+    .translate-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .translate-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-60); }
+    .translate-hint { font-size: 11px; color: var(--ink-30); }
+    .btn-delete { background: none; color: var(--red); border: 1px solid rgba(192,76,42,0.25); padding: 10px 18px; border-radius: 2px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .btn-delete:hover { background: var(--red-light); }
+    .form-section-title { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30); margin-bottom: 16px; margin-top: 28px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-60); }
+    label .lang-flag { font-style: normal; opacity: 0.6; margin-left: 4px; }
+    input[type=text], input[type=email], input[type=tel], textarea, select { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink); background: var(--warm-white); border: 1px solid var(--line); border-radius: 2px; padding: 10px 14px; outline: none; transition: border-color 0.2s; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(45,90,61,0.5); }
+    textarea { min-height: 72px; resize: vertical; }
+    .initials-row { display: flex; align-items: center; gap: 14px; }
+    .initials-preview { width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--accent); font-weight: 500; flex-shrink: 0; border: 1px solid rgba(45,90,61,0.15); }
+    .cat-toggles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .cat-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .cat-toggle input { display: none; }
+    .cat-chip { font-size: 12px; padding: 6px 14px; border-radius: 100px; border: 1px solid var(--line); color: var(--ink-60); background: transparent; transition: all 0.15s; user-select: none; cursor: pointer; }
+    .cat-toggle input:checked + .cat-chip { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .toggle-row { display: flex; align-items: center; gap: 12px; }
+    .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-track { position: absolute; inset: 0; background: var(--line); border-radius: 100px; transition: background 0.2s; }
+    .toggle-switch input:checked + .toggle-track { background: var(--accent); }
+    .toggle-track::after { content: ''; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+    .toggle-switch input:checked + .toggle-track::after { transform: translateX(20px); }
+    .toggle-label { font-size: 13px; color: var(--ink-60); }
+
+    .verified-toggle-row { display:flex; align-items:center; gap:14px; margin-top:20px; padding:16px 18px; background:var(--accent-light); border:1px solid rgba(45,90,61,0.2); border-radius:2px; }
+    .verified-icon { font-size:20px; }
+    .verified-desc { flex:1; }
+    .verified-desc strong { font-size:13px; font-weight:500; color:var(--accent); }
+    .verified-desc span { font-size:12px; color:var(--ink-60); display:block; margin-top:2px; }
+    .badge-input-row { margin-top:10px; display:flex; gap:10px; align-items:center; }
+    .badge-preview { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#fff; background:var(--accent); padding:4px 12px; border-radius:100px; }
+    .paid-tag { display:inline-block; font-size:10px; background:#fff3e0; color:#e65100; border:1px solid #ffcc80; padding:2px 8px; border-radius:100px; font-weight:500; margin-left:8px; }
+    .pending-card { border: 1px solid var(--line); padding: 28px; margin-bottom: 16px; background: var(--warm-white); }
+
+    /* EMPTY STATE */
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; text-align: center; color: var(--ink-30); }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-text { font-size: 15px; font-weight: 300; }
+    .empty-sub { font-size: 13px; margin-top: 8px; }
+
+    /* TOAST */
+    #toast { position: fixed; bottom: 28px; right: 28px; background: var(--ink); color: #fff; padding: 13px 22px; border-radius: 3px; font-size: 13px; opacity: 0; transform: translateY(10px); transition: all 0.25s; pointer-events: none; z-index: 999; }
+    #toast.show { opacity: 1; transform: none; }
   </style>
-<style id="xpat4-nav">
-  nav{position:fixed!important;top:0;left:0;right:0;z-index:100;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;padding:18px 48px;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,24,20,0.12);box-sizing:border-box}
-  .logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#1a1814;text-decoration:none;flex-shrink:0}
-  .logo span{color:#2d5a3d}
-  .nav-center{display:flex!important;flex-direction:row!important;align-items:center!important;gap:28px;list-style:none!important;margin:0;padding:0}
-  .nav-center li{list-style:none!important;margin:0;padding:0;display:inline-flex!important}
-  .nav-center a{font-size:13px;font-weight:400;color:rgba(26,24,20,0.6);text-decoration:none;white-space:nowrap;transition:color 0.2s}
-  .nav-center a:hover{color:#1a1814}
-  .nav-right{display:flex!important;flex-direction:row!important;align-items:center!important;gap:16px;flex-shrink:0}
-  .lang-switch{display:flex!important;flex-direction:row!important;gap:2px;background:rgba(26,24,20,0.08);border-radius:3px;padding:3px}
-  .lang-btn{font-size:11px;font-weight:500;padding:5px 10px;border:none;background:transparent;cursor:pointer;color:rgba(26,24,20,0.6);border-radius:2px;font-family:'DM Sans',sans-serif;transition:background 0.15s,color 0.15s}
-  .lang-btn.active{background:#faf8f4;color:#1a1814;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
-  .gt-btn{font-size:14px!important;padding:4px 8px!important;opacity:0.7}
-  .gt-btn:hover{opacity:1!important}
-  .nav-cta{font-size:13px;font-weight:500;color:#2d5a3d;text-decoration:none;border:1px solid #2d5a3d;padding:7px 18px;border-radius:2px;white-space:nowrap;transition:background 0.2s,color 0.2s}
-  .nav-cta:hover{background:#2d5a3d;color:#fff}
-  .nav-burger{display:none!important;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-  .nav-burger span{display:block;width:22px;height:2px;background:#1a1814;border-radius:2px}
-  .mobile-menu{display:none!important;position:fixed;top:60px;left:0;right:0;background:#faf8f4;border-bottom:1px solid rgba(26,24,20,0.12);padding:16px 24px;z-index:99;flex-direction:column;gap:0;box-shadow:0 4px 16px rgba(0,0,0,0.08)}
-  .mobile-menu.open{display:flex!important}
-  .mobile-menu a{font-size:16px;color:rgba(26,24,20,0.7);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(26,24,20,0.08);display:block!important}
-  .mobile-menu a:last-child{border-bottom:none}
-  footer{padding:36px 48px!important;border-top:1px solid rgba(26,24,20,0.12);display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:20px;flex-wrap:wrap}
-  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:rgba(26,24,20,0.6);text-decoration:none}
-  .footer-logo span{color:#2d5a3d}
-  .footer-links{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;gap:20px!important;list-style:none!important;margin:0!important;padding:0!important}
-  .footer-links li{list-style:none!important;margin:0!important;padding:0!important;display:inline!important}
-  .footer-links a{font-size:12px;color:rgba(26,24,20,0.35);text-decoration:none;display:inline!important}
-  .footer-links a:hover{color:rgba(26,24,20,0.6)}
-  .footer-copy{font-size:12px;color:rgba(26,24,20,0.3)}
-  @media(max-width:900px){nav{padding:14px 20px!important}.nav-center{display:none!important}.nav-cta{display:none!important}.nav-burger{display:flex!important}}
-  @media(max-width:700px){footer{padding:24px 20px!important;flex-direction:column!important;align-items:flex-start!important}.footer-links{gap:12px!important}}
-</style>
 </head>
 <body>
-      <nav>
-    <a class="logo" href="index.html">xpat<span>4</span>.org</a>
-    <ul class="nav-center">
-      <li><a href="index.html#services" data-ru="Услуги"      data-en="Services">Услуги</a></li>
-      <li><a href="catalog.html"        data-ru="Каталог"     data-en="Catalog">Каталог</a></li>
-      <li><a href="checklist.html"      data-ru="Чеклист"     data-en="Checklist">Чеклист</a></li>
-      <li><a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator">Калькулятор</a></li>
-      <li><a href="contact.html"        data-ru="Контакты"    data-en="Contacts">Контакты</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="lang-switch">
-        <button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>
-        <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
-        <button class="lang-btn gt-btn" onclick="openGoogleTranslate()" title="Translate">🌐</button>
-      </div>
-      <a class="nav-cta" href="contact.html" data-ru="Консультация" data-en="Consultation">Консультация</a>
-    </div>
-    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#services" data-ru="Услуги"         data-en="Services">Услуги</a>
-    <a href="catalog.html"        data-ru="Каталог"        data-en="Catalog">Каталог</a>
-    <a href="checklist.html"      data-ru="Чеклист"        data-en="Checklist">Чеклист</a>
-    <a href="calculator.html"     data-ru="Калькулятор"    data-en="Calculator">Калькулятор</a>
-    <a href="contact.html"        data-ru="Контакты"       data-en="Contacts">Контакты</a>
-    <a href="news.html"           data-ru="Новости"        data-en="News">Новости</a>
-    <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists">Для специалистов</a>
-  </div>
-<div class="page-hero">
-  <div class="eyebrow" data-ru="Каталог специалистов" data-en="Specialist Catalog" data-zh="专家目录">Каталог специалистов</div>
-  <h1 data-ru="Найдите нужного<br/>специалиста" data-en="Find the right<br/>specialist" data-zh="寻找合适的<br/>专家">Найдите нужного<br/>специалиста</h1>
-  <p class="page-sub" data-ru="Юристы, консультанты и агентства, работающие с иностранцами в Кыргызстане." data-en="Lawyers, consultants and agencies working with foreigners in Kyrgyzstan." data-zh="在吉尔吉斯斯坦为外国人提供服务的律师、顾问和机构。">Юристы, консультанты и агентства, работающие с иностранцами в Кыргызстане.</p>
-</div>
 
-<div class="filters-bar" id="filters-bar"></div>
-<div class="catalog-grid" id="catalog-grid"></div>
-
-<div style="max-width:900px;margin:0 auto 60px;padding:0 48px;">
-  <div style="border:1px solid var(--line);padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--sand);">
-    <div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:6px;"
-        data-ru="Вы специалист по экспат-вопросам?" data-en="Are you an expat specialist?" data-zh="您是外籍事务专家吗？">
-        Вы специалист по экспат-вопросам?
-      </div>
-      <div style="font-size:13px;color:var(--ink-60);font-weight:300;line-height:1.6;"
-        data-ru="Подайте заявку на включение в каталог — бесплатно, после проверки." data-en="Apply for a free listing — reviewed and published after verification." data-zh="免费申请入驻目录——审核通过后发布。">
-        Подайте заявку на включение в каталог — бесплатно, после проверки.
-      </div>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">xpat<span>4</span>.org</div>
+    <div class="login-sub">Панель управления</div>
+    <input type="password" id="pwd-input" placeholder="Пароль" onkeydown="if(event.key==='Enter')login()" />
+    <button class="login-btn" onclick="login()">Войти</button>
+    <div class="login-error" id="login-error">Неверный пароль</div>
+    <div style="margin-top:20px;font-size:11px;color:var(--ink-30);line-height:1.6;">
+      Пароль по умолчанию: <code style="background:var(--sand);padding:2px 6px;border-radius:2px;">xpat4admin</code><br/>
+      Измените в коде: строка <code>ADMIN_PASSWORD</code>
     </div>
-    <a href="join.html" style="background:var(--accent);color:#fff;font-size:13px;font-weight:500;padding:12px 28px;border-radius:2px;text-decoration:none;white-space:nowrap;transition:opacity 0.2s;flex-shrink:0;"
-      data-ru="Подать заявку →" data-en="Apply Now →" data-zh="立即申请 →">
-      Подать заявку →
-    </a>
   </div>
 </div>
 
-<footer>
-  <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
-  <ul class="footer-links">
-    <li><a href="visa.html"       data-ru="Виза"                data-en="Visa">Виза</a></li>
-    <li><a href="catalog.html"    data-ru="Каталог"             data-en="Catalog">Каталог</a></li>
-    <li><a href="news.html"       data-ru="Новости"             data-en="News">Новости</a></li>
-    <li><a href="calculator.html" data-ru="Калькулятор"         data-en="Calculator">Калькулятор</a></li>
-    <li><a href="join.html"       data-ru="Для специалистов"    data-en="For Specialists">Для специалистов</a></li>
-    <li><a href="contact.html"    data-ru="Контакты"            data-en="Contacts">Контакты</a></li>
-    <li><a href="terms.html"      data-ru="Оферта"              data-en="Terms">Оферта</a></li>
-    <li><a href="privacy.html"    data-ru="Конфиденциальность"  data-en="Privacy">Конфиденциальность</a></li>
-  </ul>
-  <span class="footer-copy">© 2026 xpat4.org</span>
-</footer>
+<!-- CLAUDE API KEY MODAL -->
+<div id="claude-setup">
+  <div class="gh-setup-box">
+    <div class="gh-setup-title">🤖 Claude API Key</div>
+    <div class="gh-setup-sub">
+      Ключ хранится только в этом браузере — в коде сайта его нет.<br/><br/>
+      1. Зайди на <a href="https://platform.anthropic.com/settings/keys" target="_blank">platform.anthropic.com/settings/keys</a><br/>
+      2. Нажми <strong>Create Key</strong><br/>
+      3. Скопируй и вставь ниже (начинается с <code>sk-ant-</code>)<br/><br/>
+      Без ключа: чат-виджет и автоперевод не работают.
+    </div>
+    <input type="password" id="claude-key-input" placeholder="sk-ant-api03-..." />
+    <button class="gh-btn" onclick="saveClaudeKey()">Сохранить ключ</button>
+    <span class="gh-skip" onclick="closeClaudeSetup()">Пропустить</span>
+  </div>
+</div>
 
-<script src="xpat4.js"></script>
+<!-- GITHUB TOKEN MODAL -->
+<div id="gh-setup">
+  <div class="gh-setup-box">
+    <div class="gh-setup-title">🔑 Подключить GitHub</div>
+    <div class="gh-setup-sub">
+      Введи Personal Access Token — кнопка «Опубликовать» будет обновлять сайт напрямую.<br/><br/>
+      1. Перейди на <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br/>
+      2. Generate new token (classic)<br/>
+      3. Поставь галочку <strong>repo</strong><br/>
+      4. Скопируй и вставь ниже<br/><br/>
+      Токен хранится только в этом браузере, не в коде.
+    </div>
+    <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+    <button class="gh-btn" onclick="saveGithubToken()">Сохранить и подключить</button>
+    <span class="gh-skip" onclick="closeGhSetup()">Пропустить (загружать файл вручную)</span>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo">xpat<span>4</span>.org <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:'DM Sans',sans-serif;font-weight:300;margin-left:8px;">/ Каталог</span></div>
+    <div class="topbar-right">
+      <button class="topbar-tab active" id="tab-catalog" onclick="showTab('catalog')">📋 Специалисты</button>
+      <button class="topbar-tab" id="tab-pending" onclick="showTab('pending')">⏳ Заявки <span class="pending-badge" id="pending-badge">0</span></button>
+      <button class="topbar-tab" id="tab-news" onclick="showTab('news')">📰 Новости</button>
+      <button class="topbar-tab" id="tab-events" onclick="showTab('events')">📅 События</button>
+      <span class="topbar-badge" id="topbar-count"></span>
+      <button class="topbar-tab" id="btn-claude-key" onclick="openClaudeSetup()" style="opacity:0.6" title="Claude API Key">🤖 API</button>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+  </div>
+
+  <!-- PENDING PANEL -->
+  <div id="pending-panel">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:8px;">Заявки от специалистов</h2>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:28px;font-weight:300;">Поступают через форму join.html. Одобри — специалист добавится в каталог.</p>
+    <div id="pending-list"></div>
+    <div id="pending-empty" style="text-align:center;color:var(--ink-30);padding:60px 0;font-size:15px;display:none;">Заявок пока нет</div>
+  </div>
+
+  <!-- NEWS PANEL -->
+  <div id="news-panel" style="display:none;padding:32px 40px;max-width:860px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line);">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Новости (news.json)</h2>
+      <button class="btn-save" onclick="addNewsItem()">+ Добавить заметку</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Эти заметки появляются на странице <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a>. После сохранения нажми «Опубликовать» в боковой панели.</p>
+    <div id="news-list"></div>
+    <div id="news-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
+  </div>
+
+  <!-- EVENTS PANEL -->
+  <div id="events-panel" style="display:none;padding:32px 40px;max-width:860px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line);">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Мероприятия (events.json)</h2>
+      <button class="btn-save" onclick="addEvent()">+ Добавить событие</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Мероприятия отображаются на <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a> во вкладке «Мероприятия». После изменений — «Опубликовать».</p>
+    <div id="events-list"></div>
+    <div id="event-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
+  </div>
+
+  <!-- CATALOG PANEL -->
+  <div class="layout" id="catalog-panel">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Специалисты</span>
+        <span class="sidebar-count" id="sidebar-count">0</span>
+      </div>
+      <button class="add-btn" onclick="newSpecialist()">
+        <span style="font-size:18px;line-height:1;">+</span> Добавить
+      </button>
+      <div class="specialist-list" id="specialist-list"></div>
+      <!-- Export panel injected here -->
+      <div id="export-panel"></div>
+    </div>
+
+    <div class="main" id="main-area">
+      <div class="empty-state">
+        <div class="empty-icon">👤</div>
+        <div class="empty-text">Выберите специалиста</div>
+        <div class="empty-sub">или нажмите «Добавить»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Unpublished changes banner -->
+  <div id="unpublished-banner" style="display:none;position:fixed;bottom:80px;right:24px;z-index:200;background:#1a1814;color:#fff;padding:14px 20px;border-radius:4px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,0.3);align-items:center;gap:14px;">
+    <span>⚠️ Есть несохранённые изменения</span>
+    <button onclick="publishToGitHub();document.getElementById('unpublished-banner').style.display='none';" style="background:#2d5a3d;color:#fff;border:none;padding:8px 16px;border-radius:2px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">🌐 Опубликовать сейчас</button>
+    <button onclick="document.getElementById('unpublished-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:18px;padding:0;">×</button>
+  </div>
+<div id="toast"></div>
+
 <script>
-  let currentFilter = 'all';
-  let specialists = [];
+// ─────────────────────────────────────
+// КОНФИГ — измени пароль здесь:
+const ADMIN_PASSWORD = 'xpat4admin';
+// GitHub — не менять, берётся из репо:
+const GITHUB_OWNER  = 'AIsrail';
+const GITHUB_REPO   = 'xpat4';
+const GITHUB_FILE   = 'specialists.json';
+const GITHUB_BRANCH = 'main';
+// ─────────────────────────────────────
 
-  const FILTERS = {
-    all:       { ru: 'Все', en: 'All', zh: '全部' },
-    visa:      { ru: 'Виза', en: 'Visa', zh: '签证' },
-    residence: { ru: 'ВНЖ', en: 'Residence', zh: '居留' },
-    work:      { ru: 'Работа', en: 'Work', zh: '工作' },
-    business:  { ru: 'Бизнес', en: 'Business', zh: '商业' },
-    living:    { ru: 'Жильё', en: 'Housing', zh: '住房' }
-  };
+const CATEGORIES = [
+  { key:'visa',      label:'Виза' },
+  { key:'residence', label:'ВНЖ' },
+  { key:'work',      label:'Работа' },
+  { key:'business',  label:'Бизнес' },
+  { key:'living',    label:'Жильё' },
+];
 
-  const CONTACT_LABELS = {
-    ru: { wa: 'WhatsApp', email: 'Email', tg: 'Telegram', online: 'Онлайн', nocontact: 'Уточнить контакты' },
-    en: { wa: 'WhatsApp', email: 'Email', tg: 'Telegram', online: 'Online', nocontact: 'Request contacts' },
-    zh: { wa: 'WhatsApp', email: '邮件', tg: 'Telegram', online: '在线', nocontact: '询问联系方式' }
-  };
+// ── AUTH ──
+function login() {
+  const pwd = document.getElementById('pwd-input').value;
+  if (pwd === ADMIN_PASSWORD) {
+    sessionStorage.setItem('xpat4-auth', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+  }
+}
+function logout() {
+  sessionStorage.removeItem('xpat4-auth');
+  location.reload();
+}
+if (sessionStorage.getItem('xpat4-auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
 
-  function renderFilters() {
-    const lang = XPAT4.currentLang || 'ru';
-    const bar = document.getElementById('filters-bar');
-    bar.innerHTML = Object.entries(FILTERS).map(([key, labels]) =>
-      `<button class="filter-btn${currentFilter === key ? ' active' : ''}" onclick="setFilter('${key}')">${labels[lang] || labels.en}</button>`
-    ).join('');
+// ── DATA ──
+let specialists = [];
+let editingId   = null;
+const STORAGE_KEY = 'xpat4-specialists';
+
+function loadData() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try { specialists = JSON.parse(saved); return; } catch{}
+  }
+  fetch('specialists.json')
+    .then(r => r.json())
+    .then(data => {
+      specialists = data;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(specialists));
+      renderList();
+    })
+    .catch(() => { specialists = []; renderList(); });
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(specialists));
+}
+
+function nextId() {
+  return specialists.length ? Math.max(...specialists.map(s => s.id)) + 1 : 1;
+}
+
+function init() {
+  loadData();
+  setTimeout(() => {
+    renderList();
+    renderExport();
+    updatePendingBadge();
+  }, 150);
+}
+
+// ── TABS ──
+function showTab(tab) {
+  const panels = ['catalog','pending','news','events'];
+  panels.forEach(p => {
+    const el = document.getElementById(p+'-panel');
+    if (el) el.style.display = 'none';
+    const btn = document.getElementById('tab-'+p);
+    if (btn) btn.classList.remove('active');
+  });
+  const catPanel = document.getElementById('catalog-panel');
+  if (catPanel) catPanel.style.display = 'none';
+
+  if (tab === 'catalog') {
+    if (catPanel) catPanel.style.display = 'grid';
+  } else {
+    const panel = document.getElementById(tab+'-panel');
+    if (panel) panel.style.display = 'block';
+  }
+  const btn = document.getElementById('tab-'+tab);
+  if (btn) btn.classList.add('active');
+
+  if (tab === 'pending') renderPending();
+  if (tab === 'news')    renderNewsList();
+  if (tab === 'events')  renderEventsList();
+}
+
+// ── LIST ──
+function renderList() {
+  const list  = document.getElementById('specialist-list');
+  const count = specialists.length;
+  document.getElementById('sidebar-count').textContent = count;
+  document.getElementById('topbar-count').textContent  =
+    count + ' специалист' + (count===1?'':count<5?'а':'ов');
+
+  if (!count) {
+    list.innerHTML = '<div class="list-empty">Нет специалистов.<br/>Нажмите «Добавить».</div>';
+    return;
+  }
+  list.innerHTML = specialists.map(s => `
+    <div class="list-item${editingId===s.id?' active':''}" onclick="editSpecialist(${s.id})">
+      <div class="list-avatar">${s.initials||'?'}</div>
+      <div class="list-info">
+        <div class="list-name">${s.name_ru||'—'} ${s.verified?'<span style="color:#2d5a3d;font-size:10px;">✓</span>':''}</div>
+        <div class="list-role">${s.role_ru||''}</div>
+        ${s.verified && s.badge_expires ? '<div style="font-size:10px;color:'+(new Date(s.badge_expires)<new Date()?'#c04c2a':'#2d5a3d')+';">бейдж до '+s.badge_expires+'</div>' : ''}
+        <div class="list-cats">${(s.categories||[]).map(c=>`<span class="cat-badge">${c}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── FORM ──
+function updateBadgePreview() {
+  const cb   = document.getElementById('f-verified');
+  const row  = document.getElementById('badge-input-row');
+  const durR = document.getElementById('badge-duration-row');
+  const inp  = document.getElementById('f-badge');
+  const prv  = document.getElementById('badge-preview');
+  if (!cb) return;
+  const on = cb.checked;
+  if (row)  row.style.display  = on ? 'flex'  : 'none';
+  if (durR) durR.style.display = on ? 'block' : 'none';
+  if (prv && inp) prv.textContent = '✓ ' + (inp.value || 'Verified by xpat4');
+  if (on) updateBadgeExpiry();
+}
+
+function updateBadgeExpiry() {
+  const dur     = document.getElementById('f-badge-duration');
+  const start   = document.getElementById('f-badge-start');
+  const expires = document.getElementById('f-badge-expires');
+  const warn    = document.getElementById('badge-expiry-warn');
+  if (!dur || !start || !expires) return;
+
+  if (!dur.value) {
+    expires.value = '';
+    if (warn) warn.style.display = 'none';
+    return;
   }
 
-  function setFilter(key) { currentFilter = key; renderFilters(); renderCards(); }
+  const startDate = new Date(start.value || new Date());
+  startDate.setMonth(startDate.getMonth() + parseInt(dur.value));
+  const expiryStr = startDate.toISOString().slice(0,10);
+  expires.value = expiryStr;
 
-  function renderCards() {
-    const lang = XPAT4.currentLang || 'ru';
-    const cl = CONTACT_LABELS[lang] || CONTACT_LABELS.en;
-    const grid = document.getElementById('catalog-grid');
-    const filtered = currentFilter === 'all' ? specialists : specialists.filter(s => s.categories.includes(currentFilter));
+  // Warn if already expired
+  if (warn) {
+    const expired = new Date(expiryStr) < new Date();
+    warn.style.display = expired ? 'block' : 'none';
+  }
+}
 
-    if (!filtered.length) {
-      const msg = lang === 'zh' ? '未找到专家' : lang === 'en' ? 'No specialists found' : 'Специалисты не найдены';
-      grid.innerHTML = `<div class="empty-state">${msg}</div>`;
-      return;
+function getFormData() {
+  const cats = [...document.querySelectorAll('.cat-toggle input:checked')].map(el=>el.value);
+  const nameRu = document.getElementById('f-name-ru').value.trim();
+  let initials = document.getElementById('f-initials').value.trim();
+  if (!initials && nameRu) initials = nameRu.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+  return {
+    id: editingId || nextId(), initials,
+    name_ru:  nameRu,
+    name_en:  document.getElementById('f-name-en').value.trim(),
+    role_ru:  document.getElementById('f-role-ru').value.trim(),
+    role_en:  document.getElementById('f-role-en').value.trim(),
+    desc_ru:  document.getElementById('f-desc-ru').value.trim(),
+    desc_en:  document.getElementById('f-desc-en').value.trim(),
+    city_ru:  document.getElementById('f-city-ru').value.trim()||'Бишкек',
+    city_en:  document.getElementById('f-city-en').value.trim()||'Bishkek',
+    city_zh:  document.getElementById('f-city-zh').value.trim()||'比什凯克',
+    phone:    document.getElementById('f-phone').value.trim(),
+    email:    document.getElementById('f-email').value.trim(),
+    telegram: document.getElementById('f-telegram').value.trim().replace('@',''),
+    online:   document.getElementById('f-online').checked,
+    verified: document.getElementById('f-verified') ? document.getElementById('f-verified').checked : false,
+    badge:    document.getElementById('f-badge')    ? document.getElementById('f-badge').value.trim()    : '',
+    badge_duration: document.getElementById('f-badge-duration') ? document.getElementById('f-badge-duration').value : '',
+    badge_start:    document.getElementById('f-badge-start')    ? document.getElementById('f-badge-start').value    : '',
+    badge_expires:  document.getElementById('f-badge-expires')  ? document.getElementById('f-badge-expires').value  : '',
+    categories: cats,
+  };
+}
+
+function updateInitialsPreview() {
+  const nameRu = document.getElementById('f-name-ru').value.trim();
+  const manual = document.getElementById('f-initials').value.trim();
+  const preview = manual || (nameRu ? nameRu.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase() : '?');
+  document.getElementById('initials-preview').textContent = preview;
+}
+
+function renderForm(s) {
+  const isNew = !s;
+  const d = s || { categories:[], online:false };
+  document.getElementById('main-area').innerHTML = `
+    <div class="form-header">
+      <div class="form-title">${isNew ? 'Новый специалист' : 'Редактировать'}</div>
+      <div class="form-actions">
+        ${!isNew ? `<button class="btn-delete" onclick="deleteSpecialist(${d.id})">🗑 Удалить</button>` : ''}
+        <button class="btn-save" onclick="saveSpecialist()">💾 Сохранить</button>
+      <button class="btn-translate" id="btn-translate" onclick="translateSpecialist()">✨ Перевести RU→EN</button>
+      </div>
+    </div>
+
+    <div class="form-section-title">Аватар</div>
+    <div class="initials-row">
+      <div class="initials-preview" id="initials-preview">${d.initials||'?'}</div>
+      <div class="form-group" style="flex:1">
+        <label>Инициалы <span style="color:var(--ink-30);font-size:10px;text-transform:none;letter-spacing:0;">(2–3 символа)</span></label>
+        <input type="text" id="f-initials" value="${d.initials||''}" maxlength="3" placeholder="АМ"
+          oninput="updateInitialsPreview()" style="max-width:100px" />
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--ink-30);margin-top:6px;">Оставьте пустым — возьмётся из имени автоматически.</div>
+
+    <div class="form-section-title">Имя / Название</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Имя <span class="lang-flag">🇷🇺 RU</span></label>
+        <input type="text" id="f-name-ru" value="${d.name_ru||''}" placeholder="Айгуль Мамытова" oninput="updateInitialsPreview()" />
+      </div>
+      <div class="form-group">
+        <label>Name <span class="lang-flag">🇬🇧 EN</span></label>
+        <input type="text" id="f-name-en" value="${d.name_en||''}" placeholder="Aigul Mamytova" />
+      </div>
+    </div>
+
+    <div class="form-section-title">Специализация / Роль</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Роль <span class="lang-flag">🇷🇺 RU</span></label>
+        <input type="text" id="f-role-ru" value="${d.role_ru||''}" placeholder="Миграционный юрист" />
+      </div>
+      <div class="form-group">
+        <label>Role <span class="lang-flag">🇬🇧 EN</span></label>
+        <input type="text" id="f-role-en" value="${d.role_en||''}" placeholder="Immigration Lawyer" />
+      </div>
+    </div>
+
+    <div class="form-section-title">Описание</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Описание <span class="lang-flag">🇷🇺 RU</span></label>
+        <textarea id="f-desc-ru" placeholder="1–2 предложения...">${d.desc_ru||''}</textarea>
+      </div>
+      <div class="form-group full">
+        <label>Description <span class="lang-flag">🇬🇧 EN</span></label>
+        <textarea id="f-desc-en" placeholder="1–2 sentences...">${d.desc_en||''}</textarea>
+      </div>
+    </div>
+
+    <div class="form-section-title">Город</div>
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Город <span class="lang-flag">🇷🇺</span></label>
+        <input type="text" id="f-city-ru" value="${d.city_ru||'Бишкек'}" />
+      </div>
+      <div class="form-group">
+        <label>City <span class="lang-flag">🇬🇧</span></label>
+        <input type="text" id="f-city-en" value="${d.city_en||'Bishkek'}" />
+      </div>
+      <div class="form-group">
+        <label>城市 <span class="lang-flag">🇨🇳</span></label>
+        <input type="text" id="f-city-zh" value="${d.city_zh||'比什凯克'}" />
+      </div>
+    </div>
+    <div class="toggle-row" style="margin-top:12px">
+      <label class="toggle-switch">
+        <input type="checkbox" id="f-online" ${d.online?'checked':''} />
+        <div class="toggle-track"></div>
+      </label>
+      <span class="toggle-label">Работает онлайн</span>
+    </div>
+
+    <div class="form-section-title">Контакты</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📞 Телефон / WhatsApp</label>
+        <input type="tel" id="f-phone" value="${d.phone||''}" placeholder="+996 700 000 000" />
+      </div>
+      <div class="form-group">
+        <label>✉️ Email</label>
+        <input type="email" id="f-email" value="${d.email||''}" placeholder="name@example.com" />
+      </div>
+      <div class="form-group">
+        <label>✈️ Telegram</label>
+        <input type="text" id="f-telegram" value="${d.telegram||''}" placeholder="@username" />
+      </div>
+    </div>
+
+    <div class="form-section-title">Верификация <span class="paid-tag">💎 Платная опция</span></div>
+    <div class="verified-toggle-row">
+      <span class="verified-icon">✅</span>
+      <div class="verified-desc">
+        <strong>Бейдж «Проверен xpat4»</strong>
+        <span>Специалист с бейджем выделяется в каталоге зелёной лентой. Платная опция для специалистов.</span>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="f-verified" ${d.verified?'checked':''} onchange="updateBadgePreview()" />
+        <div class="toggle-track"></div>
+      </label>
+    </div>
+    <div class="badge-input-row" id="badge-input-row" style="display:${d.verified?'flex':'none'}">
+      <div class="form-group" style="flex:1;margin:0">
+        <label>Текст бейджа <span style="color:var(--ink-30);font-size:10px;text-transform:none;">(по умолчанию: «Verified by xpat4»)</span></label>
+        <input type="text" id="f-badge" value="${d.badge||''}" placeholder="Verified by xpat4" oninput="updateBadgePreview()" style="margin-top:6px" />
+      </div>
+      <div style="padding-top:28px">
+        <span class="badge-preview" id="badge-preview">✓ ${d.badge||'Verified by xpat4'}</span>
+      </div>
+    </div>
+    <div id="badge-duration-row" style="display:${d.verified?'block':'none'};margin-top:12px;">
+      <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div class="form-group">
+          <label>Срок действия</label>
+          <select id="f-badge-duration" onchange="updateBadgeExpiry()" style="margin-top:6px">
+            <option value="">Бессрочно</option>
+            <option value="3" ${d.badge_duration=='3'?'selected':''}>3 месяца</option>
+            <option value="6" ${d.badge_duration=='6'?'selected':''}>6 месяцев</option>
+            <option value="12" ${d.badge_duration=='12'?'selected':''}>12 месяцев</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Дата начала</label>
+          <input type="date" id="f-badge-start" value="${d.badge_start||new Date().toISOString().slice(0,10)}" onchange="updateBadgeExpiry()" style="margin-top:6px" />
+        </div>
+        <div class="form-group">
+          <label>Действует до</label>
+          <input type="date" id="f-badge-expires" value="${d.badge_expires||''}" readonly style="margin-top:6px;background:var(--sand);color:var(--ink-60);" />
+        </div>
+      </div>
+      <div id="badge-expiry-warn" style="display:none;margin-top:8px;font-size:12px;color:#c04c2a;background:#fef3ef;padding:8px 12px;border-radius:2px;">
+        ⚠️ Срок бейджа истёк! Бейдж скрыт в каталоге.
+      </div>
+    </div>
+
+    <div class="form-section-title">Категории (фильтры в каталоге)</div>
+    <div class="cat-toggles">
+      ${CATEGORIES.map(c=>`
+        <label class="cat-toggle">
+          <input type="checkbox" value="${c.key}" ${(d.categories||[]).includes(c.key)?'checked':''} />
+          <span class="cat-chip">${c.label}</span>
+        </label>
+      `).join('')}
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--ink-30);">Выберите одну или несколько.</div>
+    <div style="height:48px;"></div>
+  `;
+}
+
+function newSpecialist() { editingId=null; renderList(); renderForm(null); }
+function editSpecialist(id) { editingId=id; renderList(); renderForm(specialists.find(x=>x.id===id)); }
+
+// ── AUTO-TRANSLATE ──
+async function translateSpecialist() {
+  const nameRu = document.getElementById('f-name-ru')?.value.trim();
+  const roleRu = document.getElementById('f-role-ru')?.value.trim();
+  const descRu = document.getElementById('f-desc-ru')?.value.trim();
+
+  if (!nameRu && !roleRu && !descRu) {
+    showToast('⚠️ Заполните поля на русском сначала'); return;
+  }
+
+  const key = getActiveApiKey ? getActiveApiKey() : XPAT4_CONFIG?.CLAUDE_API_KEYS?.find(k=>k);
+  if (!key) {
+    showToast('⚠️ Нет API-ключа Claude. Добавьте в CLAUDE_API_KEYS в xpat4.js'); return;
+  }
+
+  const btn = document.getElementById('btn-translate');
+  btn.classList.add('loading');
+  btn.textContent = '⏳ Перевожу...';
+
+  const prompt = `Translate specialist data from Russian to English.
+Reply ONLY with valid JSON, no markdown, no explanation.
+
+Data:
+name_ru: "${nameRu || ''}"
+role_ru: "${roleRu || ''}"
+desc_ru: "${descRu || ''}"
+
+Response format:
+{"name_en": "...", "role_en": "...", "desc_en": "..."}
+
+Rules:
+- Transliterate names (do not translate): e.g. Айгуль → Aigul
+- Translate terms correctly: ВНЖ → residence permit, ОсОО → LLC, КР → Kyrgyzstan
+- Keep professional tone`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 800,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const t = JSON.parse(clean);
+
+    // Fill EN fields
+    if (t.name_en) document.getElementById('f-name-en').value = t.name_en;
+    if (t.role_en) document.getElementById('f-role-en').value = t.role_en;
+    if (t.desc_en) document.getElementById('f-desc-en').value = t.desc_en;
+
+    showToast('✅ Переведено на EN');
+  } catch(err) {
+    showToast('❌ Ошибка перевода: ' + err.message);
+    console.error(err);
+  } finally {
+    btn.classList.remove('loading');
+    btn.textContent = '✨ Перевести RU→EN';
+  }
+}
+
+function saveSpecialist() {
+  const data = getFormData();
+  if (!data.name_ru) { showToast('⚠️ Введите имя на русском'); return; }
+  if (!data.categories.length) { showToast('⚠️ Выберите категорию'); return; }
+  if (editingId) {
+    const idx = specialists.findIndex(s=>s.id===editingId);
+    if (idx>=0) specialists[idx]=data;
+  } else {
+    specialists.push(data);
+    editingId=data.id;
+  }
+  saveData();
+  renderList();
+  renderForm(data);
+  showToast('✅ Сохранено — не забудьте опубликовать!');
+  document.getElementById('unpublished-banner') && (document.getElementById('unpublished-banner').style.display='flex');
+}
+
+function deleteSpecialist(id) {
+  if (!confirm('Удалить специалиста?')) return;
+  specialists = specialists.filter(s=>s.id!==id);
+  editingId=null;
+  saveData();
+  renderList();
+  document.getElementById('main-area').innerHTML =
+    '<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">Удалено</div></div>';
+  showToast('🗑 Удалено');
+}
+
+// ── EXPORT / PUBLISH PANEL ──
+function generateJSON() { return JSON.stringify(specialists, null, 2); }
+
+function downloadJSON() {
+  const blob = new Blob([generateJSON()], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'specialists.json';
+  a.click();
+  showToast('⬇️ Файл скачан');
+}
+
+function renderExport() {
+  const el = document.getElementById('export-panel');
+  if (!el) return;
+  const token = localStorage.getItem('xpat4-gh-token');
+
+  el.innerHTML = `<div class="export-section">
+    <div class="export-title">🚀 Публикация на сайте</div>
+    ${token ? `
+      <div class="gh-token-row">
+        <span class="gh-token-badge">✓ GitHub подключён</span>
+        <span class="gh-token-reset" onclick="resetGithubToken()">Сменить токен</span>
+      </div>
+      <div class="export-desc">Нажми — <code>specialists.json</code> обновится в <strong>AIsrail/xpat4</strong> и через ~1 мин изменения появятся на сайте.</div>
+      <button class="btn-publish" id="publish-btn" onclick="publishToGitHub()">🌐 Опубликовать на xpat4.org</button>
+      <button class="btn-dl" onclick="downloadJSON()">⬇️ Скачать .json</button>
+      <div class="gh-status" id="gh-status"></div>
+    ` : `
+      <div class="export-desc">GitHub не подключён. Подключи — и одна кнопка будет обновлять сайт без ручной загрузки.</div>
+      <button class="btn-connect" onclick="document.getElementById('gh-setup').classList.add('show')">🔑 Подключить GitHub</button>
+      <button class="btn-dl" onclick="downloadJSON()">⬇️ Скачать specialists.json</button>
+      <div class="export-desc" style="margin-top:10px;font-size:10px;">Без GitHub: скачай файл и загрузи в репозиторий AIsrail/xpat4 вручную.</div>
+    `}
+  </div>`;
+}
+
+// ── GITHUB API ──
+// ── CLAUDE API KEY (localStorage — never in code) ──
+function getActiveApiKey() {
+  const stored = localStorage.getItem('xpat4-claude-key');
+  if (stored && stored.startsWith('sk-ant')) return stored;
+  if (typeof XPAT4_CONFIG !== 'undefined') {
+    const keys = (XPAT4_CONFIG.CLAUDE_API_KEYS || []).filter(k => k && k.length > 10);
+    if (keys.length) return keys[0];
+  }
+  return '';
+}
+
+function saveClaudeKey() {
+  const key = document.getElementById('claude-key-input').value.trim();
+  if (!key.startsWith('sk-ant')) {
+    alert('Ключ должен начинаться с sk-ant-'); return;
+  }
+  localStorage.setItem('xpat4-claude-key', key);
+  closeClaudeSetup();
+  updateClaudeKeyStatus();
+  showToast('✅ Claude API ключ сохранён');
+}
+
+function openClaudeSetup() {
+  document.getElementById('claude-setup').classList.add('show');
+  document.getElementById('claude-key-input').value = '';
+}
+
+function closeClaudeSetup() {
+  document.getElementById('claude-setup').classList.remove('show');
+}
+
+function updateClaudeKeyStatus() {
+  const btn = document.getElementById('btn-claude-key');
+  if (!btn) return;
+  const key = localStorage.getItem('xpat4-claude-key');
+  if (key && key.startsWith('sk-ant')) {
+    btn.style.opacity = '1'; btn.style.color = '#7ab88a';
+    btn.title = 'Claude API: подключён ✓';
+    btn.textContent = '🤖 API ✓';
+  } else {
+    btn.style.opacity = '0.6'; btn.style.color = '';
+    btn.title = 'Claude API: не настроен';
+    btn.textContent = '🤖 API';
+  }
+}
+
+// ── GITHUB INTEGRATION ──
+function saveGithubToken() {
+  const token = document.getElementById('gh-token-input').value.trim();
+  if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+    alert('Токен должен начинаться с ghp_ или github_pat_'); return;
+  }
+  localStorage.setItem('xpat4-gh-token', token);
+  closeGhSetup();
+  renderExport();
+  showToast('✅ GitHub подключён');
+}
+
+function closeGhSetup() {
+  document.getElementById('gh-setup').classList.remove('show');
+}
+
+function resetGithubToken() {
+  if (!confirm('Сбросить токен GitHub?')) return;
+  localStorage.removeItem('xpat4-gh-token');
+  renderExport();
+}
+
+async function publishToGitHub() {
+  const token = localStorage.getItem('xpat4-gh-token');
+  if (!token) { document.getElementById('gh-setup').classList.add('show'); return; }
+
+  const btn    = document.getElementById('publish-btn');
+  const status = document.getElementById('gh-status');
+  btn.classList.add('loading');
+  btn.textContent = '⏳ Публикую...';
+  status.className = 'gh-status';
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/vnd.github+json',
+    'Content-Type': 'application/json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+
+  const filesToPush = [
+    { file: GITHUB_FILE,   content: generateJSON() },
+    { file: 'news.json',   content: JSON.stringify(newsItems, null, 2) },
+    { file: 'events.json', content: JSON.stringify(eventsData, null, 2) },
+  ];
+
+  try {
+    for (const f of filesToPush) {
+      status.textContent = `Обновляю ${f.file}...`;
+      const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${f.file}`;
+      const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, { headers });
+      let sha = null;
+      if (getRes.ok) { const d = await getRes.json(); sha = d.sha; }
+      const now = new Date().toLocaleString('ru-RU', { timeZone:'Asia/Bishkek' });
+      const body = { message:`[admin] Update ${f.file} — ${now}`, content: btoa(unescape(encodeURIComponent(f.content))), branch: GITHUB_BRANCH };
+      if (sha) body.sha = sha;
+      const putRes = await fetch(apiUrl, { method:'PUT', headers, body: JSON.stringify(body) });
+      if (!putRes.ok) { const err = await putRes.json(); throw new Error(`${f.file}: ${err.message}`); }
     }
 
-    grid.innerHTML = filtered.map(s => {
-      const contacts = [];
-      if (s.phone)    contacts.push('<a class="contact-link" href="https://wa.me/' + s.phone.replace(/\D/g,'') + '" target="_blank">' + cl.wa + '</a>');
-      if (s.telegram) contacts.push('<a class="contact-link" href="https://t.me/' + s.telegram + '" target="_blank">' + cl.tg + '</a>');
-      if (s.email)    contacts.push('<a class="contact-link" href="mailto:' + s.email + '">' + cl.email + '</a>');
-      if (!contacts.length) contacts.push('<a class="contact-link" href="contact.html">' + cl.nocontact + '</a>');
+    status.className = 'gh-status ok';
+    status.innerHTML = '✅ Все файлы опубликованы! Сайт обновится ~1 мин. <a href="https://xpat4.org/news.html" target="_blank" style="color:var(--accent)">Проверить →</a>';
+    btn.textContent = '🌐 Опубликовать на xpat4.org';
+    btn.classList.remove('loading');
+    showToast('🚀 Опубликовано!');
 
-      // Verified badge — check expiry
-      let isVerified = s.verified;
-      if (isVerified && s.badge_expires) {
-        isVerified = new Date(s.badge_expires) > new Date();
-      }
-      const badgeText  = s.badge || 'Verified by xpat4';
-      const verifiedHtml = isVerified
-        ? '<span class="verified-badge">' + badgeText + '</span>'
-        : '';
+  } catch(err) {
+    status.className = 'gh-status err';
+    status.textContent = '❌ ' + err.message;
+    btn.textContent = '🌐 Опубликовать на xpat4.org';
+    btn.classList.remove('loading');
+    if (err.message.includes('401') || err.message.toLowerCase().includes('bad credentials')) {
+      status.textContent += ' — токен недействителен.';
+      setTimeout(resetGithubToken, 2000);
+    }
+  }
+}
 
-      return '<div class="specialist-card' + (isVerified ? ' is-verified' : '') + '" id="specialist-' + s.id + '">'
-        + verifiedHtml
-        + '<div class="card-top">'
-        + '<div class="avatar">' + s.initials + '</div>'
-        + '<div class="card-meta">'
-        + '<div class="s-role">' + (s['role_' + lang] || s.role_en) + '</div>'
-        + '<div class="s-name">' + (s['name_' + lang] || s.name_en) + '</div>'
-        + '</div></div>'
-        + '<p class="s-desc">' + (s['desc_' + lang] || s.desc_en) + '</p>'
-        + '<div class="card-bottom">'
-        + '<span class="s-city">' + (s['city_' + lang] || s.city_en) + (s.online ? ' · <span class="online-badge">' + cl.online + '</span>' : '') + '</span>'
-        + '<div class="s-contacts">' + contacts.join('') + '</div>'
-        + '</div></div>';
+
+
+// ── PENDING APPLICATIONS ──
+function renderPending() {
+  const pending = JSON.parse(localStorage.getItem('xpat4-pending')||'[]');
+  const active  = pending.filter(p=>p.status==='pending');
+  const list    = document.getElementById('pending-list');
+  const empty   = document.getElementById('pending-empty');
+
+  updatePendingBadge();
+  if (!active.length) { list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+
+  list.innerHTML = active.map(p=>`
+    <div class="pending-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;">${p.name}</div>
+          <div style="font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">${p.role||'—'}</div>
+        </div>
+        <div style="font-size:11px;color:var(--ink-30);">Подана: ${new Date(p.submitted_at).toLocaleDateString('ru-RU')}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:var(--ink-60);margin-bottom:14px;">
+        <div>📞 ${p.phone||'—'}</div><div>✉️ ${p.email||'—'}</div>
+        <div>✈️ ${p.telegram?'@'+p.telegram:'—'}</div>
+        <div>📍 ${p.city||'—'}${p.online?' · Онлайн':''}</div>
+      </div>
+      ${p.desc_ru?`<div style="font-size:13px;color:var(--ink-60);margin-bottom:6px;padding:10px;background:var(--sand);">🇷🇺 ${p.desc_ru}</div>`:''}
+      ${p.desc_en?`<div style="font-size:13px;color:var(--ink-60);margin-bottom:6px;padding:10px;background:var(--sand);">🇬🇧 ${p.desc_en}</div>`:''}
+      ${p.experience?`<div style="font-size:12px;color:var(--ink-30);margin-bottom:12px;">Опыт: ${p.experience}</div>`:''}
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+        ${(p.categories||[]).map(c=>`<span style="font-size:11px;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:100px;">${c}</span>`).join('')}
+      </div>
+      <div style="display:flex;gap:10px;padding-top:14px;border-top:1px solid var(--line);">
+        <button onclick="approveApplication(${p.id})" style="background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:2px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500;">✅ Одобрить → в каталог</button>
+        <button onclick="rejectApplication(${p.id})" style="background:none;color:var(--red);border:1px solid rgba(192,76,42,0.25);padding:10px 18px;border-radius:2px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;">✗ Отклонить</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updatePendingBadge() {
+  const pending = JSON.parse(localStorage.getItem('xpat4-pending')||'[]');
+  const count   = pending.filter(p=>p.status==='pending').length;
+  const badge   = document.getElementById('pending-badge');
+  if (badge) { badge.textContent=count; badge.style.display=count?'inline':'none'; }
+}
+
+function approveApplication(id) {
+  const pending = JSON.parse(localStorage.getItem('xpat4-pending')||'[]');
+  const app = pending.find(p=>p.id===id);
+  if (!app) return;
+  const initials = app.name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+  const newSpec = {
+    id: nextId(), initials,
+    name_ru:app.name, name_en:app.name, name_zh:app.name,
+    role_ru:app.role||'', role_en:app.role||'', role_zh:app.role||'',
+    desc_ru:app.desc_ru||'', desc_en:app.desc_en||'', desc_zh:app.desc_zh||'',
+    city_ru:app.city||'Бишкек', city_en:app.city||'Bishkek', city_zh:app.city||'比什凯克',
+    phone:app.phone||'', email:app.email||'', telegram:app.telegram||'',
+    online:app.online||false, categories:app.categories||[]
+  };
+  specialists.push(newSpec);
+  saveData();
+  app.status='approved';
+  localStorage.setItem('xpat4-pending', JSON.stringify(pending));
+  showToast('✅ Добавлен — опубликуй на сайте!');
+  renderPending();
+  renderList();
+  setTimeout(() => { showTab('catalog'); editSpecialist(newSpec.id); }, 400);
+}
+
+function rejectApplication(id) {
+  if (!confirm('Отклонить заявку?')) return;
+  const pending = JSON.parse(localStorage.getItem('xpat4-pending')||'[]');
+  const app = pending.find(p=>p.id===id);
+  if (app) { app.status='rejected'; localStorage.setItem('xpat4-pending', JSON.stringify(pending)); }
+  showToast('✗ Заявка отклонена');
+  renderPending();
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ── NEWS MANAGEMENT ──
+let newsItems = [];
+let editingNewsId = null;
+
+function loadNewsData() {
+  const saved = localStorage.getItem('xpat4-news');
+  if (saved) { try { newsItems = JSON.parse(saved); return; } catch{} }
+  fetch('news.json').then(r=>r.json()).then(d=>{
+    newsItems = d; localStorage.setItem('xpat4-news', JSON.stringify(d));
+    renderNewsList();
+  }).catch(()=>{ newsItems=[]; });
+}
+
+function saveNewsData() { localStorage.setItem('xpat4-news', JSON.stringify(newsItems)); }
+
+function nextNewsId() { return newsItems.length ? Math.max(...newsItems.map(n=>n.id))+1 : 1; }
+
+function renderNewsList() {
+  const list = document.getElementById('news-list');
+  if (!list) return;
+  if (!newsItems.length) { list.innerHTML = '<div style="color:var(--ink-30);padding:32px 0;text-align:center;">Заметок пока нет. Нажмите «Добавить заметку».</div>'; return; }
+  list.innerHTML = newsItems.map(n => `
+    <div style="border:1px solid var(--line);padding:20px 24px;margin-bottom:12px;display:flex;align-items:flex-start;gap:20px;background:var(--warm-white);">
+      <div style="flex:1;">
+        <div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">${n.category||'life'} · ${n.date}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;">${n.title_ru||n.title_en}</div>
+        <div style="font-size:12px;color:var(--ink-60);margin-top:6px;font-weight:300;">${(n.body_ru||'').slice(0,100)}${(n.body_ru||'').length>100?'...':''}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="editNewsItem(${n.id})" style="background:none;border:1px solid var(--line);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">✏️ Изменить</button>
+        <button onclick="deleteNewsItem(${n.id})" style="background:none;border:1px solid rgba(192,76,42,.25);color:var(--red);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addNewsItem() { editingNewsId=null; showNewsForm({}); }
+function editNewsItem(id) { editingNewsId=id; showNewsForm(newsItems.find(n=>n.id===id)||{}); }
+
+function showNewsForm(n) {
+  const f = document.getElementById('news-form');
+  f.style.display='block';
+  f.innerHTML = `
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:20px;">${editingNewsId?'Редактировать заметку':'Новая заметка'}</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Дата</label>
+        <input type="date" id="nf-date" value="${n.date||new Date().toISOString().slice(0,10)}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Категория</label>
+        <select id="nf-cat" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+          <option value="visa" ${n.category==='visa'?'selected':''}>Виза</option>
+          <option value="life" ${n.category==='life'?'selected':''}>Жизнь</option>
+          <option value="business" ${n.category==='business'?'selected':''}>Бизнес</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Источник (URL)</label>
+        <input type="text" id="nf-src-url" value="${n.source_url||''}" placeholder="https://..." style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Заголовок 🇷🇺</label>
+      <input type="text" id="nf-title-ru" value="${n.title_ru||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Заголовок 🇬🇧</label>
+      <input type="text" id="nf-title-en" value="${n.title_en||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Текст 🇷🇺</label>
+      <textarea id="nf-body-ru" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;min-height:80px;resize:vertical;">${n.body_ru||''}</textarea>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
+      <label style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);">Текст 🇬🇧</label>
+      <textarea id="nf-body-en" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;min-height:80px;resize:vertical;">${n.body_en||''}</textarea>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-save" onclick="saveNewsItem()">💾 Сохранить</button>
+      <button class="btn-delete" onclick="document.getElementById('news-form').style.display='none'">Отмена</button>
+    </div>
+  `;
+  f.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function saveNewsItem() {
+  const item = {
+    id: editingNewsId || nextNewsId(),
+    date: document.getElementById('nf-date').value,
+    category: document.getElementById('nf-cat').value,
+    source_url: document.getElementById('nf-src-url').value,
+    title_ru: document.getElementById('nf-title-ru').value,
+    title_en: document.getElementById('nf-title-en').value,
+    body_ru:  document.getElementById('nf-body-ru').value,
+    body_en:  document.getElementById('nf-body-en').value,
+  };
+  if (!item.title_ru && !item.title_en) { showToast('⚠️ Введите заголовок'); return; }
+  if (editingNewsId) {
+    const idx = newsItems.findIndex(n=>n.id===editingNewsId);
+    if (idx>=0) newsItems[idx]=item;
+  } else {
+    newsItems.unshift(item);
+  }
+  saveNewsData();
+  renderNewsList();
+  document.getElementById('news-form').style.display='none';
+  showToast('✅ Сохранено — не забудьте опубликовать!');
+}
+
+function deleteNewsItem(id) {
+  if (!confirm('Удалить заметку?')) return;
+  newsItems = newsItems.filter(n=>n.id!==id);
+  saveNewsData(); renderNewsList(); showToast('🗑 Удалено');
+}
+
+// ── EVENTS MANAGEMENT ──
+let eventsData = [];
+let editingEventId = null;
+
+function loadEventsData() {
+  const saved = localStorage.getItem('xpat4-events');
+  if (saved) { try { eventsData = JSON.parse(saved); return; } catch{} }
+  fetch('events.json').then(r=>r.json()).then(d=>{
+    eventsData=d; localStorage.setItem('xpat4-events', JSON.stringify(d));
+    renderEventsList();
+  }).catch(()=>{ eventsData=[]; });
+}
+
+function saveEventsData() { localStorage.setItem('xpat4-events', JSON.stringify(eventsData)); }
+function nextEventId() { return eventsData.length ? Math.max(...eventsData.map(e=>e.id))+1 : 1; }
+
+function renderEventsList() {
+  const list = document.getElementById('events-list');
+  if (!list) return;
+  if (!eventsData.length) { list.innerHTML='<div style="color:var(--ink-30);padding:32px 0;text-align:center;">Мероприятий пока нет.</div>'; return; }
+  const today = new Date(); today.setHours(0,0,0,0);
+  list.innerHTML = eventsData
+    .sort((a,b)=>new Date(a.date)-new Date(b.date))
+    .map(e=>{
+      const past = new Date(e.date) < today;
+      return `
+      <div style="border:1px solid var(--line);padding:20px 24px;margin-bottom:12px;display:flex;align-items:flex-start;gap:20px;background:var(--warm-white);${past?'opacity:0.5':''}">
+        <div style="flex-shrink:0;text-align:center;padding:8px 12px;background:var(--sand);border:1px solid var(--line);min-width:60px;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--accent);line-height:1;">${new Date(e.date).getDate()}</div>
+          <div style="font-size:10px;color:var(--ink-30);text-transform:uppercase;letter-spacing:.08em;">${e.date.slice(0,7)}</div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;">${e.title_ru||e.title_en}</div>
+          <div style="font-size:12px;color:var(--ink-60);margin-top:4px;">📍 ${e.location_ru||''} · 🕐 ${e.time||''} · ${e.free?'Бесплатно':'Платно'}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button onclick="editEvent(${e.id})" style="background:none;border:1px solid var(--line);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">✏️</button>
+          <button onclick="deleteEvent(${e.id})" style="background:none;border:1px solid rgba(192,76,42,.25);color:var(--red);padding:7px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">🗑</button>
+        </div>
+      </div>`;
     }).join('');
+}
 
-    // Scroll to anchor if hash
-    const hash = window.location.hash;
-    if (hash) { setTimeout(() => { const el = document.querySelector(hash); if (el) el.scrollIntoView({ behavior:'smooth', block:'center' }); }, 100); }
+function addEvent() { editingEventId=null; showEventForm({}); }
+function editEvent(id) { editingEventId=id; showEventForm(eventsData.find(e=>e.id===id)||{}); }
+
+function showEventForm(e) {
+  const f = document.getElementById('event-form');
+  f.style.display='block';
+  f.innerHTML = `
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:20px;">${editingEventId?'Редактировать событие':'Новое событие'}</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Дата</label>
+        <input type="date" id="ef-date" value="${e.date||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Время</label>
+        <input type="text" id="ef-time" value="${e.time||''}" placeholder="18:00" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Тип</label>
+        <select id="ef-cat" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+          <option value="meetup" ${e.category==='meetup'?'selected':''}>Встреча</option>
+          <option value="workshop" ${e.category==='workshop'?'selected':''}>Семинар</option>
+          <option value="tour" ${e.category==='tour'?'selected':''}>Тур</option>
+          <option value="other" ${e.category==='other'?'selected':''}>Другое</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Название 🇷🇺</label>
+        <input type="text" id="ef-title-ru" value="${e.title_ru||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Title 🇬🇧</label>
+        <input type="text" id="ef-title-en" value="${e.title_en||''}" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Место 🇷🇺</label>
+        <input type="text" id="ef-loc-ru" value="${e.location_ru||''}" placeholder="Hub Bishkek, ул. Токтогула 78" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Location 🇬🇧</label>
+        <input type="text" id="ef-loc-en" value="${e.location_en||''}" placeholder="Hub Bishkek, 78 Toktogul St" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Описание 🇷🇺</label>
+        <textarea id="ef-desc-ru" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;min-height:70px;resize:vertical;">${e.desc_ru||''}</textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Description 🇬🇧</label>
+        <textarea id="ef-desc-en" style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;min-height:70px;resize:vertical;">${e.desc_en||''}</textarea>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);">Ссылка (FB, Telegram...)</label>
+        <input type="text" id="ef-link" value="${e.link||''}" placeholder="https://..." style="padding:9px 12px;border:1px solid var(--line);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;justify-content:flex-end;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--ink-60);">
+          <input type="checkbox" id="ef-free" ${e.free?'checked':''} style="accent-color:var(--accent);width:16px;height:16px;" />
+          Бесплатное мероприятие
+        </label>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-save" onclick="saveEvent()">💾 Сохранить</button>
+      <button class="btn-delete" onclick="document.getElementById('event-form').style.display='none'">Отмена</button>
+    </div>
+  `;
+  f.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function saveEvent() {
+  const item = {
+    id: editingEventId || nextEventId(),
+    date: document.getElementById('ef-date').value,
+    time: document.getElementById('ef-time').value,
+    category: document.getElementById('ef-cat').value,
+    title_ru: document.getElementById('ef-title-ru').value,
+    title_en: document.getElementById('ef-title-en').value,
+    location_ru: document.getElementById('ef-loc-ru').value,
+    location_en: document.getElementById('ef-loc-en').value,
+    desc_ru: document.getElementById('ef-desc-ru').value,
+    desc_en: document.getElementById('ef-desc-en').value,
+    link: document.getElementById('ef-link').value,
+    free: document.getElementById('ef-free').checked,
+  };
+  if (!item.date) { showToast('⚠️ Укажите дату'); return; }
+  if (!item.title_ru && !item.title_en) { showToast('⚠️ Введите название'); return; }
+  if (editingEventId) {
+    const idx = eventsData.findIndex(e=>e.id===editingEventId);
+    if (idx>=0) eventsData[idx]=item;
+  } else {
+    eventsData.push(item);
   }
+  saveEventsData();
+  renderEventsList();
+  document.getElementById('event-form').style.display='none';
+  showToast('✅ Сохранено — не забудьте опубликовать!');
+}
 
-  fetch('specialists.json?v=' + Date.now()).then(r => r.json()).then(data => {
-    specialists = data;
-    renderFilters();
-    renderCards();
-  });
+function deleteEvent(id) {
+  if (!confirm('Удалить мероприятие?')) return;
+  eventsData = eventsData.filter(e=>e.id!==id);
+  saveEventsData(); renderEventsList(); showToast('🗑 Удалено');
+}
 
-  document.addEventListener('xpat4-lang-change', () => { renderFilters(); renderCards(); });
-</script>
-
-
-<script>
-(function(){
-  var b = document.getElementById('nav-burger');
-  var m = document.getElementById('mobile-menu');
-  if (!b || !m) return;
-  // Remove duplicate listeners by cloning
-  var b2 = b.cloneNode(true);
-  b.parentNode.replaceChild(b2, b);
-  b2.addEventListener('click', function(e){
-    e.stopPropagation();
-    m.classList.toggle('open');
-  });
-  m.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ m.classList.remove('open'); });
-  });
-  // Close on outside click
-  document.addEventListener('click', function(e){
-    if (!b2.contains(e.target) && !m.contains(e.target)){
-      m.classList.remove('open');
-    }
-  });
-})();
-</script>
-<script>
-(function(){
-  var b=document.getElementById('nav-burger');
-  var m=document.getElementById('mobile-menu');
-  if(!b||!m)return;
-  b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('open');});
-  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');});});
-  document.addEventListener('click',function(e){if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});
-})();
+// ── BOOT ──
+function init() {
+  loadData();
+  setTimeout(() => {
+    renderList();
+    renderExport();
+    updatePendingBadge();
+    loadNewsData();
+    loadEventsData();
+    updateClaudeKeyStatus();
+  }, 150);
+}
+if (sessionStorage.getItem('xpat4-auth')==='1') { init(); }
 </script>
 </body>
 </html>
