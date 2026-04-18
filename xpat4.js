@@ -262,10 +262,6 @@ window.openGoogleTranslate = function() {
   window.open('https://translate.google.com/translate?sl=auto&tl=auto&u=' + url, '_blank');
 };
 
-  // Update chat widget language
-  XPAT4.updateWidgetLang && XPAT4.updateWidgetLang(lang);
-};
-
 /* ── AI CHAT WIDGET ── */
 XPAT4.WIDGET_I18N = {
   ru: {
