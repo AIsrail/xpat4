@@ -472,16 +472,10 @@ function getFormData() {
     id: editingId || nextId(), initials,
     name_ru:  nameRu,
     name_en:  document.getElementById('f-name-en').value.trim(),
-    name_zh:  document.getElementById('f-name-zh').value.trim(),
-    name_ar:  document.getElementById('f-name-ar')?.value.trim() || '',
     role_ru:  document.getElementById('f-role-ru').value.trim(),
     role_en:  document.getElementById('f-role-en').value.trim(),
-    role_zh:  document.getElementById('f-role-zh').value.trim(),
-    role_ar:  document.getElementById('f-role-ar')?.value.trim() || '',
     desc_ru:  document.getElementById('f-desc-ru').value.trim(),
     desc_en:  document.getElementById('f-desc-en').value.trim(),
-    desc_zh:  document.getElementById('f-desc-zh').value.trim(),
-    desc_ar:  document.getElementById('f-desc-ar')?.value.trim() || '',
     city_ru:  document.getElementById('f-city-ru').value.trim()||'Бишкек',
     city_en:  document.getElementById('f-city-en').value.trim()||'Bishkek',
     city_zh:  document.getElementById('f-city-zh').value.trim()||'比什凯克',
@@ -514,7 +508,7 @@ function renderForm(s) {
       <div class="form-actions">
         ${!isNew ? `<button class="btn-delete" onclick="deleteSpecialist(${d.id})">🗑 Удалить</button>` : ''}
         <button class="btn-save" onclick="saveSpecialist()">💾 Сохранить</button>
-      <button class="btn-translate" id="btn-translate" onclick="translateSpecialist()">✨ Перевести RU→EN/ZH/AR</button>
+      <button class="btn-translate" id="btn-translate" onclick="translateSpecialist()">✨ Перевести RU→EN</button>
       </div>
     </div>
 
@@ -539,14 +533,6 @@ function renderForm(s) {
         <label>Name <span class="lang-flag">🇬🇧 EN</span></label>
         <input type="text" id="f-name-en" value="${d.name_en||''}" placeholder="Aigul Mamytova" />
       </div>
-      <div class="form-group full">
-        <label>姓名 <span class="lang-flag">🇨🇳 ZH</span></label>
-        <input type="text" id="f-name-zh" value="${d.name_zh||''}" placeholder="艾古尔·马米托娃" />
-      </div>
-      <div class="form-group full">
-        <label>الاسم <span class="lang-flag">🇸🇦 AR</span></label>
-        <input type="text" id="f-name-ar" value="${d.name_ar||''}" placeholder="أيغول ماميتوفا" dir="rtl" />
-      </div>
     </div>
 
     <div class="form-section-title">Специализация / Роль</div>
@@ -559,14 +545,6 @@ function renderForm(s) {
         <label>Role <span class="lang-flag">🇬🇧 EN</span></label>
         <input type="text" id="f-role-en" value="${d.role_en||''}" placeholder="Immigration Lawyer" />
       </div>
-      <div class="form-group full">
-        <label>职务 <span class="lang-flag">🇨🇳 ZH</span></label>
-        <input type="text" id="f-role-zh" value="${d.role_zh||''}" placeholder="移民律师" />
-      </div>
-      <div class="form-group full">
-        <label>المهنة <span class="lang-flag">🇸🇦 AR</span></label>
-        <input type="text" id="f-role-ar" value="${d.role_ar||''}" placeholder="محامي هجرة" dir="rtl" />
-      </div>
     </div>
 
     <div class="form-section-title">Описание</div>
@@ -578,14 +556,6 @@ function renderForm(s) {
       <div class="form-group full">
         <label>Description <span class="lang-flag">🇬🇧 EN</span></label>
         <textarea id="f-desc-en" placeholder="1–2 sentences...">${d.desc_en||''}</textarea>
-      </div>
-      <div class="form-group full">
-        <label>简介 <span class="lang-flag">🇨🇳 ZH</span></label>
-        <textarea id="f-desc-zh" placeholder="1-2句话...">${d.desc_zh||''}</textarea>
-      </div>
-      <div class="form-group full">
-        <label>الوصف <span class="lang-flag">🇸🇦 AR</span></label>
-        <textarea id="f-desc-ar" placeholder="جملة أو جملتان..." dir="rtl">${d.desc_ar||''}</textarea>
       </div>
     </div>
 
@@ -710,26 +680,21 @@ async function translateSpecialist() {
   btn.classList.add('loading');
   btn.textContent = '⏳ Перевожу...';
 
-  const prompt = `Переведи данные специалиста с русского на английский (en), китайский (zh) и арабский (ar).
-Отвечай ТОЛЬКО валидным JSON без markdown, без пояснений.
+  const prompt = `Translate specialist data from Russian to English.
+Reply ONLY with valid JSON, no markdown, no explanation.
 
-Данные:
+Data:
 name_ru: "${nameRu || ''}"
 role_ru: "${roleRu || ''}"
 desc_ru: "${descRu || ''}"
 
-Формат ответа:
-{
-  "name_en": "...", "name_zh": "...", "name_ar": "...",
-  "role_en": "...", "role_zh": "...", "role_ar": "...",
-  "desc_en": "...", "desc_zh": "...", "desc_ar": "..."
-}
+Response format:
+{"name_en": "...", "role_en": "...", "desc_en": "..."}
 
-Правила:
-- Имена транслитерируй (не переводи) на EN, для ZH и AR используй фонетическую транскрипцию
-- Профессиональные термины (ВНЖ, ОсОО, КР) переводи корректно: VNJ/residence permit, OsOO/LLC, KR/Kyrgyzstan
-- Описание переводи точно, сохраняй профессиональный тон
-- Arabic: используй современный стандартный арабский`;
+Rules:
+- Transliterate names (do not translate): e.g. Айгуль → Aigul
+- Translate terms correctly: ВНЖ → residence permit, ОсОО → LLC, КР → Kyrgyzstan
+- Keep professional tone`;
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -757,25 +722,14 @@ desc_ru: "${descRu || ''}"
     if (t.name_en) document.getElementById('f-name-en').value = t.name_en;
     if (t.role_en) document.getElementById('f-role-en').value = t.role_en;
     if (t.desc_en) document.getElementById('f-desc-en').value = t.desc_en;
-    // Fill ZH fields
-    if (t.name_zh) document.getElementById('f-name-zh').value = t.name_zh;
-    if (t.role_zh) document.getElementById('f-role-zh').value = t.role_zh;
-    if (t.desc_zh) document.getElementById('f-desc-zh').value = t.desc_zh;
-    // Fill AR fields (if present)
-    const nameAr = document.getElementById('f-name-ar');
-    const roleAr = document.getElementById('f-role-ar');
-    const descAr = document.getElementById('f-desc-ar');
-    if (nameAr && t.name_ar) nameAr.value = t.name_ar;
-    if (roleAr && t.role_ar) roleAr.value = t.role_ar;
-    if (descAr && t.desc_ar) descAr.value = t.desc_ar;
 
-    showToast('✅ Переведено на EN / ZH / AR');
+    showToast('✅ Переведено на EN');
   } catch(err) {
     showToast('❌ Ошибка перевода: ' + err.message);
     console.error(err);
   } finally {
     btn.classList.remove('loading');
-    btn.textContent = '✨ Перевести RU→EN/ZH/AR';
+    btn.textContent = '✨ Перевести RU→EN';
   }
 }
 
