@@ -144,28 +144,5 @@
     "categories": [
       "work"
     ]
-  },
-  {
-    "id": 6,
-    "initials": "NL",
-    "name_ru": "Nomad Legal Hub",
-    "name_en": "Nomad Legal Hub",
-    "name_zh": "游牧法律中心",
-    "role_ru": "Образование и учёба",
-    "role_en": "Education & Studies",
-    "role_zh": "教育与留学",
-    "desc_ru": "Студенческие визы, университеты КР, поддержка иностранных студентов.",
-    "desc_en": "Student visas, Kyrgyz universities, support for international students.",
-    "desc_zh": "学生签证、吉尔吉斯大学及国际学生支持服务。",
-    "city_ru": "Бишкек",
-    "city_en": "Bishkek",
-    "city_zh": "比什凯克",
-    "online": false,
-    "phone": "",
-    "email": "",
-    "telegram": "",
-    "categories": [
-      "work"
-    ]
   }
 ]
