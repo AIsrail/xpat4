@@ -212,129 +212,6 @@ function rotateApiKey() {
   document.head.appendChild(style);
 })();
 
-/* ── NAV & FOOTER HTML INJECTION ── */
-/* Replaces whatever nav/footer is in the HTML with the correct version */
-(function() {
-  var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-  var NAV_HTML = '<nav>' +
-    '<a class="logo" href="index.html">xpat<span style="color:#2d5a3d">4</span>.org</a>' +
-    '<ul class="nav-center">' +
-      '<li><a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a></li>' +
-      '<li><a href="catalog.html" data-ru="Каталог" data-en="Catalog">Каталог</a></li>' +
-      '<li><a href="checklist.html" data-ru="Чеклист" data-en="Checklist">Чеклист</a></li>' +
-      '<li><a href="calculator.html" data-ru="Калькулятор" data-en="Calculator">Калькулятор</a></li>' +
-      '<li><a href="contact.html" data-ru="Контакты" data-en="Contacts">Контакты</a></li>' +
-    '</ul>' +
-    '<div class="nav-right">' +
-      '<div class="lang-switch">' +
-        '<button class="lang-btn" data-lang="ru" onclick="XPAT4.setLang('ru')">RU</button>' +
-        '<button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>' +
-        '<button class="lang-btn gt-btn" onclick="openGoogleTranslate()" title="Translate">🌐</button>' +
-      '</div>' +
-      '<a class="nav-cta" href="contact.html" data-ru="Консультация" data-en="Consultation">Консультация</a>' +
-    '</div>' +
-    '<button class="nav-burger" id="nav-burger" aria-label="Menu">' +
-      '<span></span><span></span><span></span>' +
-    '</button>' +
-    '</nav>' +
-    '<div class="mobile-menu" id="mobile-menu">' +
-      '<a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a>' +
-      '<a href="catalog.html" data-ru="Каталог" data-en="Catalog">Каталог</a>' +
-      '<a href="checklist.html" data-ru="Чеклист" data-en="Checklist">Чеклист</a>' +
-      '<a href="calculator.html" data-ru="Калькулятор" data-en="Calculator">Калькулятор</a>' +
-      '<a href="contact.html" data-ru="Контакты" data-en="Contacts">Контакты</a>' +
-      '<a href="news.html" data-ru="Новости" data-en="News">Новости</a>' +
-      '<a href="join.html" data-ru="Для специалистов" data-en="For Specialists">Для специалистов</a>' +
-    '</div>';
-
-  var FOOTER_HTML = '<footer>' +
-    '<a class="footer-logo" href="index.html">xpat<span style="color:#2d5a3d">4</span>.org</a>' +
-    '<ul class="footer-links">' +
-      '<li><a href="visa.html" data-ru="Виза" data-en="Visa">Виза</a></li>' +
-      '<li><a href="catalog.html" data-ru="Каталог" data-en="Catalog">Каталог</a></li>' +
-      '<li><a href="news.html" data-ru="Новости" data-en="News">Новости</a></li>' +
-      '<li><a href="calculator.html" data-ru="Калькулятор" data-en="Calculator">Калькулятор</a></li>' +
-      '<li><a href="join.html" data-ru="Для специалистов" data-en="For Specialists">Для специалистов</a></li>' +
-      '<li><a href="contact.html" data-ru="Контакты" data-en="Contacts">Контакты</a></li>' +
-      '<li><a href="terms.html" data-ru="Оферта" data-en="Terms">Оферта</a></li>' +
-      '<li><a href="privacy.html" data-ru="Конфиденциальность" data-en="Privacy">Конфиденциальность</a></li>' +
-    '</ul>' +
-    '<span class="footer-copy">© 2026 xpat4.org</span>' +
-    '</footer>';
-
-  function injectNav() {
-    // Replace existing nav
-    var existingNav = document.querySelector('nav');
-    var existingMobile = document.getElementById('mobile-menu');
-    var tmp = document.createElement('div');
-    tmp.innerHTML = NAV_HTML;
-
-    if (existingNav) {
-      // Remove old mobile menu first
-      if (existingMobile) existingMobile.parentNode.removeChild(existingMobile);
-      existingNav.parentNode.replaceChild(tmp.firstChild, existingNav);
-      // Insert mobile menu after nav
-      var newNav = document.querySelector('nav');
-      var mobileDiv = tmp.querySelector('.mobile-menu') || tmp.firstChild;
-      // Re-parse since firstChild consumed it
-      var tmp2 = document.createElement('div');
-      tmp2.innerHTML = NAV_HTML;
-      var allNodes = tmp2.childNodes;
-      var newMobile = tmp2.querySelector('.mobile-menu');
-      if (newMobile && newNav && newNav.parentNode) {
-        newNav.parentNode.insertBefore(newMobile, newNav.nextSibling);
-      }
-    } else {
-      // No nav found — prepend to body
-      document.body.insertAdjacentHTML('afterbegin', NAV_HTML);
-    }
-  }
-
-  function injectFooter() {
-    var existingFooter = document.querySelector('footer');
-    if (existingFooter) {
-      existingFooter.outerHTML = FOOTER_HTML;
-    }
-  }
-
-  function initBurger() {
-    var burger = document.getElementById('nav-burger');
-    var menu = document.getElementById('mobile-menu');
-    if (!burger || !menu) return;
-    burger.addEventListener('click', function(e) {
-      e.stopPropagation();
-      menu.classList.toggle('open');
-    });
-    menu.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() { menu.classList.remove('open'); });
-    });
-    document.addEventListener('click', function(e) {
-      if (!burger.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.remove('open');
-      }
-    });
-  }
-
-  function run() {
-    // Skip admin page
-    if (currentPage === 'admin.html') return;
-    injectNav();
-    injectFooter();
-    initBurger();
-    // Apply current language to new nav/footer elements
-    if (window.XPAT4 && XPAT4.currentLang) {
-      XPAT4.setLang(XPAT4.currentLang);
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
-  } else {
-    run();
-  }
-})();
-
 /* ── LANGUAGE SYSTEM ── */
 window.XPAT4 = window.XPAT4 || {};
 
@@ -750,7 +627,8 @@ XPAT4.initWidget = function() {
       'Content-Type': 'application/json',
       'x-api-key': key,
       'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
+      'anthropic-dangerous-direct-browser-access': 'true',
+        'anthropic-beta': 'messages-2023-06-01'
     };
 
     const res = await fetch(XPAT4_CONFIG.CLAUDE_API_URL, {
