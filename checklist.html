@@ -190,7 +190,7 @@
     <a href="checklist.html"      data-ru="Чеклист"        data-en="Checklist"      data-zh="清单">Чеклист</a>
     <a href="calculator.html"     data-ru="Калькулятор"    data-en="Calculator"     data-zh="计算器">Калькулятор</a>
     <a href="contact.html"        data-ru="Контакты"       data-en="Contacts"       data-zh="联系我们">Контакты</a>
-    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">События</a>
+    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">Новости</a>
     <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
   </div>
 
@@ -220,7 +220,7 @@
   <ul class="footer-links">
     <li><a href="visa.html" data-ru="Виза" data-en="Visa" data-zh="签证">Виза</a></li>
     <li><a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
-    <li><a href="news.html" data-ru="События" data-en="Events" data-zh="新闻">События</a></li>
+    <li><a href="news.html" data-ru="Новости" data-en="News" data-zh="新闻">Новости</a></li>
     <li><a href="calculator.html" data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
     <li><a href="join.html" data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a></li>
     <li><a href="contact.html" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
@@ -424,7 +424,7 @@ function render() {
   wrap.innerHTML = CHECKLIST.map(phase => `
     <div class="phase">
       <div class="phase-header">
-        <div class="phase-num">${phase.num}</div>
+        <div class="phase-num">${phase.phase.num}</div>
         <div>
           <div class="phase-label">${phase.phase.label[lang]||phase.phase.label.en}</div>
         </div>
