@@ -15,7 +15,9 @@
   <url><loc>https://xpat4.org/terms.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://xpat4.org/privacy.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
 
-  <!-- AEO pages -->
+  <url><loc>https://xpat4.org/news.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+
   <url><loc>https://xpat4.org/kyrgyzstan-visa-free-countries.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://xpat4.org/evisa-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://xpat4.org/ovpg-registration-kyrgyzstan.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
@@ -39,7 +41,6 @@
   <!-- AEO batch 2 (to be added) -->
   <url><loc>https://xpat4.org/insurance-kyrgyzstan-expats.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://xpat4.org/bishkek-vs-osh-expats.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://xpat4.org/kyrgyz-russian-language-expats.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://xpat4.org/relocate-kyrgyzstan-from-russia.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://xpat4.org/relocate-kyrgyzstan-from-europe.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://xpat4.org/relocate-kyrgyzstan-from-china.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
