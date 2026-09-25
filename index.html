@@ -19,7 +19,7 @@
         "inLanguage": ["ru", "en", "zh"],
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://xpat4.org/catalog.html?q={search_term_string}",
+          "target": "https://xpat4.org/catalog?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       },
@@ -312,17 +312,29 @@
     }
 
   </style>
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="xpat4.org">
+  <meta property="og:title" content="xpat4 — Виза и релокация в Кыргызстан | Visa &amp; Relocation to Kyrgyzstan">
+  <meta property="og:description" content="Всё для иностранцев в Кыргызстане: визы, регистрация, ВНЖ, работа, бизнес. Everything for expats in Kyrgyzstan.">
+  <meta property="og:url" content="https://xpat4.org/">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:image" content="https://xpat4.org/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://xpat4.org/og-image.jpg">
 </head>
 <body>
 
   <nav>
-    <a class="logo" href="index.html">xpat<span>4</span>.org</a>
+    <a class="logo" href="/">xpat<span>4</span>.org</a>
     <ul class="nav-center">
-      <li><a href="index.html#services" data-ru="Услуги"      data-en="Services"    data-zh="服务">Услуги</a></li>
-      <li><a href="catalog.html"        data-ru="Каталог"     data-en="Catalog"     data-zh="目录">Каталог</a></li>
-      <li><a href="checklist.html"      data-ru="Чеклист"     data-en="Checklist"   data-zh="清单">Чеклист</a></li>
-      <li><a href="calculator.html"     data-ru="Калькулятор" data-en="Calculator"  data-zh="计算器">Калькулятор</a></li>
-      <li><a href="contact.html"        data-ru="Контакты"    data-en="Contacts"    data-zh="联系我们">Контакты</a></li>
+      <li><a href="/#services" data-ru="Услуги"      data-en="Services"    data-zh="服务">Услуги</a></li>
+      <li><a href="/catalog"        data-ru="Каталог"     data-en="Catalog"     data-zh="目录">Каталог</a></li>
+      <li><a href="/checklist"      data-ru="Чеклист"     data-en="Checklist"   data-zh="清单">Чеклист</a></li>
+      <li><a href="/calculator"     data-ru="Калькулятор" data-en="Calculator"  data-zh="计算器">Калькулятор</a></li>
+      <li><a href="/contact"        data-ru="Контакты"    data-en="Contacts"    data-zh="联系我们">Контакты</a></li>
     </ul>
     <div class="nav-right">
       <div class="lang-switch">
@@ -330,18 +342,18 @@
         <button class="lang-btn" data-lang="en" onclick="XPAT4.setLang('en')">EN</button>
         <button class="lang-btn" data-lang="zh" onclick="XPAT4.setLang('zh')">中文</button>
       </div>
-      <a class="nav-cta" href="contact.html" data-ru="Консультация" data-en="Consultation" data-zh="咨询">Консультация</a>
+      <a class="nav-cta" href="/contact" data-ru="Консультация" data-en="Consultation" data-zh="咨询">Консультация</a>
     </div>
     <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#services" data-ru="Услуги"         data-en="Services"       data-zh="服务">Услуги</a>
-    <a href="catalog.html"        data-ru="Каталог"        data-en="Catalog"        data-zh="目录">Каталог</a>
-    <a href="checklist.html"      data-ru="Чеклист"        data-en="Checklist"      data-zh="清单">Чеклист</a>
-    <a href="calculator.html"     data-ru="Калькулятор"    data-en="Calculator"     data-zh="计算器">Калькулятор</a>
-    <a href="contact.html"        data-ru="Контакты"       data-en="Contacts"       data-zh="联系我们">Контакты</a>
-    <a href="news.html"           data-ru="Новости"        data-en="News"           data-zh="新闻">События</a>
-    <a href="join.html"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
+    <a href="/#services" data-ru="Услуги"         data-en="Services"       data-zh="服务">Услуги</a>
+    <a href="/catalog"        data-ru="Каталог"        data-en="Catalog"        data-zh="目录">Каталог</a>
+    <a href="/checklist"      data-ru="Чеклист"        data-en="Checklist"      data-zh="清单">Чеклист</a>
+    <a href="/calculator"     data-ru="Калькулятор"    data-en="Calculator"     data-zh="计算器">Калькулятор</a>
+    <a href="/contact"        data-ru="Контакты"       data-en="Contacts"       data-zh="联系我们">Контакты</a>
+    <a href="/news"           data-ru="Новости"        data-en="News"           data-zh="新闻">События</a>
+    <a href="/join"           data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a>
   </div>
 
 <div class="hero-bg" id="hero-bg">
@@ -369,7 +381,7 @@
       data-ru="Начать здесь" data-en="Start Here" data-zh="从这里开始">
       Начать здесь
     </a>
-    <a class="btn-ghost" href="catalog.html"
+    <a class="btn-ghost" href="/catalog"
       data-ru="Найти специалиста" data-en="Find a Specialist" data-zh="寻找专家">
       Найти специалиста
     </a>
@@ -406,7 +418,7 @@
 
 <div class="cards-section" id="services">
   <div class="cards-grid">
-    <a class="card" href="visa.html">
+    <a class="card" href="/visa">
       <span class="card-num">01</span>
       <div class="card-icon">🛂</div>
       <div class="card-title"
@@ -424,7 +436,7 @@
         Подробнее
       </span>
     </a>
-    <a class="card" href="residence.html">
+    <a class="card" href="/residence">
       <span class="card-num">02</span>
       <div class="card-icon">📋</div>
       <div class="card-title"
@@ -442,7 +454,7 @@
         Подробнее
       </span>
     </a>
-    <a class="card" href="work.html">
+    <a class="card" href="/work">
       <span class="card-num">03</span>
       <div class="card-icon">💼</div>
       <div class="card-title"
@@ -460,7 +472,7 @@
         Подробнее
       </span>
     </a>
-    <a class="card" href="living.html">
+    <a class="card" href="/living">
       <span class="card-num">04</span>
       <div class="card-icon">🏡</div>
       <div class="card-title"
@@ -487,7 +499,7 @@
     <div class="nomad-tag" data-ru="Цифровые номады" data-en="Digital Nomads" data-zh="数字游民">Цифровые номады</div>
     <h2 data-ru="Бишкек — лучший<br/>город для <em>удалёнщика</em> в ЦА" data-en="Bishkek — best city<br/>for <em>remote workers</em> in CA" data-zh="比什凯克——<br/>中亚最适合<em>远程工作者</em>的城市">Бишкек — лучший<br/>город для <em>удалёнщика</em> в ЦА</h2>
     <p data-ru="Стоимость жизни на 60% ниже, чем в Европе. Быстрый интернет, коворкинги, нет налогов для работающих на иностранного работодателя — и горы в двух часах езды." data-en="Cost of living 60% lower than Europe. Fast internet, coworking spaces, no taxes for those working for foreign employers — and mountains two hours away." data-zh="生活成本比欧洲低60%。高速网络、联合办公空间、为境外雇主工作无需缴税——两小时车程即可抵达山区。">Стоимость жизни на 60% ниже, чем в Европе. Быстрый интернет, коворкинги, нет налогов для работающих на иностранного работодателя — и горы в двух часах езды.</p>
-    <a class="btn-sand" href="work.html" data-ru="Подробнее о работе в КР" data-en="Learn about working in KR" data-zh="了解在吉工作详情">Подробнее о работе в КР</a>
+    <a class="btn-sand" href="/work" data-ru="Подробнее о работе в КР" data-en="Learn about working in KR" data-zh="了解在吉工作详情">Подробнее о работе в КР</a>
   </div>
   <div class="nomad-benefits">
     <div class="nomad-benefit">
@@ -526,7 +538,7 @@
       </p>
     </div>
     <div>
-      <a class="btn-outline" href="catalog.html"
+      <a class="btn-outline" href="/catalog"
         data-ru="Весь каталог" data-en="Full Catalog" data-zh="完整目录">
         Весь каталог
       </a>
@@ -591,7 +603,7 @@
 
 <!-- QUICK ACTIONS -->
 <section class="quick-actions fade-up">
-  <a class="quick-card" href="calculator.html">
+  <a class="quick-card" href="/calculator">
     <div class="quick-card-icon">🧮</div>
     <div class="quick-card-text">
       <div class="quick-card-title" data-ru="Калькулятор стоимости жизни" data-en="Cost of Living Calculator" data-zh="生活成本计算器">Калькулятор стоимости жизни</div>
@@ -599,7 +611,7 @@
       <div class="quick-card-arrow" data-ru="Открыть калькулятор" data-en="Open Calculator" data-zh="打开计算器">Открыть калькулятор</div>
     </div>
   </a>
-  <a class="quick-card" href="checklist.html">
+  <a class="quick-card" href="/checklist">
     <div class="quick-card-icon">✅</div>
     <div class="quick-card-text">
       <div class="quick-card-title" data-ru="Чеклист: Первые 30 дней" data-en="Checklist: First 30 Days" data-zh="清单：入境头30天">Чеклист: Первые 30 дней</div>
@@ -623,7 +635,7 @@
       data-zh="描述您的情况——我们将帮助您了解需要哪些文件以及联系谁。">
       Опишите вашу ситуацию — мы поможем разобраться, какие документы нужны и к кому обратиться.
     </p>
-    <a class="btn-light" href="contact.html"
+    <a class="btn-light" href="/contact"
       data-ru="Задать вопрос" data-en="Ask a Question" data-zh="提问">
       Задать вопрос
     </a>
@@ -631,15 +643,15 @@
 </section>
 
 <footer>
-  <a class="footer-logo" href="index.html">xpat<span>4</span>.org</a>
+  <a class="footer-logo" href="/">xpat<span>4</span>.org</a>
   <ul class="footer-links">
-    <li><a href="visa.html" data-ru="Виза" data-en="Visa" data-zh="签证">Виза</a></li>
-    <li><a href="catalog.html" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
-    <li><a href="calculator.html" data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
-    <li><a href="join.html" data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a></li>
-    <li><a href="contact.html" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
-    <li><a href="terms.html" data-ru="Оферта" data-en="Terms" data-zh="条款">Оферта</a></li>
-    <li><a href="privacy.html" data-ru="Конфиденциальность" data-en="Privacy" data-zh="隐私">Конфиденциальность</a></li>
+    <li><a href="/visa" data-ru="Виза" data-en="Visa" data-zh="签证">Виза</a></li>
+    <li><a href="/catalog" data-ru="Каталог" data-en="Catalog" data-zh="目录">Каталог</a></li>
+    <li><a href="/calculator" data-ru="Калькулятор" data-en="Calculator" data-zh="计算器">Калькулятор</a></li>
+    <li><a href="/join" data-ru="Для специалистов" data-en="For Specialists" data-zh="专家入驻">Для специалистов</a></li>
+    <li><a href="/contact" data-ru="Контакты" data-en="Contacts" data-zh="联系我们">Контакты</a></li>
+    <li><a href="/terms" data-ru="Оферта" data-en="Terms" data-zh="条款">Оферта</a></li>
+    <li><a href="/privacy" data-ru="Конфиденциальность" data-en="Privacy" data-zh="隐私">Конфиденциальность</a></li>
   </ul>
   <span class="footer-copy">© 2026 xpat4.org</span>
 </footer>
@@ -681,7 +693,7 @@
     const onlineLabel = { ru: 'Онлайн', en: 'Online', zh: '在线' }[lang] || 'Online';
 
     grid.innerHTML = window._specialists.slice(0, 6).map(s => `
-      <a class="consultant-card fade-up" href="catalog.html#specialist-${s.id}">
+      <a class="consultant-card fade-up" href="/catalog#specialist-${s.id}">
         <div class="consultant-avatar">${s.initials}</div>
         <div class="consultant-role">${s['role_' + lang] || s.role_en}</div>
         <div class="consultant-name">${s['name_' + lang] || s.name_en}</div>
