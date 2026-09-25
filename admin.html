@@ -162,6 +162,7 @@
     #toast { position: fixed; bottom: 28px; right: 28px; background: var(--ink); color: #fff; padding: 13px 22px; border-radius: 3px; font-size: 13px; opacity: 0; transform: translateY(10px); transition: all 0.25s; pointer-events: none; z-index: 999; }
     #toast.show { opacity: 1; transform: none; }
   </style>
+  <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 
@@ -245,7 +246,7 @@
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Новости (news.json)</h2>
       <button class="btn-save" onclick="addNewsItem()">+ Добавить заметку</button>
     </div>
-    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Эти заметки появляются на странице <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a>. После сохранения нажми «Опубликовать» в боковой панели.</p>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Эти заметки появляются на странице <a href="/news" target="_blank" style="color:var(--accent)">news.html</a>. После сохранения нажми «Опубликовать» в боковой панели.</p>
     <div id="news-list"></div>
     <div id="news-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
   </div>
@@ -256,7 +257,7 @@
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;">Мероприятия (events.json)</h2>
       <button class="btn-save" onclick="addEvent()">+ Добавить событие</button>
     </div>
-    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Мероприятия отображаются на <a href="news.html" target="_blank" style="color:var(--accent)">news.html</a> во вкладке «Мероприятия». После изменений — «Опубликовать».</p>
+    <p style="font-size:13px;color:var(--ink-60);margin-bottom:24px;font-weight:300;line-height:1.6;">Мероприятия отображаются на <a href="/news" target="_blank" style="color:var(--accent)">news.html</a> во вкладке «Мероприятия». После изменений — «Опубликовать».</p>
     <div id="events-list"></div>
     <div id="event-form" style="display:none;margin-top:24px;border:1px solid var(--line);padding:28px;background:var(--warm-white);"></div>
   </div>
@@ -967,7 +968,7 @@ async function publishToGitHub() {
     }
 
     status.className = 'gh-status ok';
-    status.innerHTML = '✅ Все файлы опубликованы! Сайт обновится ~1 мин. <a href="https://xpat4.org/news.html" target="_blank" style="color:var(--accent)">Проверить →</a>';
+    status.innerHTML = '✅ Все файлы опубликованы! Сайт обновится ~1 мин. <a href="https://xpat4.org/news" target="_blank" style="color:var(--accent)">Проверить →</a>';
     btn.textContent = '🌐 Опубликовать на xpat4.org';
     btn.classList.remove('loading');
     showToast('🚀 Опубликовано!');
