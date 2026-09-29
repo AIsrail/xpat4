@@ -174,10 +174,6 @@
     <input type="password" id="pwd-input" placeholder="Пароль" onkeydown="if(event.key==='Enter')login()" />
     <button class="login-btn" onclick="login()">Войти</button>
     <div class="login-error" id="login-error">Неверный пароль</div>
-    <div style="margin-top:20px;font-size:11px;color:var(--ink-30);line-height:1.6;">
-      Пароль по умолчанию: <code style="background:var(--sand);padding:2px 6px;border-radius:2px;">xpat4admin</code><br/>
-      Измените в коде: строка <code>ADMIN_PASSWORD</code>
-    </div>
   </div>
 </div>
 
@@ -312,8 +308,11 @@
 
 <script>
 // ─────────────────────────────────────
-// КОНФИГ — измени пароль здесь:
-const ADMIN_PASSWORD = 'xpat4admin';
+// Реальная защита /admin — Basic Auth на edge, см. functions/_middleware.js
+// (пароль задаётся как секрет ADMIN_PASSWORD в настройках Cloudflare Pages).
+// Экран ниже — это просто UX-удобство (не логиниться на каждый reload), а не
+// граница безопасности: страница публичная, этот пароль виден в исходниках.
+const ADMIN_PASSWORD = 'xpat4-8f2c19a4';
 // GitHub — не менять, берётся из репо:
 const GITHUB_OWNER  = 'AIsrail';
 const GITHUB_REPO   = 'xpat4';
