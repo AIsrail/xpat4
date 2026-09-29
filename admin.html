@@ -314,7 +314,7 @@
 // граница безопасности: страница публичная, этот пароль виден в исходниках.
 const ADMIN_PASSWORD = 'xpat4-8f2c19a4';
 // GitHub — не менять, берётся из репо:
-const GITHUB_OWNER  = 'AIsrail';
+const GITHUB_OWNER  = 'gulnaramk84-boss';
 const GITHUB_REPO   = 'xpat4';
 const GITHUB_FILE   = 'specialists.json';
 const GITHUB_BRANCH = 'main';
@@ -847,7 +847,7 @@ function renderExport() {
         <span class="gh-token-badge">✓ GitHub подключён</span>
         <span class="gh-token-reset" onclick="resetGithubToken()">Сменить токен</span>
       </div>
-      <div class="export-desc">Нажми — <code>specialists.json</code> обновится в <strong>AIsrail/xpat4</strong> и через ~1 мин изменения появятся на сайте.</div>
+      <div class="export-desc">Нажми — <code>specialists.json</code> обновится в <strong>gulnaramk84-boss/xpat4</strong> и через ~1 мин изменения появятся на сайте.</div>
       <button class="btn-publish" id="publish-btn" onclick="publishToGitHub()">🌐 Опубликовать на xpat4.org</button>
       <button class="btn-dl" onclick="downloadJSON()">⬇️ Скачать .json</button>
       <div class="gh-status" id="gh-status"></div>
@@ -855,7 +855,7 @@ function renderExport() {
       <div class="export-desc">GitHub не подключён. Подключи — и одна кнопка будет обновлять сайт без ручной загрузки.</div>
       <button class="btn-connect" onclick="document.getElementById('gh-setup').classList.add('show')">🔑 Подключить GitHub</button>
       <button class="btn-dl" onclick="downloadJSON()">⬇️ Скачать specialists.json</button>
-      <div class="export-desc" style="margin-top:10px;font-size:10px;">Без GitHub: скачай файл и загрузи в репозиторий AIsrail/xpat4 вручную.</div>
+      <div class="export-desc" style="margin-top:10px;font-size:10px;">Без GitHub: скачай файл и загрузи в репозиторий gulnaramk84-boss/xpat4 вручную.</div>
     `}
   </div>`;
 }
@@ -1360,7 +1360,7 @@ async function loadEventApps() {
   var token = localStorage.getItem('xpat4-gh-token');
   if(token) {
     try {
-      var res = await fetch('https://api.github.com/repos/AIsrail/xpat4/contents/pending_events.json?ref=main',
+      var res = await fetch('https://api.github.com/repos/gulnaramk84-boss/xpat4/contents/pending_events.json?ref=main',
         {headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});
       if(res.ok) {
         var data = await res.json();

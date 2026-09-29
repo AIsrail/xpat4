@@ -1,7 +1,7 @@
 /* ============================================================
    xpat4.js — Shared utilities for xpat4.org
    - 3-language system (RU / EN / ZH) with browser auto-detect
-   - AI Chat Widget (Claude API + Ollama fallback)
+   - AI Chat Widget (Claude API; falls back to WhatsApp when no key is set)
    - WhatsApp escalation to Gulnara Mambetaliyeva
    ============================================================ */
 
@@ -12,8 +12,6 @@ const XPAT4_CONFIG = {
   CLAUDE_API_KEYS: [], // оставить пустым
   CLAUDE_API_URL: 'https://api.anthropic.com/v1/messages',
   CLAUDE_MODEL:   'claude-sonnet-4-20250514',
-  OLLAMA_URL:     'http://localhost:11434',
-  OLLAMA_MODEL:   'llama3',
   GULNARA_WA:     '996700522667',
 };
 
@@ -274,6 +272,7 @@ XPAT4.WIDGET_I18N = {
     escalate_msg:'Это сложный вопрос — лучше проконсультируйтесь с Гульнарой Мамбеталиевой лично.',
     wa_btn:      '💬 Написать Гульнаре в WhatsApp',
     error:       'Ошибка соединения. Попробуйте ещё раз.',
+    no_key_msg:  'ИИ-помощник сейчас недоступен — но вы можете написать Гульнаре напрямую, она ответит лично.',
     wa_greeting: 'Здравствуйте, Гульнара! С сайта xpat4.org пришёл вопрос от потенциального клиента:\n\n',
     wa_suffix:   '\n\nПожалуйста, ответьте клиенту или дайте добро на ответ от нашего ИИ-помощника.',
   },
@@ -287,6 +286,7 @@ XPAT4.WIDGET_I18N = {
     escalate_msg:'This is a complex question — I recommend a personal consultation with Gulnara Mambetaliyeva.',
     wa_btn:      '💬 Message Gulnara on WhatsApp',
     error:       'Connection error. Please try again.',
+    no_key_msg:  'The AI assistant is temporarily unavailable — but you can message Gulnara directly and she\'ll reply personally.',
     wa_greeting: 'Hello Gulnara! A potential client from xpat4.org sent a question:\n\n',
     wa_suffix:   '\n\nPlease reply to the client or give approval for our AI assistant to respond.',
   },
@@ -300,6 +300,7 @@ XPAT4.WIDGET_I18N = {
     escalate_msg:'这是一个复杂的问题，建议您直接咨询顾问古尔纳拉·马姆别塔利耶娃。',
     wa_btn:      '💬 通过WhatsApp联系古尔纳拉',
     error:       '连接错误，请重试。',
+    no_key_msg:  'AI助手暂时不可用——但您可以直接联系古尔纳拉，她会亲自回复。',
     wa_greeting: '您好，古尔纳拉！来自xpat4.org网站的潜在客户提出了以下问题：\n\n',
     wa_suffix:   '\n\n请回复客户，或批准我们的AI助手代为回答。',
   }
@@ -550,6 +551,11 @@ XPAT4.initWidget = function() {
     addMsg(text, 'user');
     conversation.push({ role: 'user', content: text });
 
+    if (!getActiveApiKey()) {
+      handleEscalate(text, getI18n().no_key_msg);
+      return;
+    }
+
     isTyping = true;
     const thinkEl = addMsg(getI18n().thinking, 'thinking');
 
@@ -582,14 +588,14 @@ XPAT4.initWidget = function() {
     isTyping = false;
   }
 
-  function handleEscalate(summary) {
+  function handleEscalate(summary, message) {
     const t = getI18n();
     const waText = encodeURIComponent(t.wa_greeting + summary + t.wa_suffix);
     const waUrl  = `https://wa.me/${XPAT4_CONFIG.GULNARA_WA}?text=${waText}`;
 
     const html = `
       <div class="xpat-escalate-card">
-        <div style="font-size:13px;line-height:1.5;color:#1a1814;">${t.escalate_msg}</div>
+        <div style="font-size:13px;line-height:1.5;color:#1a1814;">${message || t.escalate_msg}</div>
         <a class="xpat-wa-btn" href="${waUrl}" target="_blank" rel="noopener">${t.wa_btn}</a>
       </div>
     `;
@@ -601,17 +607,7 @@ XPAT4.initWidget = function() {
   }
 
   async function callAI(messages) {
-    // Try Claude first
-    try {
-      return await callClaude(messages);
-    } catch (claudeErr) {
-      console.warn('Claude API failed, trying Ollama fallback:', claudeErr.message);
-      try {
-        return await callOllama(messages);
-      } catch (ollamaErr) {
-        throw new Error('Both Claude and Ollama failed: ' + ollamaErr.message);
-      }
-    }
+    return callClaude(messages);
   }
 
   async function callClaude(messages, attempt) {
@@ -647,27 +643,6 @@ XPAT4.initWidget = function() {
     if (!res.ok) throw new Error(`Claude HTTP ${res.status}`);
     const data = await res.json();
     return data.content?.[0]?.text || '';
-  }
-
-  async function callOllama(messages) {
-    // Build a prompt from messages
-    const prompt = XPAT4.AI_SYSTEM_PROMPT + '\n\n' +
-      messages.map(m => (m.role === 'user' ? 'User: ' : 'Assistant: ') + m.content).join('\n') +
-      '\nAssistant:';
-
-    const res = await fetch(`${XPAT4_CONFIG.OLLAMA_URL}/api/generate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model:  XPAT4_CONFIG.OLLAMA_MODEL,
-        prompt: prompt,
-        stream: false
-      })
-    });
-
-    if (!res.ok) throw new Error(`Ollama HTTP ${res.status}`);
-    const data = await res.json();
-    return data.response || '';
   }
 
   // Update widget language when lang changes

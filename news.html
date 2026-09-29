@@ -275,12 +275,12 @@ function showTab(tab) {
   if (tab === 'events' && !eventsLoaded) loadEvents();
 }
 
-// ── NEWS (RSS via allorigins) ──
+// ── NEWS (RSS via rss2json) ──
 var MAX_NEWS = 20;
 var NEWS_FEEDS = [
   { url:'https://news.google.com/rss/search?q=Kyrgyzstan+visa+OR+migration+OR+expat+OR+foreigner&hl=en-US&gl=US&ceid=US:en', name:'Google News' },
   { url:'https://news.google.com/rss/search?q=Kyrgyzstan+business+OR+economy&hl=en-US&gl=US&ceid=US:en', name:'Google News' },
-  { url:'https://eurasianet.org/feed', name:'Eurasianet' }
+  { url:'https://eurasianet.org/rss', name:'Eurasianet' }
 ];
 var KG_KW = ['kyrgyz','bishkek','kyrgyzstan'];
 
@@ -290,17 +290,16 @@ function fmtDate(ds){ if(!ds)return''; var d=new Date(ds); return isNaN(d)?'':d.
 
 async function fetchFeed(feed) {
   try {
-    var res = await fetch('https://api.allorigins.win/get?url='+encodeURIComponent(feed.url), {signal:AbortSignal.timeout(8000)});
+    var res = await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url), {signal:AbortSignal.timeout(8000)});
     if(!res.ok) return [];
     var data = await res.json();
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(data.contents||'','text/xml');
-    return Array.from(doc.querySelectorAll('item')).map(function(it){
+    if (data.status !== 'ok') return [];
+    return (data.items||[]).map(function(it){
       return {
-        title: it.querySelector('title')?.textContent||'',
-        link:  it.querySelector('link')?.textContent||it.querySelector('guid')?.textContent||'#',
-        desc:  stripHTML(it.querySelector('description')?.textContent||''),
-        date:  it.querySelector('pubDate')?.textContent||'',
+        title: it.title||'',
+        link:  it.link||'#',
+        desc:  stripHTML(it.description||''),
+        date:  it.pubDate||'',
         source: feed.name
       };
     }).filter(isRelevant).slice(0,5);
@@ -449,7 +448,7 @@ function submitEvent() {
 
 async function pushEventToGitHub(pendingEvents, token) {
   try {
-    var apiUrl  = 'https://api.github.com/repos/AIsrail/xpat4/contents/pending_events.json';
+    var apiUrl  = 'https://api.github.com/repos/gulnaramk84-boss/xpat4/contents/pending_events.json';
     var headers = {'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
     var getRes  = await fetch(apiUrl+'?ref=main', {headers:headers});
     var sha     = getRes.ok ? (await getRes.json()).sha : null;
